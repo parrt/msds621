@@ -15,10 +15,13 @@ def normalize(X): # creating standard variables here (u-x)/sigma
         s = np.std(X[:,j])
         X[:,j] = (X[:,j] - u) / s
 
-def MSE(X,y,B):
+def MSE(X,y,B,lmbda):
     pass
 
 def loss_gradient(X, y, B, lmbda):
+    pass
+
+def loss_ridge(X, y, B, lmbda):
     pass
 
 def loss_gradient_ridge(X, y, B, lmbda):
@@ -27,10 +30,14 @@ def loss_gradient_ridge(X, y, B, lmbda):
 def sigmoid(z):
     pass
 
-def log_likelihood(X, y, B):
+def log_likelihood(X, y, B,lmbda):
     pass
 
 def log_likelihood_gradient(X, y, B, lmbda):
+    pass
+
+# NOT REQUIRED but to try to implement for fun
+def L1_log_likelihood(X, y, B, lmbda):
     pass
 
 # NOT REQUIRED but to try to implement for fun
