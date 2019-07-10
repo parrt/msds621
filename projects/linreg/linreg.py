@@ -15,9 +15,6 @@ def normalize(X): # creating standard variables here (u-x)/sigma
         s = np.std(X[:,j])
         X[:,j] = (X[:,j] - u) / s
 
-def add1col(X):
-    pass
-
 def MSE(X,y,B):
     pass
 
