@@ -18,7 +18,7 @@ $ ls
 bayes.py   review_polarity  test_bayes.py
 ```
 
-Download the [test_bayes.py]() script into the root directory of your repository; you can add this if you want but I will overwrite it when testing. It assumes that the 
+Download the [test_bayes.py](https://github.com/parrt/msds621/blob/master/projects/bayes/test_bayes.py) script into the root directory of your repository; you can add this if you want but I will overwrite it when testing. It assumes that the 
 
 See Naive Bayes discussion, p258 in [Introduction to Information Retrieval](https://nlp.stanford.edu/IR-book/).
 
@@ -39,7 +39,7 @@ word_likelihood_neg = neg_ndocs_with_word / ndocs[0] # p(w,neg)
         
 ## Deliverables
 
-To submit your project, ensure that your {bayes.py} file is submitted to your repository. That file must be in the root of your `bayes`-*userid* repository.
+To submit your project, ensure that your `bayes.py` file is submitted to your repository. That file must be in the root of your `bayes`-*userid* repository.  It should not have a main program and should consist of a collection of functions.
 
 **Please do not add the data to your repository!**
 

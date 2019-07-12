@@ -211,7 +211,7 @@ def test_load():
 
 def test_vocab():
     neg, pos = load()
-    V = vocab([neg,pos])
+    V = vocab(neg,pos)
     assert len(V)==38372+1 # Add one for unknown at index 0
 
     rs = np.random.RandomState(42) # get same list back each time
@@ -224,7 +224,7 @@ def test_vocab():
 
 def test_vectorize():
     neg, pos = load()
-    V = vocab([neg,pos])
+    V = vocab(neg,pos)
     vneg = vectorize_docs(neg, V)
     vpos = vectorize_docs(pos, V)
     allwords = np.array([*V.keys()])
@@ -248,7 +248,7 @@ def test_vectorize():
 
 def test_training_error():
     neg, pos = load()
-    V = vocab([neg,pos])
+    V = vocab(neg,pos)
     vneg = vectorize_docs(neg, V)
     vpos = vectorize_docs(pos, V)
 
@@ -264,7 +264,7 @@ def test_training_error():
 
 def test_kfold_621():
     neg, pos = load()
-    V = vocab([neg,pos])
+    V = vocab(neg,pos)
     vneg = vectorize_docs(neg, V)
     vpos = vectorize_docs(pos, V)
 
@@ -281,7 +281,7 @@ def test_kfold_621():
 
 def test_kfold_sklearn_vs_621():
     neg, pos = load()
-    V = vocab([neg,pos])
+    V = vocab(neg,pos)
     vneg = vectorize_docs(neg, V)
     vpos = vectorize_docs(pos, V)
 
