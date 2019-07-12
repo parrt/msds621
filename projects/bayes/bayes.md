@@ -18,7 +18,9 @@ $ ls
 bayes.py   review_polarity  test_bayes.py
 ```
 
-Download the [test_bayes.py](https://github.com/parrt/msds621/blob/master/projects/bayes/test_bayes.py) script into the root directory of your repository; you can add this if you want but I will overwrite it when testing. It assumes that the 
+Download the [test_bayes.py](https://github.com/parrt/msds621/blob/master/projects/bayes/test_bayes.py) script into the root directory of your repository; you can add this if you want but I will overwrite it when testing. It assumes that the `review_polarity` directory is in the same directory (the root of the repository).
+
+Download the [bayes.py starter kit](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.py) into the root directory of your repository. Make sure to add this to the repo.
 
 See Naive Bayes discussion, p258 in [Introduction to Information Retrieval](https://nlp.stanford.edu/IR-book/).
 
@@ -26,6 +28,14 @@ See Naive Bayes discussion, p258 in [Introduction to Information Retrieval](http
 
 ## Discussion
 
+A text classifier predicts to which class an unknown document belongs. In our case, the predictions are binary: 0 for negative movie review and 1 for positive movie review. Given document $d$ and a class $c$, we can think about classification mathematically as picking the most likely class:
+
+$$
+c^*= \frac{argmax}{c} P(c|d)
+$$
+
+Text classification requires a representation
+ 
 +1 on top, |V| on bottom for smoothing. +1 on bottom because we’ve added one to V
 
 Less powerful unless documents are very short than the word count isn't super meaningful and we should just go with the number of documents that have that word.
