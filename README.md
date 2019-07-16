@@ -106,3 +106,8 @@ Each project has a hard deadline and only those projects working correctly befor
   * Permutation
   * Drop column
 * Partial dependence
+
+## Unsupervised learning
+
+* k-means clustering
+* Breiman's trick
