@@ -81,6 +81,7 @@ Each project has a hard deadline and only those projects working correctly befor
   * [Logistic](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/classifier-regularization.ipynb)
 * Linear regression L1, L2
 * Logistic regression L1, L2
+* [Gradient Descent optimization]()
 * [Project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)
 
 ## Models
@@ -92,8 +93,10 @@ Each project has a hard deadline and only those projects working correctly befor
 
 ## Mechanics
 
-* Data clean up
+* The common training and testing procedure
+* Data cleaning
 * Dealing with missing data
+* Unbalanced classification data sets
 
 ## Model assessment
 
@@ -102,14 +105,14 @@ Each project has a hard deadline and only those projects working correctly befor
 
 ## Model interpretation
 
-* Example-based model decision explanations
 * Feature importance
   * Gini drop 
   * Permutation
   * Drop column
 * Partial dependence
+* Example-based model decision explanations
 
 ## Unsupervised learning
 
 * k-means clustering
-* Breiman's trick
+* Breiman's trick for clustering with RFs
