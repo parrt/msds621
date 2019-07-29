@@ -1,6 +1,8 @@
 # MSDS621 Introduction to Machine Learning
 
-summary
+“*In God we trust; all others bring data.*” — Attributed to W. Edwards Deming and George Box
+
+This course introduces students to the key processes and concepts of machine learning (for table-like structured data), such as data cleaning, dealing with missing data, basic feature engineering, model training, feature selection, and model assessment. We study a few key models deeply, rather than providing a broad but superficial survey of models. As part of this course, students implement linear and logistic regression with regularization through gradient percent, a Naive Bayes model for text sentiment analysis, decision trees, and random forest models.
 
 # Administrivia
 
@@ -73,24 +75,25 @@ Each project has a hard deadline and only those projects working correctly befor
 
 # Syllabus
 
-[Overview]()
+[Overview](https://github.com/parrt/msds621/raw/master/lectures/intro.pdf)
  
 ## Regularization for linear models
 
-* [Review of linear models with scikit-learn](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/sklearn-linear-models.ipynb)
+* [Review of linear models](https://github.com/parrt/msds621/raw/master/lectures/review-linear-models.pdf)
 * Notebooks demonstrating need for regularization:
-  * [Linear](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/regressor-regularization.ipynb)
-  * [Logistic](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/classifier-regularization.ipynb)
-* [Regularization of linear models L1, L2]()
-* [Gradient Descent optimization]()
+  * [Linear models with scikit-learn](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/sklearn-linear-models.ipynb)
+  * [Linear regularization](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/regressor-regularization.ipynb)
+  * [Logistic regularization](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/classifier-regularization.ipynb)
+* [Regularization of linear models L1, L2](https://github.com/parrt/msds621/raw/master/lectures/regularization.pdf)
+* [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf)
 * [Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)
 
 ## Models
 
-* [How machine learning works]()
-* Naive Bayes ([Naive Bayes project](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf))
+* [Naive Bayes](https://github.com/parrt/msds621/raw/master/lectures/naive-bayes.pdf) ([Naive Bayes project](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf))
+* [Intro to non-parametric machine learning models](https://github.com/parrt/msds621/raw/master/lectures/how-ML-works.pdf)
 * kNN
-* Decision Tree ([Decision Tree project]())
+* Decision Trees ([Decision Tree project]())
 * Random Forests ([Random Forest project]())
 
 ## Mechanics
