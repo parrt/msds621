@@ -62,8 +62,8 @@ For information and resources regarding sexual misconduct or assault visit the <
 |[Naive Bayes](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf) | 5% | XXX |
 |[Decision trees]() | 13% | XXX |
 |[Random Forest]() | 12% | XXX |
-|Exam 1| 30%| 9AM-9:55AM XXX |
-|Exam 2| 30%| 9AM-9:55AM XXX |
+|Exam 1| 30%| 8:45AM-9:45AM XXX |
+|Exam 2| 30%| 8:45AM-9:45AM XXX |
 
 All projects will be graded with the specific input or tests given in the project description, so you understand precisely what is expected of your program. Consequently, projects will be graded in binary fashion: They either work or they do not. Each failed unit test gets a fixed amount off, no partial credit. The only exception is when your program does not run on the grader's or my machine because of some cross-platform issue. This is typically because a student has hardcoded some file name or directory into their program. In that case, we will take off just 10% instead of giving you a 0. Please go to github and verify that the website has the proper files for your solution. That is what I will download for testing.
 
@@ -73,23 +73,25 @@ Each project has a hard deadline and only those projects working correctly befor
 
 # Syllabus
 
+[Overview]()
+ 
 ## Regularization for linear models
 
 * [Review of linear models with scikit-learn](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/sklearn-linear-models.ipynb)
-* Demo need for regularization:
+* Notebooks demonstrating need for regularization:
   * [Linear](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/regressor-regularization.ipynb)
   * [Logistic](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/classifier-regularization.ipynb)
-* Linear regression L1, L2
-* Logistic regression L1, L2
+* [Regularization of linear models L1, L2]()
 * [Gradient Descent optimization]()
-* [Project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)
+* [Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)
 
 ## Models
 
+* [How machine learning works]()
+* Naive Bayes ([Naive Bayes project](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf))
 * kNN
-* Naive Bayes ([Project](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf))
-* Decision Tree
-* Random Forests
+* Decision Tree ([Decision Tree project]())
+* Random Forests ([Random Forest project]())
 
 ## Mechanics
 
