@@ -34,6 +34,73 @@ If you record the sequence of splits, you get a binary tree. For example, here i
 
 <img src="https://github.com/parrt/dtreeviz/raw/master/testing/samples/iris-TD-2.svg?sanitize=true" width="40%">
 
+### Functions and objects to build
+
+First, define two classes that will represent the objects in your decision trees. You can build them anywhere you want, but here's the outline of how I built mine:
+
+```
+class DecisionNode:
+    def __init__(self, col, split, lchild, rchild):
+        self.col = col
+        self.split = split
+        self.lchild = lchild
+        self.rchild = rchild
+
+    def predict(self, x_test):
+        ...
+```
+
+```
+class LeafNode:
+    def __init__(self, y, prediction):
+        self.n = len(y)
+        self.prediction = prediction
+
+    def predict(self, x_test):
+        ...
+```
+
+Please make sure, however, that your tree nodes respond to function `t.predict(x)` for some tree node `t` and feature vector `x`.
+
+The primary interface to your code from the testing script is the `fit()` function:
+
+```
+def fit(X, y, isclassifier, min_samples_leaf=1, loss=None):
+    """
+    Recursively create and return a decision tree fit to (X,y) for
+    either a classifier or regressor. Leaf nodes for classifiers predict
+    the most common class (the mode) and regressors predict the average y
+    for samples in that leaf.
+
+    The loss function is either np.std (if isclassifier) or gini.
+    """
+```
+
+For example, the test script has the following function for classification:
+
+```
+def classifier_fit(X, y, min_samples_leaf=1):
+    return fit(X, y, isclassifier=True, min_samples_leaf=min_samples_leaf, loss=gini)
+```
+
+Note that it is passing in the `gini()` function (see below).
+
+Next, you must define a function that takes a decision tree root and one or more feature vectors (in a 2D matrix) and returns one or more predictions: 
+
+```
+def predict(root, X_test):
+    ...
+```
+
+The predictions are either numeric values for regression or integer class identifiers for classification.
+
+You must also define a function that implements the gini impurity score, as shown at Wikipedia:
+
+```
+def gini(y):
+    "Return the gini impurity score for values in y"
+```
+
 Script `test_dtree_funcs.py` tests your implementation.
 
 ### Wrapping your functions in objects
@@ -88,63 +155,16 @@ class ClassifierTree621(DecisionTree621):
 
 ## Getting started
 
+Download the test scripts
+ 
 ## Deliverables
 
-```
-class DecisionNode:
-    def __init__(self, col, split, lchild, rchild):
-        self.col = col
-        self.split = split
-        self.lchild = lchild
-        self.rchild = rchild
-
-    def predict(self, x_test):
-        ...
-```
-
-```
-class LeafNode:
-    def __init__(self, y, prediction):
-        self.n = len(y)
-        self.prediction = prediction
-
-    def predict(self, x_test):
-        ...
-```
-
-```
-def predict(root, X_test):
-    return np.array([root.predict(X_test[ri,:]) for ri in range(len(X_test))])
-```
-
-```
-def regressor_fit(X, y, min_samples_leaf=1):
-    return fit(X, y, isclassifier=False, min_samples_leaf=min_samples_leaf, loss=np.std)
-```
-
-```
-def classifier_fit(X, y, min_samples_leaf=1):
-    return fit(X, y, isclassifier=True, min_samples_leaf=min_samples_leaf, loss=gini)
-```
-
-```
-def fit(X, y, isclassifier, min_samples_leaf=1, loss=None):
-    """
-    Recursively create and return a decision tree fit to (X,y) for
-    either a classifier or regressor. Leaf nodes for classifiers predict
-    the most common class (the mode) and regressors predict the average y
-    for samples in that leaf.
-
-    The loss function is either np.std (if isclassifier) or gini.
-    """
-```
-
-```
-def gini(x):
-    "Return the gini impurity score for values in x"
-```
+* `dtree_funcs.py` This is the initial implementation with the functions `fit()`, `gini()`, and `predict()` as well as the class definitions you need for decision tree implementation
+* `dtree.py` This is the same code cut-and-paste into methods of class definitions to organize your code in an object-oriented way
 
 ## Evaluation
+
+Your code will be tested using the unit tests provided to you as part of this project. There are two regression and three classification toy data sets. Hopefully, getting even one of the tests to pass means you will get all of the test to pass. Nonetheless, each test is worth 17% for the function-based implementation that you start with. That means 85% of your grade  comes from getting the basic functionality to work.
 
 ```
 $ python -m pytest -v test_dtree_funcs.py 
@@ -163,3 +183,25 @@ test_dtree_funcs.py::test_breast_cancer PASSED                                  
 
 =========================================== 5 passed in 26.71 seconds ============================================
 ```
+
+Next, we will test the object-oriented version of your software using a similar script that simply invokes your objects as if they were sklearn objects. The functionality should not change in so you should get all of these test to pass if the test pass for the function-based code. With that in mind, there is an overall score of 15% given to you if you get the following tests to work; no partial credit for this part as they should all work or not work.
+
+```
+$ python -m pytest -v test_dtree.py 
+============================================== test session starts ===============================================
+platform darwin -- Python 3.7.1, pytest-4.0.2, py-1.7.0, pluggy-0.8.0 -- ...
+cachedir: .pytest_cache
+rootdir: /Users/parrt/courses/msds621-private/projects/dtree, inifile:
+plugins: remotedata-0.3.1, openfiles-0.3.1, doctestplus-0.2.0, arraydiff-0.3
+collected 5 items                                                                                                
+
+test_dtree.py::test_boston PASSED                                                                          [ 20%]
+test_dtree.py::test_california_housing PASSED                                                              [ 40%]
+test_dtree.py::test_iris PASSED                                                                            [ 60%]
+test_dtree.py::test_wine PASSED                                                                            [ 80%]
+test_dtree.py::test_breast_cancer PASSED                                                                   [100%]
+
+=========================================== 5 passed in 26.63 seconds ============================================
+```
+
+*My test scripts complete in less than 30 seconds and I will take off 10% if either of the test scripts take longer than one minute each. Please pay attention to efficiency.*
