@@ -103,6 +103,10 @@ def gini(y):
 
 Script `test_dtree_funcs.py` tests your implementation.
 
+### Training algorithm
+
+min samples per leaf
+ 
 ### Wrapping your functions in objects
 
 After successfully building the functions that construct trees and make predictions, the next phase is to wrap or pull apart these functions and wrap them into class definitions: `RegressionTree621` and `ClassifierTree621` to mimic sklearn's `DecisionTreeClassifier` and `DecisionTreeRegressor` objects. Script `test_dtree.py` tests your implementation.
@@ -117,7 +121,15 @@ class RegressionTree621:
         self.min_samples_leaf = min_samples_leaf
         self.loss = loss # loss function; either np.std or gini
     def fit(self, X, y):
+        self.root = self.fit_(X, y)
+
+    def fit_(self, X, y): # recursive version of fit()
+        """
+        Recursively create and return a decision tree fit to (X,y) for
+        either a classifier or regressor.
+        """
         ...
+
     def predict(self, X_test):
         ...        
     def score(self, X_test, y_test):
@@ -166,11 +178,13 @@ Cut/paste my definitions of `DecisionNode` and `LeafNode` into `dtree_funcs.py` 
 
 Define skeletons for functions `fit()`, `gini()`, and `predict()`.
 
+Add the files to your repository, commit, and push back to github.
+
 In this way, you have started on the project without actually having to do any work. Getting over inertia is an important step in any project.
  
 ## Deliverables
 
-In your github repo `dtree`-*userid*, you must provide the following functions at the root of the repository directory:
+In your github repo `dtree`-*userid*, you must provide the following files at the root of the repository directory:
 
 * `dtree_funcs.py` This is the initial implementation with the functions `fit()`, `gini()`, and `predict()` as well as the class definitions you need for decision tree implementation
 * `dtree.py` This is the same code cut-and-paste into methods of class definitions to organize your code in an object-oriented way
