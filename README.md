@@ -62,8 +62,8 @@ For information and resources regarding sexual misconduct or assault visit the <
 |--------|--------|--------|
 |[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| XXX |
 |[Naive Bayes](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf) | 5% | XXX |
-|[Decision trees]() | 13% | XXX |
-|[Random Forest]() | 12% | XXX |
+|[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 13% | XXX |
+|[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | XXX |
 |Exam 1| 30%| 8:45AM-9:45AM XXX |
 |Exam 2| 30%| 8:45AM-9:45AM XXX |
 
@@ -93,8 +93,8 @@ Each project has a hard deadline and only those projects working correctly befor
 * [Naive Bayes](https://github.com/parrt/msds621/raw/master/lectures/naive-bayes.pdf) ([Naive Bayes project](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf))
 * [Intro to non-parametric machine learning models](https://github.com/parrt/msds621/raw/master/lectures/how-ML-works.pdf)
 * kNN
-* Decision Trees ([Decision Tree project]())
-* Random Forests ([Random Forest project]())
+* Decision Trees ([Decision Tree project](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md))
+* Random Forests ([Random Forest project](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md))
 
 ## Mechanics
 
