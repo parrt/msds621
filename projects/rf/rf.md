@@ -182,4 +182,4 @@ test_rf.py::test_breast_cancer PASSED                                        [10
 ============================ 6 passed in 30.26 seconds =============================
 ```
 
-*My test passes in roughly 40 seconds and you will lose 5% if your test takes longer than 80 seconds.*
+*My test passes in roughly 30 seconds and you will lose 5% if your test takes longer than 1 minute.*

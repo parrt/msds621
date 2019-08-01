@@ -105,8 +105,42 @@ Script `test_dtree_funcs.py` tests your implementation.
 
 ### Training algorithm
 
-min samples per leaf
- 
+The training algorithm embodied by function `fit()` exhaustively tries combinations of features and feature values, looking for an optimal split.  The optimal split is one that splits a feature space for one feature into two sub-regions and the average variance (regression) or impurity (classification) is lower than that of the current node's observations.  
+
+The first decision node is created by looking at the entire set of training records in X. One split into two regions, training recursively splits those two regions. In this way, different subsamples of the training data are examined to create the decision nodes of the tree. If every decision node split the current set of samples exactly in half, than the height of the tree would be roughly `log(len(X))`.  Training returns a leaf node when there are less than or equal to `min_samples_leaf` observations in a subsample.
+
+The algorithm looks like this:
+
+```
+fit(X, y, min_samples_leaf, loss):
+    if X has fewer than min_samples_leaf observations, create and return a leaf node
+    col, split = find_best_split(X, y, loss) # find best var and split value for X, y
+    if col==-1, then we couldn't find a better split so return a leaf node
+    split X into observations whose X[col] values are <= split and those > split
+    recursively call fit() twice on these subsamples of X, y to get left and right children
+    return a decision node with col, split, left child, and right child
+```
+
+Finding the optimal split looks like this:
+
+```
+find_best_split(X, y, loss):
+    record loss(y) as the current best score (lowest variance or impurity)
+    record variable -1 and split -1 as the best to initialize
+    for each variable i:
+        candidates = pick 11 values out of X[:, i] # (for speed reasons)
+        for each split in candidates:
+            left = y values <= split
+            right = y values > split
+            if left or right is empty then it's a bad split; try another candidate
+            compute the loss for left and right chunks an average them
+            if that combined loss is close to zero, we have perfection:
+                return i, split
+            if that combined loss is less than the best so far:
+                track i, split, and that combined loss as the new best
+    return the best i and split value
+```
+
 ### Wrapping your functions in objects
 
 After successfully building the functions that construct trees and make predictions, the next phase is to wrap or pull apart these functions and wrap them into class definitions: `RegressionTree621` and `ClassifierTree621` to mimic sklearn's `DecisionTreeClassifier` and `DecisionTreeRegressor` objects. Script `test_dtree.py` tests your implementation.
