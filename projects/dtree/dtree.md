@@ -107,7 +107,7 @@ Script `test_dtree_funcs.py` tests your implementation.
 
 The training algorithm embodied by function `fit()` exhaustively tries combinations of features and feature values, looking for an optimal split.  The optimal split is one that splits a feature space for one feature into two sub-regions and the average variance (regression) or impurity (classification) is lower than that of the current node's observations.  
 
-The first decision node is created by looking at the entire set of training records in X. One split into two regions, training recursively splits those two regions. In this way, different subsamples of the training data are examined to create the decision nodes of the tree. If every decision node split the current set of samples exactly in half, than the height of the tree would be roughly `log(len(X))`.  Training returns a leaf node when there are less than or equal to `min_samples_leaf` observations in a subsample.
+The first decision node is created by looking at the entire set of training records in X. Once split into two regions, training recursively splits those two regions. In this way, different subsamples of the training data are examined to create the decision nodes of the tree. If every decision node split the current set of samples exactly in half, than the height of the tree would be roughly `log(len(X))`.  Training returns a leaf node when there are less than or equal to `min_samples_leaf` observations in a subsample.
 
 The algorithm looks like this:
 
