@@ -107,6 +107,10 @@ Script `test_dtree_funcs.py` tests your implementation.
 
 After successfully building the functions that construct trees and make predictions, the next phase is to wrap or pull apart these functions and wrap them into class definitions: `RegressionTree621` and `ClassifierTree621` to mimic sklearn's `DecisionTreeClassifier` and `DecisionTreeRegressor` objects. Script `test_dtree.py` tests your implementation.
 
+Object-oriented programming is probably unfamiliar to you, but there is plenty of material on the web (most of it is crap though).  You can check out [my OO summary](https://github.com/parrt/msds501/blob/master/notes/OO.ipynb), which sucks slightly less than other stuff on the web. 
+
+The basic idea is that class definitions organize multiple functions together (functions within a class definition are called methods). For example, here is the skeleton class definitions that you will need:
+
 ```
 class RegressionTree621:
     def __init__(self, min_samples_leaf=1, loss=None):
@@ -117,6 +121,7 @@ class RegressionTree621:
     def predict(self, X_test):
         ...        
     def score(self, X_test, y_test):
+        "See regressor_score() in test_dtree_funcs.py"
         ...
 ```
 
@@ -155,12 +160,22 @@ class ClassifierTree621(DecisionTree621):
 
 ## Getting started
 
-Download the test scripts
+Download the [test scripts](https://github.com/parrt/msds621/tree/master/projects/dtree) and create blank script files `dtree_funcs.py` and `dtree.py` with perhaps `import numpy as np` as starter code.   I would focus on making sure that the functions work properly in `dtree_funcs.py` and and worry about the object-oriented implementation after all of your tests pass.
+
+Cut/paste my definitions of `DecisionNode` and `LeafNode` into `dtree_funcs.py` if you plan on using those, but you are free to use your own binary tree implementation.
+
+Define skeletons for functions `fit()`, `gini()`, and `predict()`.
+
+In this way, you have started on the project without actually having to do any work. Getting over inertia is an important step in any project.
  
 ## Deliverables
 
+In your github repo `dtree`-*userid*, you must provide the following functions at the root of the repository directory:
+
 * `dtree_funcs.py` This is the initial implementation with the functions `fit()`, `gini()`, and `predict()` as well as the class definitions you need for decision tree implementation
 * `dtree.py` This is the same code cut-and-paste into methods of class definitions to organize your code in an object-oriented way
+
+I will copy in clean versions of the test scripts before grading your projects.
 
 ## Evaluation
 
