@@ -14,10 +14,10 @@ This course introduces students to the key processes and concepts of machine lea
 * Exams are held in X and &. Both sections meet together.
 * My office is room 607 @ 101 Howard up on mezzanine above the open area on 5th floor
 
-**TEMPORAL COORDINATES.** Wed Oct X to Dec Y.
+**TEMPORAL COORDINATES.** Thu Oct 17 to Tue Dec 3.
 
-* Section 01: 
-* Section 02: 
+* Section 01: 10 - 11:50 AM Room 155-156
+* Section 02: 1:15 - 3:05 PM Room 155-156
 * Exams: 
 
 **INSTRUCTION FORMAT**. Class runs for 1:50 hours, 2 days/week. Instructor-student interaction during lecture is encouraged and we'll mix in mini-exercises / labs during class. All programming will be done in the Python 3 programming language, unless otherwise specified.
@@ -86,7 +86,7 @@ Each project has a hard deadline and only those projects working correctly befor
   * [Logistic regularization](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/classifier-regularization.ipynb)
 * [Regularization of linear models L1, L2](https://github.com/parrt/msds621/raw/master/lectures/regularization.pdf)
 * [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf)
-* [Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)
+* ([Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf))
 
 ## Models
 
@@ -98,7 +98,7 @@ Each project has a hard deadline and only those projects working correctly befor
 
 ## Mechanics
 
-* The common training and testing procedure
+* [Getting a sense of the training and testing procedure](https://github.com/parrt/msds621/blob/master/notebooks/process/basic-process.ipynb) (notebook)
 * Data cleaning
 * Dealing with missing data
 * Unbalanced classification data sets
