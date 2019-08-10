@@ -97,6 +97,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 * [Intro to non-parametric machine learning models](https://github.com/parrt/msds621/raw/master/lectures/nonparametric-models.pdf) (slides)
 * [Decision trees](https://github.com/parrt/msds621/raw/master/lectures/decision-trees.pdf) (slides)
   * [Binary tree crash course](https://github.com/parrt/msds621/raw/master/lectures/binary-trees.pdf) (slides)
+  * [Training decision trees](https://github.com/parrt/msds621/raw/master/lectures/training-decision-trees.pdf) (slides)
   * [Decision trees notebook](https://github.com/parrt/msds621/blob/master/notebooks/trees/partitioning.ipynb)
   * [Binary trees notebook](https://github.com/parrt/msds621/blob/master/notebooks/trees/basics.ipynb)
   * (*[Decision trees project](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md)*)
