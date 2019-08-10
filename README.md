@@ -79,31 +79,33 @@ Each project has a hard deadline and only those projects working correctly befor
  
 ## Regularization for linear models
 
-* [Review of linear models](https://github.com/parrt/msds621/raw/master/lectures/review-linear-models.pdf)
+* [Review of linear models](https://github.com/parrt/msds621/raw/master/lectures/review-linear-models.pdf) (slides)
 * Notebooks demonstrating need for regularization:
-  * [Linear models with scikit-learn](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/sklearn-linear-models.ipynb)
-  * [Linear regularization](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/regressor-regularization.ipynb)
-  * [Logistic regularization](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/classifier-regularization.ipynb)
-* [Regularization of linear models L1, L2](https://github.com/parrt/msds621/raw/master/lectures/regularization.pdf)
-* [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf)
-* ([Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf))
+  * [Linear models with scikit-learn notebook](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/sklearn-linear-models.ipynb)
+  * [Linear regularization notebook](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/regressor-regularization.ipynb)
+  * [Logistic regularization notebook](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/classifier-regularization.ipynb)
+* [Regularization of linear models L1, L2](https://github.com/parrt/msds621/raw/master/lectures/regularization.pdf) (slides)
+* [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf) (slides)
+* (*[Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)*)
 
 ## Models
 
-* [Naive Bayes](https://github.com/parrt/msds621/raw/master/lectures/naive-bayes.pdf) ([Naive Bayes project](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf))
-* [Intro to non-parametric machine learning models](https://github.com/parrt/msds621/raw/master/lectures/how-ML-works.pdf)
-* kNN
-* [Decision trees](https://github.com/parrt/msds621/raw/master/lectures/decision-trees.pdf)
-  * [Binary tree crash course](https://github.com/parrt/msds621/raw/master/lectures/binary-trees.pdf)
+We will learn 3 models in depth for this course: naive bayes, decision trees, and random forests but will examine k-nearest-neighbor (kNN) briefly.
+
+* [Naive Bayes](https://github.com/parrt/msds621/raw/master/lectures/naive-bayes.pdf)  (slides)
+  * (*[Naive Bayes project](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf)*)
+* [Intro to non-parametric machine learning models](https://github.com/parrt/msds621/raw/master/lectures/nonparametric-models.pdf) (slides)
+* [Decision trees](https://github.com/parrt/msds621/raw/master/lectures/decision-trees.pdf) (slides)
+  * [Binary tree crash course](https://github.com/parrt/msds621/raw/master/lectures/binary-trees.pdf) (slides)
   * [Decision trees notebook](https://github.com/parrt/msds621/blob/master/notebooks/trees/partitioning.ipynb)
   * [Binary trees notebook](https://github.com/parrt/msds621/blob/master/notebooks/trees/basics.ipynb)
-  * ([Decision trees project](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md))
-* Random Forests
-  * ([Random Forest project](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md))
+  * (*[Decision trees project](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md)*)
+* [Random Forests](https://github.com/parrt/msds621/raw/master/lectures/random-forests.pdf) (slides)
+  * (*[Random Forest project](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md)*)
 
 ## Mechanics
 
-* [Getting a sense of the training and testing procedure](https://github.com/parrt/msds621/blob/master/notebooks/process/basic-process.ipynb) (notebook)
+* [Getting a sense of the training and testing procedure notebook](https://github.com/parrt/msds621/blob/master/notebooks/process/basic-process.ipynb)
 * Data cleaning
 * Dealing with missing data
 * Unbalanced classification data sets
