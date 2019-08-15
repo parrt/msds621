@@ -106,14 +106,14 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 ## Mechanics
 
-* [Getting a sense of the training and testing procedure notebook](https://github.com/parrt/msds621/blob/master/notebooks/process/basic-process.ipynb) (slides)
+* [Getting a sense of the training and testing procedure notebook](https://github.com/parrt/msds621/blob/master/notebooks/process/basic-process.ipynb)
 * Data cleaning
 * Dealing with missing data
 * Unbalanced classification data sets
 
 ## Model assessment
 
-* [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf)
+* [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf) (slides)
 * Loss functions, metrics
 * ROC and PR curves
 
