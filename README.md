@@ -64,8 +64,8 @@ For information and resources regarding sexual misconduct or assault visit the <
 |[Naive Bayes](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf) | 5% | XXX |
 |[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 13% | XXX |
 |[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | XXX |
-|Exam 1| 30%| 8:45AM-9:45AM XXX |
-|Exam 2| 30%| 8:45AM-9:45AM XXX |
+|Exam 1| 30%| XXX |
+|Exam 2| 30%| Fri, Dec 11 10AM-11:30AM |
 
 All projects will be graded with the specific input or tests given in the project description, so you understand precisely what is expected of your program. Consequently, projects will be graded in binary fashion: They either work or they do not. Each failed unit test gets a fixed amount off, no partial credit. The only exception is when your program does not run on the grader's or my machine because of some cross-platform issue. This is typically because a student has hardcoded some file name or directory into their program. In that case, we will take off *a minimum* of 10% instead of giving you a 0, depending on the severity of the mistake.  Please go to github and verify that the website has the proper files for your solution. That is what I will download for testing.
 
