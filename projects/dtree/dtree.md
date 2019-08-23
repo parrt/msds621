@@ -111,15 +111,15 @@ The first decision node is created by looking at the entire set of training reco
 
 The algorithm looks like this:
 
-<img src="images/fit.png" width="80%">
+<img src="images/fit.png" width="60%">
 
 Finding the optimal split looks like this:
 
-<img src="images/bestsplit.png" width="80%">
+<img src="images/bestsplit.png" width="60%">
 
 In our case, for speed reasons (and to improve generality), we're going to pick a subset of all possible split values.
 
-<img src="images/bestsplit-subset.png" width="80%">
+<img src="images/bestsplit-subset.png" width="60%">
 
 We could also improve generality by picking splits midway *between* X values rather than at X values, but that means sorting or scanning values looking for the nearest value less than the split point.
 
