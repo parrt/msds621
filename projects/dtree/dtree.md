@@ -111,35 +111,17 @@ The first decision node is created by looking at the entire set of training reco
 
 The algorithm looks like this:
 
-```
-fit(X, y, min_samples_leaf, loss):
-    if X has fewer than min_samples_leaf observations, create and return a leaf node
-    col, split = find_best_split(X, y, loss) # find best var and split value for X, y
-    if col==-1, then we couldn't find a better split so return a leaf node
-    split X into observations whose X[col] values are <= split and those > split
-    recursively call fit() twice on these subsamples of X, y to get left and right children
-    return a decision node with col, split, left child, and right child
-```
+<img src="images/fit.png" width="80%">
 
 Finding the optimal split looks like this:
 
-```
-find_best_split(X, y, loss):
-    record loss(y) as the current best score (lowest variance or impurity)
-    record variable -1 and split -1 as the best to initialize
-    for each variable i:
-        candidates = pick 11 values out of X[:, i] # (for speed reasons)
-        for each split in candidates:
-            left = y values <= split
-            right = y values > split
-            if left or right is empty then it's a bad split; try another candidate
-            compute the loss for left and right chunks an average them
-            if that combined loss is close to zero, we have perfection:
-                return i, split
-            if that combined loss is less than the best so far:
-                track i, split, and that combined loss as the new best
-    return the best i and split value
-```
+<img src="images/bestsplit.png" width="80%">
+
+In our case, for speed reasons (and to improve generality), we're going to pick a subset of all possible split values.
+
+<img src="images/bestsplit-subset.png" width="80%">
+
+We could also improve generality by picking splits midway *between* X values rather than at X values, but that means sorting or scanning values looking for the nearest value less than the split point.
 
 ### Wrapping your functions in objects
 
