@@ -49,9 +49,9 @@ class DecisionNode:
 
 You might find the Python conditional `isinstance(child, LeafNode)` of use. And answers whether or not the `child` object is a `LeafNode` as opposed to a decision node.
 
-The second change is in the training mechanism. Conventional decision trees exhaustively scan all available features and the feature values looking for the optimal variable/split combination. To reduce overfitting, each split should pick from a random subset of the features; the subset size is the square root of the number of features.  Function `np.random.choice()` is useful here to get a list of feature indexes and then `X[:, i]` gives us the ith column.  In my solution,  the change is to the outermost loop in `find_best_split()`.
+The second change is in the training mechanism. Conventional decision trees exhaustively scan all available features and the feature values looking for the optimal variable/split combination. To reduce overfitting, each split should pick from a random subset of the features; the subset size is the square root of the number of features.  Function `np.random.choice()` is useful here to get a list of feature indexes and then `X[:, i]` gives us the ith column.  In my solution,  the change is to the outermost loop in `find_best_split()`. The algorithm looks like:
 
-<img src="images/bestsplit.png" width="60%">
+<img src="images/bestsplit.png" width="50%">
 
 
 ### RF Prediction
@@ -59,6 +59,13 @@ The second change is in the training mechanism. Conventional decision trees exha
 Once we've trained a forest of decision trees, we can make predictions for one or more feature vectors using `predict()`. For regression, the prediction for the forest is the weighted average of the predictions from the individual decision trees. If `X_test` passed to `predict()` is a two-dimensional matrix of *n* rows, then *n* predictions should be returned in an array from `predict()`. To make a prediction for a single feature vector, call `leaf()` on each tree to get the leaf node that contains the prediction information for the feature vector.  Each leaf has `n`, the number of observations in that leaf that can serve as our weight. The leaf also has a `prediction` that is the predicted y value for regression or class for classification. (We'll deal with classification separately.) First, compute the total weight of all `leaf.n` and then compute the sum of `leaf.prediction * leaf.n`. The prediction is then the weighted sum divided by the total weight.
 
 For classification, it's a little more complicated Because we need a majority vote across all trees.  As with regression, go through all of the trees, and get the leaves associated with the prediction of a single feature vector.  Create a numpy array, say, `class_counts` that is big enough so that the maximum integer representing a class is a valid index in the array. Then, `class_counts[c]` gives the count associated with class `c`.  Add `leaf.n` to the `class_counts[leaf.prediction]` count. The class with the largest count should be the prediction; `np.argmax` is useful here.
+
+<table border=0>
+<tr valign="top">
+<td><img src="images/predict-regr.png" width="100%"></td><td><img src="images/predict-class.png" width="100%"></td>
+</tr>
+</table>
+
 
 ### Object definitions
 
