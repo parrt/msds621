@@ -114,8 +114,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 ## Model assessment
 
 * [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf) (slides)
-* Loss functions, metrics
-* ROC and PR curves
+* [Model assessment](https://github.com/parrt/msds621/raw/master/lectures/model-assessment) (slides)
 
 ## Model interpretation
 
