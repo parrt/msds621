@@ -2,7 +2,7 @@
 
 “*In God we trust; all others bring data.*” — Attributed to W. Edwards Deming and George Box
 
-This course introduces students to the key processes and concepts of machine learning (for table-like structured data), such as data cleaning, dealing with missing data, basic feature engineering, model training, feature selection, and model assessment. We study a few key models deeply, rather than providing a broad but superficial survey of models. As part of this course, students implement linear and logistic regression with regularization through gradient percent, a Naive Bayes model for text sentiment analysis, decision trees, and random forest models.
+This course introduces students to the key processes and concepts of machine learning (for table-like structured data), such as data cleaning, dealing with missing data, basic feature engineering, model training, feature selection, and model assessment. We study a few key models deeply, rather than providing a broad but superficial survey of models. As part of this course, students implement linear and logistic regression with regularization through gradient descent, a Naive Bayes model for text sentiment analysis, decision trees, and random forest models.
 
 # Administrivia
 
