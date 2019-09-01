@@ -107,10 +107,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 ## Mechanics
 
 * [Getting a sense of the training and testing procedure notebook](https://github.com/parrt/msds621/blob/master/notebooks/process/basic-process.ipynb)
-* Data cleaning
-* Basic feature engineering
-* Dealing with missing data
-* Unbalanced classification data sets
+* [Preparing data for modeling](https://github.com/parrt/msds621/raw/master/lectures/data-prep.pdf) (slides)
 
 ## Model assessment
 
@@ -124,7 +121,6 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
   * Permutation
   * Drop column
 * Partial dependence
-* Example-based model decision explanations
 
 ## Unsupervised learning
 
