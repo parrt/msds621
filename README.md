@@ -108,6 +108,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 * [Getting a sense of the training and testing procedure notebook](https://github.com/parrt/msds621/blob/master/notebooks/process/basic-process.ipynb)
 * [Preparing data for modeling](https://github.com/parrt/msds621/raw/master/lectures/data-prep.pdf) (slides)
+* [Basic feature engineering](https://github.com/parrt/msds621/raw/master/lectures/feature-engineering.pdf) (slides)
 
 ## Model assessment
 
