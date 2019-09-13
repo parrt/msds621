@@ -118,12 +118,10 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 ## Model interpretation
 
 * [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides)
-  * Gini drop 
-  * Permutation
-  * Drop column
 * Partial dependence
 
 ## Unsupervised learning
 
 * k-means clustering
+* Hierarchical clustering
 * Breiman's trick for clustering with RFs
