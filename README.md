@@ -123,6 +123,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 ## Unsupervised learning
 
-* k-means clustering
-* Hierarchical clustering
-* Breiman's trick for clustering with RFs
+* [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)
+  * k-means clustering
+  * Hierarchical clustering
+  * Breiman's trick for clustering with RFs
