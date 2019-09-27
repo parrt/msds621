@@ -19,7 +19,7 @@ This course introduces students to the key processes and concepts of machine lea
 
 * Section 01: 10 - 11:50 AM Room 155-156
 * Section 02: 1:15 - 3:05 PM Room 155-156
-* Exams: 
+* Exams: Nov 8, Dec 6
 
 **INSTRUCTION FORMAT**. Class runs for 1:50 hours, 2 days/week. Instructor-student interaction during lecture is encouraged and we'll mix in mini-exercises / labs during class. All programming will be done in the Python 3 programming language, unless otherwise specified.
 
@@ -61,11 +61,11 @@ For information and resources regarding sexual misconduct or assault visit the <
 
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
-|[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| XXX |
-|[Naive Bayes](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf) | 5% | XXX |
-|[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 13% | XXX |
-|[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | XXX |
-|Exam 1| 30%| XXX |
+|[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| Mon Oct 31, 11:59PM |
+|[Naive Bayes](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf) | 8% | Monday Nov 11, 11:59PM |
+|[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Mon Nov 21, 11:59PM |
+|[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | Sun Dec 8, 11:59PM |
+|Exam 1| 25%| Fri Nov 8, 5-6:15PM |
 |Exam 2| 30%| Fri, Dec 11 10AM-11:30AM |
 
 All projects will be graded with the specific input or tests given in the project description, so you understand precisely what is expected of your program. Consequently, projects will be graded in binary fashion: They either work or they do not. Each failed unit test gets a fixed amount off, no partial credit. The only exception is when your program does not run on the grader's or my machine because of some cross-platform issue. This is typically because a student has hardcoded some file name or directory into their program. In that case, we will take off *a minimum* of 10% instead of giving you a 0, depending on the severity of the mistake.  Please go to github and verify that the website has the proper files for your solution. That is what I will download for testing.
