@@ -76,7 +76,7 @@ Each project has a hard deadline and only those projects working correctly befor
 
 # Syllabus
 
-[Overview](https://github.com/parrt/msds621/raw/master/lectures/intro.pdf)
+[Overview](https://github.com/parrt/msds621/raw/master/lectures/overview.pdf)
  
 ## Regularization for linear models
 
