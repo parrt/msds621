@@ -50,7 +50,7 @@ def L1_log_likelihood_gradient(X, y, B, lmbda):
     """
     pass
 
-def minimizer(X, y, loss, loss_gradient,
+def minimize(X, y, loss, loss_gradient,
               eta=0.00001, lmbda=0.0,
               max_iter=1000, addB0=True,
               precision=0.00000001):
@@ -87,7 +87,7 @@ class LinearRegression621:
         return np.dot(X, self.B)
 
     def fit(self, X, y):
-        self.B = minimizer(X, y,
+        self.B = minimize(X, y,
                            MSE,
                            loss_gradient,
                            self.eta,
