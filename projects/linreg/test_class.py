@@ -58,12 +58,12 @@ def check(X, y, mae, model, skmodel, accuracy=1.0, donormalize=True):
         true_B = np.concatenate([skmodel.intercept_, skmodel.coef_[0]])
     else:
         true_B = np.concatenate([skmodel.intercept_, skmodel.coef_])
-    # print("MAE of B", MAE(estimated_B, true_B))
+    print("MAE of B", MAE(estimated_B, true_B))
 
-    # r = pd.DataFrame()
-    # r['estimated'] = estimated_B
-    # r['true'] = true_B
-    # print(r)
+    r = pd.DataFrame()
+    r['estimated'] = estimated_B
+    r['true'] = true_B
+    print(r)
 
     assert (correct/n) >= accuracy
     assert MAE(estimated_B, true_B) < mae
@@ -92,45 +92,12 @@ def test_synthetic():
           accuracy=.98,
           donormalize=True)
 
-"""
-def test_lasso_synthetic():
-    # From https://beckernick.github.io/logistic-regression-from-scratch/
-    n = 5000
-    x1 = np.random.multivariate_normal([0, 0], [[1, .75], [.75, 1]], n)
-    x2 = np.random.multivariate_normal([1, 4], [[1, .75], [.75, 1]], n)
-
-    X = np.vstack((x1, x2)).astype(np.float32)
-    y = np.hstack((np.zeros(n), np.ones(n)))
-    y = y.reshape(-1,1)
-
-    check(X, y, .8,
-          LassoLogistic621(max_iter=15_000, eta=4),
-          LogisticRegression(penalty='l1', max_iter=15_000, solver='saga'),
-          accuracy=.98,
-          donormalize=True)
-"""
-
 def test_wine():
     X, y = wine_data()
-
-    # X_ = X.copy()
-    # normalize(X_)
-    # logit = sm.Logit(y, add1col(X_))
-    # res = logit.fit(method='bfgs')
-    # print(res.summary())
 
     check(X, y, 1.1,
           LogisticRegression621(max_iter=20_000, eta=1),
           LogisticRegression(C=1e30))
-
-"""
-def test_lasso_wine():
-    X, y = wine_data()
-
-    check(X, y, .3,
-          LassoLogistic621(max_iter=15_000, lmbda=1, eta=6),
-          LogisticRegression(penalty='l1', max_iter=5_000, solver='saga'))
-"""
 
 def test_iris():
     X, y = iris_data()
@@ -139,12 +106,3 @@ def test_iris():
           LogisticRegression621(max_iter=80_000, eta=1),
           LogisticRegression(C=1e15, solver='lbfgs'),
           donormalize=True)
-
-"""
-def test_lasso_iris():
-    X, y = iris_data()
-
-    check(X, y, .4,
-          LassoLogistic621(max_iter=20_000, lmbda=1, eta=5),
-          LogisticRegression(penalty='l1', max_iter=5_000, solver='saga'))
-"""

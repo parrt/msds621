@@ -71,6 +71,7 @@ def check(X, y, mae, model, skmodel, donormalize=True):
     # print(estimated_B, 'VS\n', true_B)
     # print(np.std(estimated_B), np.std(true_B), MAE(estimated_B, true_B))
 
+    # COMPARE COEFF
     # r = pd.DataFrame()
     # r['estimated'] = estimated_B
     # r['true'] = true_B
@@ -93,7 +94,7 @@ def test_synthetic():
 def test_ridge_synthetic():
     X, y = synthetic_data()
 
-    check(X, y, .000001,
+    check(X, y, .00005,
           RidgeRegression621(max_iter=30_000, eta=1, lmbda=4),
           Ridge(alpha=40, solver='lsqr'))
 
@@ -126,7 +127,7 @@ def test_ridge_boston():
     y = boston.target
     y = y.reshape(-1, 1)
 
-    check(X, y, .08,
+    check(X, y, .06,
           RidgeRegression621(max_iter=30_000, eta=1, lmbda=.1),
           Ridge(alpha=40, solver='lsqr'))
 
