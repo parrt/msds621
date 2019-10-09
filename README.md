@@ -76,24 +76,24 @@ Each project has a hard deadline and only those projects working correctly befor
 
 # Syllabus
 
-[Overview](https://github.com/parrt/msds621/raw/master/lectures/overview.pdf)
+[Overview](https://github.com/parrt/msds621/raw/master/lectures/overview.pdf) (Day 1)
  
 ## Regularization for linear models
 
-* [Review of linear models](https://github.com/parrt/msds621/raw/master/lectures/review-linear-models.pdf) (slides)
+* [Review of linear models](https://github.com/parrt/msds621/raw/master/lectures/review-linear-models.pdf) (slides) (Day 1)
 * Notebooks demonstrating need for regularization:
   * [Linear models with scikit-learn notebook](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/sklearn-linear-models.ipynb)
   * [Linear regularization notebook](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/regressor-regularization.ipynb)
   * [Logistic regularization notebook](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/classifier-regularization.ipynb)
-* [Regularization of linear models L1, L2](https://github.com/parrt/msds621/raw/master/lectures/regularization.pdf) (slides)
-* [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf) (slides)
-* (*[Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)*)
+* [Regularization of linear models L1, L2](https://github.com/parrt/msds621/raw/master/lectures/regularization.pdf) (slides) (Day 1)
+* [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf) (slides) (Day 2)
+* (*[Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)*) (Day 2)
 
 ## Models
 
 We will learn 3 models in depth for this course: naive bayes, decision trees, and random forests but will examine k-nearest-neighbor (kNN) briefly.
 
-* [Naive Bayes](https://github.com/parrt/msds621/raw/master/lectures/naive-bayes.pdf)  (slides)
+* [Naive Bayes](https://github.com/parrt/msds621/raw/master/lectures/naive-bayes.pdf)  (slides) (Day 3)
   * (*[Naive Bayes project](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf)*)
 * [Intro to non-parametric machine learning models](https://github.com/parrt/msds621/raw/master/lectures/nonparametric-models.pdf) (slides)
 * [Decision trees](https://github.com/parrt/msds621/raw/master/lectures/decision-trees.pdf) (slides)
