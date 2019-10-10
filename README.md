@@ -81,6 +81,7 @@ Each project has a hard deadline and only those projects working correctly befor
 ## Regularization for linear models
 
 * [Review of linear models](https://github.com/parrt/msds621/raw/master/lectures/review-linear-models.pdf) (slides) (Day 1)
+* [Lab: Plotting decision surfaces for linear models](https://github.com/parrt/msds621/blob/master/labs/linear-models/decision-surfaces.ipynb) (Day 1)
 * Notebooks demonstrating need for regularization:
   * [Linear models with scikit-learn notebook](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/sklearn-linear-models.ipynb)
   * [Linear regularization notebook](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/regressor-regularization.ipynb)
