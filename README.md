@@ -3,7 +3,7 @@
 “*In God we trust; all others bring data.*” — Attributed to W. Edwards Deming and George Box
 
 
-This course introduces students to the key processes and concepts of machine learning (for table-like structured data), such as data cleaning, dealing with missing data, basic feature engineering, model training, feature selection, and model assessment. We study a few key models deeply, rather than providing a broad but superficial survey of models. <img src="images/feynman.png" width="200" align="right">As part of this course, students implement linear and logistic regression with regularization through gradient descent, a Naive Bayes model for text sentiment analysis, decision trees, and random forest models.   Implementing these models yourself is critical to truly understanding them. As Richard Feynman wrote, "*What I cannot create, I do not understand.*" (From his blackboard at the time of his death.)
+This course introduces students to the key processes and concepts of machine learning (for table-like structured data), such as data cleaning, dealing with missing data, basic feature engineering, model training, feature selection, and model assessment. We study a few key models deeply, rather than providing a broad but superficial survey of models. <img src="images/feynman.png" width="200" align="right">As part of this course, students implement linear and logistic regression with regularization through gradient descent, a Naive Bayes model for text sentiment analysis, decision trees, and random forest models.   Implementing these models yourself is critical to truly understanding them. As Richard Feynman wrote, "**What I cannot create, I do not understand.**" (From his blackboard at the time of his death.)
 
 # Administrivia
 
@@ -101,6 +101,7 @@ The first lecture is an overview of the entire machine learning process:
 * [Lab: Plotting decision surfaces for linear models](https://github.com/parrt/msds621/blob/master/labs/linear-models/decision-surfaces.ipynb) (Day 1)
 * [Regularization of linear models L1, L2](https://github.com/parrt/msds621/raw/master/lectures/regularization.pdf) (slides) (Day 1)
 * [Lab: Regularization for linear regression](https://github.com/parrt/msds621/blob/master/labs/linear-models/regularization-regr.ipynb) (Day 1)
+* [Lab: Regularization for logistic regression](https://github.com/parrt/msds621/blob/master/labs/linear-models/regularization-logi.ipynb) (Day 1)
 * [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf) (slides) (Day 2)
 * (*[Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)*) (Day 2)
 
