@@ -80,19 +80,25 @@ Each project has a hard deadline and only those projects working correctly befor
 
 There are a number of notebooks associated with the lecture slides.
 
-* [Linear models with scikit-learn notebook](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/sklearn-linear-models.ipynb)
-* [Linear regularization notebook](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/regressor-regularization.ipynb)
-* [Logistic regularization notebook](https://github.com/parrt/msds621/blob/master/notebooks/linear-models/classifier-regularization.ipynb)
+* [Linear models, regularization](https://github.com/parrt/msds621/blob/master/notebooks/linear-models)
+* [Binary trees, decision trees, bias-variance](https://github.com/parrt/msds621/blob/master/notebooks/trees)
+* [Model assessment](https://github.com/parrt/msds621/blob/master/notebooks/assessment)
+* [Clustering](https://github.com/parrt/msds621/blob/master/notebooks/clustering)
 
-We'll start with an overview of the entire machine learning process:
+The following notebook takes you through a number of important processes, which you are free to do at your leisure. Even if we haven't covered the topics in lecture, you can still get something out of the notebook.
+
+* [Getting a sense of the training and testing procedure notebook](https://github.com/parrt/msds621/blob/master/notebooks/process/basic-process.ipynb)
+
+## Getting started
+
+The first lecture is an overview of the entire machine learning process:
 
 [Overview](https://github.com/parrt/msds621/raw/master/lectures/overview.pdf) (Day 1)
- 
+
 ## Regularization for linear models
 
 * [Review of linear models](https://github.com/parrt/msds621/raw/master/lectures/review-linear-models.pdf) (slides) (Day 1)
 * [Lab: Plotting decision surfaces for linear models](https://github.com/parrt/msds621/blob/master/labs/linear-models/decision-surfaces.ipynb) (Day 1)
-* Notebooks demonstrating need for regularization:
 * [Regularization of linear models L1, L2](https://github.com/parrt/msds621/raw/master/lectures/regularization.pdf) (slides) (Day 1)
 * [Lab: Regularization for linear regression](https://github.com/parrt/msds621/blob/master/labs/linear-models/regularization-regr.ipynb) (Day 1)
 * [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf) (slides) (Day 2)
@@ -108,15 +114,12 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 * [Decision trees](https://github.com/parrt/msds621/raw/master/lectures/decision-trees.pdf) (slides) (Day 4)
   * [Binary tree crash course](https://github.com/parrt/msds621/raw/master/lectures/binary-trees.pdf) (slides) (Day 4)
   * [Training decision trees](https://github.com/parrt/msds621/raw/master/lectures/training-decision-trees.pdf) (slides) (Day 4)
-  * [Decision trees notebook](https://github.com/parrt/msds621/blob/master/notebooks/trees/partitioning.ipynb)
-  * [Binary trees notebook](https://github.com/parrt/msds621/blob/master/notebooks/trees/basics.ipynb)
   * (*[Decision trees project](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md)*)
 * [Random Forests](https://github.com/parrt/msds621/raw/master/lectures/random-forests.pdf) (slides)
   * (*[Random Forest project](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md)*)
 
 ## Mechanics
 
-* [Getting a sense of the training and testing procedure notebook](https://github.com/parrt/msds621/blob/master/notebooks/process/basic-process.ipynb)
 * [Preparing data for modeling](https://github.com/parrt/msds621/raw/master/lectures/data-prep.pdf) (slides)
 * [Basic feature engineering](https://github.com/parrt/msds621/raw/master/lectures/feature-engineering.pdf) (slides)
 
