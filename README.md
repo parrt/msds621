@@ -80,10 +80,10 @@ Each project has a hard deadline and only those projects working correctly befor
 
 There are a number of notebooks associated with the lecture slides.
 
-* [Linear models, regularization](https://github.com/parrt/msds621/blob/master/notebooks/linear-models)
-* [Binary trees, decision trees, bias-variance](https://github.com/parrt/msds621/blob/master/notebooks/trees)
-* [Model assessment](https://github.com/parrt/msds621/blob/master/notebooks/assessment)
-* [Clustering](https://github.com/parrt/msds621/blob/master/notebooks/clustering)
+* [Linear models, regularization](https://nbviewer.jupyter.org/github/parrt/msds621/tree/master/notebooks/linear-models/)
+* [Binary trees, decision trees, bias-variance](https://nbviewer.jupyter.org/github/parrt/msds621/tree/master/notebooks/trees/)
+* [Model assessment](https://nbviewer.jupyter.org/github/parrt/msds621/tree/master/notebooks/assessment/)
+* [Clustering](https://nbviewer.jupyter.org/github/parrt/msds621/tree/master/notebooks/clustering/)
 
 The following notebook takes you through a number of important processes, which you are free to do at your leisure. Even if we haven't covered the topics in lecture, you can still get something out of the notebook.
 
