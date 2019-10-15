@@ -103,6 +103,7 @@ The first lecture is an overview of the entire machine learning process:
 	* [Lab: Exploring regularization for linear regression](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/regularization-regr.ipynb) (Day 1)
 	* [Lab: Regularization for logistic regression](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/regularization-logi.ipynb) (Day 1)
 * [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf) (slides) (Day 2)
+	* [Lab: Gradient descent in action](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/gradient-descent.ipynb) (Day 2)
 * (*[Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)*) (Day 2)
 
 ## Models
