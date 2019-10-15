@@ -2,12 +2,14 @@ import numpy as np
 import pandas as pd
 from scipy.special import lmbda
 
+np.random.seed(999) # Force same random sequence for each test
+
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.datasets import load_boston, load_iris, load_wine, load_digits, \
                              load_breast_cancer, load_diabetes, fetch_mldata
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, precision_score, recall_score, r2_score
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, r2_score, log_loss
 
 #import statsmodels.discrete.discrete_model as sm
 
@@ -37,23 +39,24 @@ def iris_data():
     y = y.reshape(-1, 1)
     return X, y
 
-def check(X, y, mae, model, skmodel, accuracy=1.0, donormalize=True):
-    if donormalize:
-        normalize(X)
+def check(X, y, mae, model, skmodel, accuracy=1.0):
+    normalize(X)
+    X_train, X_test, y_train, y_test = \
+        train_test_split(X, y, test_size=0.2, shuffle=True, random_state=999)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    y_proba_estimated = model.predict_proba(X_test)
+    correct = np.sum(y_test.flatten() == y_pred)
+    n = len(X_test)
+    print(f"Got {correct} / {n} correct = {(correct / n) * 100:.2f}%")
 
-    model.fit(X, y)
-    y_pred = model.predict(X)
-    y_proba_estimated = model.predict_proba(X)
-    correct = np.sum(y.flatten() == y_pred)
-    n = len(X)
-    accuracy = correct / n
-    # print(f"Got {correct} / {n} correct = {accuracy * 100:.2f}%")
+    print(f"Log loss {log_loss(y_test, y_proba_estimated)}")
 
     estimated_B = model.B.reshape(-1)
     # print(estimated_B)
 
-    skmodel.fit(X, y.reshape(-1))
-    y_proba_true = skmodel.predict_proba(X)
+    skmodel.fit(X_train, y_train.reshape(-1))
+    y_proba_true = skmodel.predict_proba(X_test)
     if skmodel.coef_.ndim==2:
         true_B = np.concatenate([skmodel.intercept_, skmodel.coef_[0]])
     else:
@@ -88,21 +91,21 @@ def test_synthetic():
 
     check(X, y, .003,
           LogisticRegression621(max_iter=10_000, eta=10),
-          LogisticRegression(penalty='l2', C=1e15, solver='lbfgs'),
-          accuracy=.98,
-          donormalize=True)
+          LogisticRegression(penalty='none', solver='lbfgs'),
+          accuracy=.99)
 
 def test_wine():
     X, y = wine_data()
 
-    check(X, y, 1.1,
+    check(X, y, 1.8,
           LogisticRegression621(max_iter=20_000, eta=1),
-          LogisticRegression(C=1e30))
+          LogisticRegression(penalty='none', solver='lbfgs'),
+          accuracy=0.99)
 
 def test_iris():
     X, y = iris_data()
 
     check(X, y, 1.5,
           LogisticRegression621(max_iter=80_000, eta=1),
-          LogisticRegression(C=1e15, solver='lbfgs'),
-          donormalize=True)
+          LogisticRegression(penalty='none', solver='lbfgs'),
+          accuracy=0.99)
