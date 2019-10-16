@@ -2,10 +2,20 @@
 
 “*In God we trust; all others bring data.*” — Attributed to W. Edwards Deming and George Box
 
+This course introduces students to the key processes and concepts of machine learning (for table-like structured data), such as:
 
-This course introduces students to the key processes and concepts of machine learning (for table-like structured data), such as data cleaning, dealing with missing data, basic feature engineering, model training, feature selection, and model assessment. We study a few key models deeply, rather than providing a broad but superficial survey of models. As part of this course, students implement linear and logistic regression with regularization through gradient descent, a Naive Bayes model for text sentiment analysis, decision trees, and random forest models.   
+* data cleaning
+* dealing with missing data
+* basic feature engineering
+* feature selection
+* model implementation
+* model training
+* model assessment
+* mode interpretation
 
-<img src="images/feynman.png" width="200" align="right">Implementing these models yourself is critical to truly understanding them. As Richard Feynman wrote, "**What I cannot create, I do not understand.**" (From his blackboard at the time of his death.)
+We study a few key models deeply, rather than providing a broad but superficial survey of models. As part of this course, students implement linear and logistic regression with regularization through gradient descent, a Naive Bayes model for text sentiment analysis, decision trees, and random forest models.   
+
+<img src="images/feynman.png" width="200" align="right">Implementing these models yourself is critical to truly understanding them. As Richard Feynman wrote, "**What I cannot create, I do not understand.**" (From his blackboard at the time of his death.) With an intuition behind how the models work, you'll be able to understand and predict their behavior much more easily.
 
 # Administrivia
 
@@ -13,15 +23,15 @@ This course introduces students to the key processes and concepts of machine lea
 
 **SPATIAL COORDINATES:**<br>
 
-* Class is held at 101 Howard in Xth floor classroom Y.
-* Exams are held in X and &. Both sections meet together.
+* Class is held at 101 Howard in 1st floor classroom 155-156.
+* Exams are held in 154-156. Both sections meet together.
 * My office is room 607 @ 101 Howard up on mezzanine above the open area on 5th floor
 
 **TEMPORAL COORDINATES.** Thu Oct 17 to Tue Dec 3.
 
 * Section 01: 10 - 11:50 AM Room 155-156
 * Section 02: 1:15 - 3:05 PM Room 155-156
-* Exams: Nov 8, Dec 6
+* Exams: 10AM Nov 8, 5PM Dec 10 Room 154-156
 
 **INSTRUCTION FORMAT**. Class runs for 1:50 hours, 2 days/week. Instructor-student interaction during lecture is encouraged and we'll mix in mini-exercises / labs during class. All programming will be done in the Python 3 programming language, unless otherwise specified.
 
@@ -73,6 +83,8 @@ For information and resources regarding sexual misconduct or assault visit the <
 All projects will be graded with the specific input or tests given in the project description, so you understand precisely what is expected of your program. Consequently, projects will be graded in binary fashion: They either work or they do not. Each failed unit test gets a fixed amount off, no partial credit. The only exception is when your program does not run on the grader's or my machine because of some cross-platform issue. This is typically because a student has hardcoded some file name or directory into their program. In that case, we will take off *a minimum* of 10% instead of giving you a 0, depending on the severity of the mistake.  Please go to github and verify that the website has the proper files for your solution. That is what I will download for testing.
 
 Each project has a hard deadline and only those projects working correctly before the deadline get credit.  My grading script pulls from github at the deadline.  *All projects are due at the start of class on the day indicated, unless otherwise specified.*
+
+*I reserve the right to change projects until the day they are assigned.*
 
 **Grading standards**. I consider an **A** grade to be above and beyond what most students have achieved. A **B** grade is an average grade for a student or what you could call "competence" in a business setting. A **C** grade means that you either did not or could not put forth the effort to achieve competence. Below **C** implies you did very little work or had great difficulty with the class compared to other students.
 

@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 from scipy.special import lmbda
 
+np.random.seed(999) # Force same random sequence for each test
+
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.datasets import load_boston, load_iris, load_wine, load_digits, \
@@ -42,28 +44,28 @@ def load_ames():
     cols = set(df_ames.columns) - set(cols_with_missing)
     X = df_ames[cols]
     X = X.drop('SalePrice', axis=1)
-    normalize(X)
     X = pd.get_dummies(X)
     y = df_ames['SalePrice']
     y = y.values.reshape(-1, 1)
     return X, y
 
-def check(X, y, mae, model, skmodel, donormalize=True):
-    if donormalize:
-        normalize(X)
+def check(X, y, mae, model, skmodel, r2_diff):
+    normalize(X)
 
-    model.fit(X, y)
+    X_train, X_test, y_train, y_test = \
+        train_test_split(X, y, test_size=0.2, shuffle=True, random_state=999)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
 
-    y_pred = model.predict(X)
-    r2 = r2_score(y, y_pred)
-    # print("r^2", r2)
+    r2 = r2_score(y_test, y_pred)
+    print("r^2", r2)
 
     estimated_B = model.B.reshape(-1)
 
-    skmodel.fit(X, y)
-    y_pred = skmodel.predict(X)
-    skr2 = r2_score(y, y_pred)
-    # print("sklearn r^2", skr2)
+    skmodel.fit(X_train, y_train.reshape(-1,1))
+    y_pred = skmodel.predict(X_test)
+    skr2 = r2_score(y_test.reshape(-1,1), y_pred)
+    print("sklearn r^2", skr2)
     if skmodel.coef_.ndim==2:
         true_B = np.concatenate([skmodel.intercept_, skmodel.coef_[0]])
     else:
@@ -72,15 +74,15 @@ def check(X, y, mae, model, skmodel, donormalize=True):
     # print(np.std(estimated_B), np.std(true_B), MAE(estimated_B, true_B))
 
     # COMPARE COEFF
-    # r = pd.DataFrame()
-    # r['estimated'] = estimated_B
-    # r['true'] = true_B
-    # print(r)
+    r = pd.DataFrame()
+    r['estimated'] = estimated_B
+    r['true'] = true_B
+    print(r)
 
-    # print(f'MAE of coefficients difference >= {MAE(estimated_B, true_B)}')
+    print(f'MAE of coefficients difference must be < {MAE(estimated_B, true_B)}')
 
-    assert np.abs(r2-skr2) < .07, f"R^2 {r2} and sklearn R^2 {skr2} differ by {np.abs(r2-skr2)}"
-    assert MAE(estimated_B, true_B) < mae, f'MAE of coefficients difference >= {mae}'
+    assert np.abs(r2-skr2) < r2_diff, f"R^2 {r2} and sklearn R^2 {skr2} differ by {np.abs(r2-skr2)}"
+    assert MAE(estimated_B, true_B) < mae, f'MAE of coefficients difference {MAE(estimated_B, true_B)} >= {mae}'
 
 
 def test_synthetic():
@@ -88,15 +90,17 @@ def test_synthetic():
 
     check(X, y, .0005,
           LinearRegression621(eta=1, max_iter=60_000),
-          LinearRegression())
+          LinearRegression(),
+          r2_diff=0.002)
 
 
 def test_ridge_synthetic():
     X, y = synthetic_data()
 
-    check(X, y, .00005,
-          RidgeRegression621(max_iter=30_000, eta=1, lmbda=4),
-          Ridge(alpha=40, solver='lsqr'))
+    check(X, y, .09,
+          RidgeRegression621(max_iter=30_000, eta=1, lmbda=5.2),
+          Ridge(alpha=40, solver='lsqr'),
+          r2_diff=0.6)
 
 
 def test_boston():
@@ -107,7 +111,8 @@ def test_boston():
 
     check(X, y, .003,
           LinearRegression621(max_iter=15_000, eta=.8),
-          LinearRegression())
+          LinearRegression(),
+          r2_diff=0.0001)
 
 def test_boston_noise():
     boston = load_boston()
@@ -119,7 +124,8 @@ def test_boston_noise():
 
     check(X, y, .28,
           LinearRegression621(max_iter=15_000, eta=1),
-          LinearRegression())
+          LinearRegression(),
+          r2_diff=0.3)
 
 def test_ridge_boston():
     boston = load_boston()
@@ -127,9 +133,10 @@ def test_ridge_boston():
     y = boston.target
     y = y.reshape(-1, 1)
 
-    check(X, y, .06,
-          RidgeRegression621(max_iter=30_000, eta=1, lmbda=.1),
-          Ridge(alpha=40, solver='lsqr'))
+    check(X, y, 1.1,
+          RidgeRegression621(max_iter=15_000, eta=1, lmbda=.3),
+          Ridge(alpha=1/.3, solver='lsqr'),
+          r2_diff=0.07)
 
 def test_ridge_boston_noise():
     boston = load_boston()
@@ -139,6 +146,7 @@ def test_ridge_boston_noise():
 
     X = addnoise(X)
 
-    check(X, y, .05,
-          RidgeRegression621(max_iter=30_000, eta=1, lmbda=.1),
-          Ridge(alpha=40, solver='lsqr'))
+    check(X, y, .65,
+          RidgeRegression621(max_iter=30_000, eta=1, lmbda=.3),
+          Ridge(alpha=1/0.3, solver='lsqr'),
+          r2_diff=0.2)
