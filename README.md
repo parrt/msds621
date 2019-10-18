@@ -31,7 +31,7 @@ We study a few key models deeply, rather than providing a broad but superficial 
 
 * Section 01: 10 - 11:50 AM Room 155-156
 * Section 02: 1:15 - 3:05 PM Room 155-156
-* Exams: 10AM Nov 8, 5PM Dec 10 Room 154-156
+* Exams: Fri 5-6PM Nov 8; Fri 10-11:30AM Dec 6; Room 154-156
 
 **INSTRUCTION FORMAT**. Class runs for 1:50 hours, 2 days/week. Instructor-student interaction during lecture is encouraged and we'll mix in mini-exercises / labs during class. All programming will be done in the Python 3 programming language, unless otherwise specified.
 
@@ -77,8 +77,8 @@ For information and resources regarding sexual misconduct or assault visit the <
 |[Naive Bayes](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf) | 8% | Monday Nov 11, 11:59PM |
 |[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Mon Nov 25, 11:59PM |
 |[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | Sun Dec 8, 11:59PM |
-|Exam 1| 25%| Fri Nov 8, 5-6:15PM |
-|Exam 2| 30%| Fri, Dec 11 10AM-11:30AM |
+|Exam 1| 25%| Fri Nov 8, 5PM-6PM |
+|Exam 2| 30%| Fri, Dec 6 10AM-11:30AM |
 
 All projects will be graded with the specific input or tests given in the project description, so you understand precisely what is expected of your program. Consequently, projects will be graded in binary fashion: They either work or they do not. Each failed unit test gets a fixed amount off, no partial credit. The only exception is when your program does not run on the grader's or my machine because of some cross-platform issue. This is typically because a student has hardcoded some file name or directory into their program. In that case, we will take off *a minimum* of 10% instead of giving you a 0, depending on the severity of the mistake.  Please go to github and verify that the website has the proper files for your solution. That is what I will download for testing.
 
