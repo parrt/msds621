@@ -136,21 +136,22 @@ def vectorize_docs(docs, V):
 class NaiveBayes621:
     """
     This object behaves like a sklearn model with fit(X,y) and predict(X) functions.
+    Limited to two classes, 0 and 1 in the y target.
     """
-    def __init__(self):
-        ...
-
-    def fit(self, X, y):
+    def fit(self, X:np.ndarray, y:np.ndarray):
         """
         Given 2D word vector matrix X, one row per document, and 1D binary vector y
         train a Naive Bayes classifier assuming a multinomial distribution for
         p(w,c), the probability of word exists in class c. p(w,c) is estimated by
-        the number of times w occurs in all documents of class c. p(c) is estimated
-        by the number of documents in c divided by the total number of documents.
+        the number of times w occurs in all documents of class c divided by the
+        total words in class c. p(c) is estimated by the number of documents
+        in c divided by the total number of documents.
+
+        The first column of X is a column of zeros to represent missing vocab words.
         """
         ...
 
-    def predict(self, X):
+    def predict(self, X:np.ndarray):
         """
         Given 2D word vector matrix X, one row per document, return binary vector
         indicating class 0 or 1 for each row of X.
@@ -158,7 +159,7 @@ class NaiveBayes621:
         ...
 
 
-def kfold_CV(model, X, y, k=4):
+def kfold_CV(model, X:np.ndarray, y:np.ndarray, k=4):
     """
     Run k-fold cross validation using model and 2D word vector matrix X and binary
     y class vector. Return a 1D numpy vector of length k with the accuracies, the
