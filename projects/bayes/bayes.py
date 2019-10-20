@@ -7,6 +7,8 @@ import codecs
 from collections import defaultdict
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import KFold
+from typing import Sequence
+
 import time
 
 # From scikit learn that got words from:
@@ -54,7 +56,22 @@ ENGLISH_STOP_WORDS = frozenset([
     "within", "without", "would", "yet", "you", "your", "yours", "yourself",
     "yourselves"])
 
-def filelist(root):
+
+class defaultintdict(dict):
+    """
+    Behaves exactly like defaultdict(int) except d['foo'] does NOT
+    add 'foo' to dictionary d. (Booo for that default behavior in
+    defaultdict!)
+    """
+    def __init__(self):
+        self._factory=int
+        super().__init__()
+
+    def __missing__(self, key):
+        return 0
+
+
+def filelist(root) -> Sequence[str]:
     """Return a fully-qualified list of filenames under root directory"""
     allfiles = []
     for path, subdirs, files in os.walk(root):
@@ -63,7 +80,7 @@ def filelist(root):
     return allfiles
 
 
-def get_text(filename):
+def get_text(filename:str) -> str:
     """
     Load and return the text of a text file, assuming latin-1 encoding as that
     is what the BBC corpus uses.  Use codecs.open() function not open().
@@ -74,7 +91,7 @@ def get_text(filename):
     return s
 
 
-def words(text):
+def words(text:str) -> Sequence[str]:
     """
     Given a string, return a list of words normalized as follows.
     Split the string to make words first by using regex compile() function
@@ -95,7 +112,7 @@ def words(text):
     return words
 
 
-def load_docs(docs_dirname):
+def load_docs(docs_dirname:str) -> Sequence[Sequence]:
     """
     Load all .txt files under docs_dirname and return a list of word lists, one per doc.
     Ignore empty and non ".txt" files.
@@ -105,7 +122,7 @@ def load_docs(docs_dirname):
     return docs
 
 
-def vocab(neg, pos):
+def vocab(neg:Sequence[Sequence], pos:Sequence[Sequence]) -> dict:
     """
     Given neg and pos lists of word lists, construct a mapping from word to word index.
     Use index 0 to mean unknown word, '__unknown__'. The real words start from index one.
@@ -120,11 +137,19 @@ def vocab(neg, pos):
     return V
 
 
-def vectorize_docs(docs, V):
+def vectorize(V:dict, docwords:Sequence) -> np.ndarray:
+    """
+    Return a row vector (based upon V) for docwords.
+    """
+    ...
+
+
+def vectorize_docs(docs:Sequence, V:dict) -> np.ndarray:
     """
     Return a matrix where each row represents a documents word vector.
     Each column represents a single word feature. There are |V|+1
     columns because we leave an extra one for the unknown word in position 0.
+    Invoke vector(V,docwords) to vectorize each doc for each row of matrix
     :param docs: list of word lists, one per doc
     :param V: Mapping from word to index; e.g., first word -> index 1
     :return: numpy 2D matrix with word counts per doc: ndocs x nwords
@@ -138,7 +163,7 @@ class NaiveBayes621:
     This object behaves like a sklearn model with fit(X,y) and predict(X) functions.
     Limited to two classes, 0 and 1 in the y target.
     """
-    def fit(self, X:np.ndarray, y:np.ndarray):
+    def fit(self, X:np.ndarray, y:np.ndarray) -> None:
         """
         Given 2D word vector matrix X, one row per document, and 1D binary vector y
         train a Naive Bayes classifier assuming a multinomial distribution for
@@ -151,7 +176,7 @@ class NaiveBayes621:
         """
         ...
 
-    def predict(self, X:np.ndarray):
+    def predict(self, X:np.ndarray) -> np.ndarray:
         """
         Given 2D word vector matrix X, one row per document, return binary vector
         indicating class 0 or 1 for each row of X.
@@ -159,11 +184,15 @@ class NaiveBayes621:
         ...
 
 
-def kfold_CV(model, X:np.ndarray, y:np.ndarray, k=4):
+def kfold_CV(model, X:np.ndarray, y:np.ndarray, k=4) -> np.ndarray:
     """
     Run k-fold cross validation using model and 2D word vector matrix X and binary
     y class vector. Return a 1D numpy vector of length k with the accuracies, the
-    ratios of correctly-identified documents to the total number of documents.
+    ratios of correctly-identified documents to the total number of documents. You
+    can use KFold from sklearn to get the splits but must loop through the splits
+    with a loop to implement the cross-fold testing.  Pass random_state=999 to KFold
+    so we always get same sequence (wrong in practice) so student eval unit tests
+    are consistent.
     """
     ...
     return np.array(accuracies)

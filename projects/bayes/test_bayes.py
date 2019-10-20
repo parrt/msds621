@@ -1,7 +1,10 @@
 import numpy as np
 from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import mean_absolute_error, confusion_matrix, precision_score, recall_score
 
 from bayes import *
+
+np.random.seed(999)
 
 # These are hardcoded but you can change to your directory.
 # I'll change this during testing.
@@ -198,6 +201,17 @@ def load():
     return neg, pos
 
 
+def training_data():
+    neg, pos = load()
+    V = vocab(neg, pos)
+    vneg = vectorize_docs(neg, V)
+    vpos = vectorize_docs(pos, V)
+    X = np.vstack([vneg, vpos])
+    y = np.vstack([np.zeros(shape=(len(vneg), 1)),
+                   np.ones(shape=(len(vpos), 1))]).reshape(-1)
+    return V, X, y
+
+
 def test_load():
     neg, pos = load()
     # Pick sample docs to compare
@@ -222,7 +236,7 @@ def test_vocab():
     assert sorted(subset) == VOCAB_SUBSET100
 
 
-def test_vectorize():
+def test_vectorize_docs():
     neg, pos = load()
     V = vocab(neg,pos)
     vneg = vectorize_docs(neg, V)
@@ -246,52 +260,107 @@ def test_vectorize():
             'written', 'year', 'years']
 
 
-def test_training_error():
-    neg, pos = load()
-    V = vocab(neg,pos)
-    vneg = vectorize_docs(neg, V)
-    vpos = vectorize_docs(pos, V)
+def test_vectorize():
+    V, X, y = training_data()
+    d1 = vectorize(V, words("mostly very funny , the story is quite appealing."))
+    d2 = vectorize(V, words("there is already a candidate for the worst of 1997."))
+    p = len(V) + 1
+    assert len(d1)==p, f"d1 should be 1x{p} but is 1x{len(d1)}"
+    assert len(d2)==p, f"d2 should be 1x{p} but is 1x{len(d2)}"
+    d1_idx = np.nonzero(d1)
+    d2_idx = np.nonzero(d2)
+    true_d1_idx = np.array([ 1367, 13337, 26872, 32570 ])
+    true_d2_idx = np.array([ 4676, 37932 ])
+    assert (d1_idx==true_d1_idx).all(), f"{d1_idx} should be {true_d1_idx}"
+    assert (d2_idx==true_d2_idx).all(), f"{d2_idx} should be {true_d2_idx}"
 
-    X = np.vstack([vneg, vpos])
-    y = np.vstack(
-        [np.zeros(shape=(len(vneg), 1)), np.ones(shape=(len(vpos), 1))]).reshape(-1)
+
+def test_simple_docs_error():
+    V, X, y = training_data()
+    d1 = vectorize(V, words("mostly very funny, the story is quite appealing."))
+    d2 = vectorize(V, words("there is already a candidate for the worst of 1997."))
+    p = len(V) + 1
+    assert len(d1)==p, f"d1 should be 1x{p} but is 1x{len(d1)}"
+    assert len(d2)==p, f"d2 should be 1x{p} but is 1x{len(d2)}"
+    y_test = np.array([1,0])
+
+    X_test = np.vstack([d1,d2])
+    model = NaiveBayes621()
+    model.fit(X, y)
+    y_pred = model.predict(X_test)
+    accuracy = np.sum(y_test==y_pred) / 2
+    # print(f"train accuracy {accuracy}")
+    assert accuracy == 1.0, f"Correct = {np.sum(y==y_pred)} / {len(y)} = {100*accuracy:.1f}%"
+
+
+def test_unknown_words_vectorize():
+    V, X, y = training_data()
+    d1_words = words("blort blort loved movie but xyrzf abcdefgh not so much")
+    d2_words = words("brexit vote postponed")
+    d1 = vectorize(V, d1_words)
+    d2 = vectorize(V, d2_words)
+    p = len(V) + 1
+    assert len(d1)==p, f"d1 should be 1x{p} but is 1x{len(d1)}"
+    assert len(d2)==p, f"d2 should be 1x{p} but is 1x{len(d2)}"
+    assert d1[0]==4, f"d1 should have 4 unknown words"
+    assert d2[0]==1, f"d2 should have 1 unknown word"
+
+    d1_idx = np.nonzero(d1)
+    d2_idx = np.nonzero(d2)
+    true_d1_idx = np.array([ 0, 19965, 22121 ])
+    true_d2_idx = np.array([ 0, 25740, 36959 ])
+    assert (d1_idx==true_d1_idx).all(), f"{d1_idx} should be {true_d1_idx}"
+    assert (d2_idx==true_d2_idx).all(), f"{d2_idx} should be {true_d2_idx}"
+
+    # TODO test unknown word count
+
+
+def test_unknown_words_training_error():
+    V, X, y = training_data()
+    # xyzdef and brexit are not in V
+    d1 = vectorize(V, words("very good, the story is xyzdef appealing. i also try to recommend excellent films like this"))
+    d2 = vectorize(V, words("brexit vote postponed hated movie; a van damme movie has become a painful chore"))
+    y_test = np.array([1, 0])
+
+    X_test = np.vstack([d1, d2])
+    model = NaiveBayes621()
+    model.fit(X, y)
+    y_pred = model.predict(X_test)
+    accuracy = np.sum(y_test == y_pred) / 2
+    # print(f"train accuracy {accuracy}, {y_pred}")
+    assert accuracy == 1.0, f"Correct = {np.sum(y_test == y_pred)} / {len(y_test)} = {100 * accuracy:.1f}%"
+
+
+def test_training_error():
+    V, X, y = training_data()
     model = NaiveBayes621()
     model.fit(X, y)
     y_pred = model.predict(X)
     accuracy = np.sum(y==y_pred) / len(y)
-    assert accuracy > 0.97, f"Correct = {np.sum(y==y_pred)} / {len(y)} = {100*accuracy:.1f}%"
+    # print(f"training accuracy {accuracy}")
+    assert accuracy > 0.965, f"Correct = {np.sum(y==y_pred)} / {len(y)} = {100*accuracy:.1f}%"
 
 
 def test_kfold_621():
-    neg, pos = load()
-    V = vocab(neg,pos)
-    vneg = vectorize_docs(neg, V)
-    vpos = vectorize_docs(pos, V)
+    # Test just kfold stuff so use sklearn model
+    V, X, y = training_data()
 
-    X = np.vstack([vneg, vpos])
-    y = np.vstack(
-        [np.zeros(shape=(len(vneg), 1)), np.ones(shape=(len(vpos), 1))]).reshape(-1)
-    model = NaiveBayes621()
-
-    accuracies = kfold_CV(model, X, y, k=4)
-    true_accuracies = np.array([.836, .80, .806, .786])
-    areclose = np.abs(true_accuracies - accuracies) < np.array([.5, .5, .5, .5])
-    assert areclose.all(), f"true accuracies {true_accuracies} and yours {accuracies} differ"
+    sklearn_accuracies = kfold_CV(GaussianNB(), X, y, k=4)
+    true_sklearn_accuracies = np.array([0.638, 0.644, 0.67, 0.63])
+    mae = mean_absolute_error(sklearn_accuracies,true_sklearn_accuracies)
+    # print(f"kfold {sklearn_accuracies} vs true {true_sklearn_accuracies}, MAE {mae:.3f}")
+    # Better by at least 0.1 average accuracy
+    assert mae < 0.0001, f"true accuracies {true_sklearn_accuracies} and your kfold {sklearn_accuracies} differ by MAE {mae:.3f}"
 
 
 def test_kfold_sklearn_vs_621():
-    neg, pos = load()
-    V = vocab(neg,pos)
-    vneg = vectorize_docs(neg, V)
-    vpos = vectorize_docs(pos, V)
-
-    X = np.vstack([vneg, vpos])
-    y = np.vstack([np.zeros(shape=(len(vneg), 1)), np.ones(shape=(len(vpos), 1))]).reshape(-1)
+    V, X, y = training_data()
 
     accuracies = kfold_CV(NaiveBayes621(), X, y, k=4)
 
-    sklearn_accuracies = kfold_CV(GaussianNB(), X, y, k=4)
-    sklearn_true_accuracies = np.array([0.666, 0.678, 0.636, 0.662])
+    # sklearn_accuracies = kfold_CV(GaussianNB(), X, y, k=4)
+    sklearn_true_accuracies = np.array([0.638, 0.644, 0.67, 0.63]) # save time; reuse known accuracies
+    improvement = np.mean(accuracies - sklearn_true_accuracies)
+    # print(f"kfold {accuracies} vs true sklearn {sklearn_true_accuracies}, improvement {improvement}")
+    assert improvement>0.1, f"Your accuracies {accuracies} should be better than sklearn's {sklearn_accuracies}"
 
-    werebetter = (accuracies - sklearn_true_accuracies) > np.array([.1, .1, .1, .1])
-    assert werebetter.all(), f"Your accuracies {accuracies} should be better than sklearn's {sklearn_accuracies}"
