@@ -98,8 +98,8 @@ def test_ridge_synthetic():
     X, y = synthetic_data()
 
     check(X, y, .09,
-          RidgeRegression621(max_iter=30_000, eta=1, lmbda=5.2),
-          Ridge(alpha=40, solver='lsqr'),
+          RidgeRegression621(max_iter=100_000, eta=5, lmbda=80),
+          Ridge(alpha=80, solver='lsqr'),
           r2_diff=0.6)
 
 
@@ -110,7 +110,7 @@ def test_boston():
     y = y.reshape(-1, 1)
 
     check(X, y, .003,
-          LinearRegression621(max_iter=15_000, eta=.8),
+          LinearRegression621(max_iter=30_000, eta=5),
           LinearRegression(),
           r2_diff=0.0001)
 
@@ -123,7 +123,7 @@ def test_boston_noise():
     X = addnoise(X)
 
     check(X, y, .28,
-          LinearRegression621(max_iter=15_000, eta=1),
+          LinearRegression621(max_iter=15_000, eta=5),
           LinearRegression(),
           r2_diff=0.3)
 
@@ -134,8 +134,8 @@ def test_ridge_boston():
     y = y.reshape(-1, 1)
 
     check(X, y, 1.1,
-          RidgeRegression621(max_iter=15_000, eta=1, lmbda=.3),
-          Ridge(alpha=1/.3, solver='lsqr'),
+          RidgeRegression621(max_iter=30_000, eta=5, lmbda=80),
+          Ridge(alpha=80, solver='lsqr'),
           r2_diff=0.07)
 
 def test_ridge_boston_noise():
@@ -147,6 +147,6 @@ def test_ridge_boston_noise():
     X = addnoise(X)
 
     check(X, y, .65,
-          RidgeRegression621(max_iter=30_000, eta=1, lmbda=.3),
-          Ridge(alpha=1/0.3, solver='lsqr'),
+          RidgeRegression621(max_iter=30_000, eta=5, lmbda=80),
+          Ridge(alpha=80, solver='lsqr'),
           r2_diff=0.2)
