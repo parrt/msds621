@@ -44,7 +44,7 @@ def check(X, y, mae, model, skmodel, accuracy=1.0):
     model.fit(X, y)
     y_pred = model.predict(X)
     y_proba_estimated = model.predict_proba(X)
-    correct = np.sum(y.flatten() == y_pred)
+    correct = np.sum(y.flatten() == y_pred.flatten())
     n = len(X)
     # print(f"Got {correct} / {n} correct = {(correct / n) * 100:.2f}%")
 
