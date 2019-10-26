@@ -45,18 +45,14 @@ def check(X, y, mae, model, skmodel, accuracy=1.0):
         train_test_split(X, y, test_size=0.2, shuffle=True, random_state=999)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
-    y_proba_estimated = model.predict_proba(X_test)
     correct = np.sum(y_test.flatten() == y_pred.flatten())
     n = len(X_test)
     print(f"Got {correct} / {n} correct = {(correct / n) * 100:.2f}%")
-
-    print(f"Log loss {log_loss(y_test, y_proba_estimated)}")
 
     estimated_B = model.B.reshape(-1)
     # print(estimated_B)
 
     skmodel.fit(X_train, y_train.reshape(-1))
-    y_proba_true = skmodel.predict_proba(X_test)
     if skmodel.coef_.ndim==2:
         true_B = np.concatenate([skmodel.intercept_, skmodel.coef_[0]])
     else:
