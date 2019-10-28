@@ -126,7 +126,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 * [Naive Bayes](https://github.com/parrt/msds621/raw/master/lectures/naive-bayes.pdf)  (slides) (Day 4)
   * [Lab: Naive bayes by hand](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/bayes/naive-bayes.ipynb) (Day 4)
-  * (*[Naive Bayes project](https://github.com/parrt/msds621/raw/master/projects/bayes/bayes.pdf)*)
+  * (*[Naive Bayes project](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/projects/bayes/bayes.ipynb)*)
 * [Intro to non-parametric machine learning models](https://github.com/parrt/msds621/raw/master/lectures/nonparametric-models.pdf) (slides) (Day 4)
 * [Decision trees](https://github.com/parrt/msds621/raw/master/lectures/decision-trees.pdf) (slides) (Day 5)
   * [Lab: Partitioning feature space](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/trees/partitioning-feature-space.ipynb) (Day 5)
