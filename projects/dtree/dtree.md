@@ -115,11 +115,11 @@ The algorithm looks like this:
 
 Finding the optimal split looks like this:
 
-<img src="images/bestsplit.png" width="50%">
+<img src="images/bestsplit.png" width="80%">
 
 In our case, for speed reasons (and to improve generality), we're going to pick a subset of all possible split values.
 
-<img src="images/bestsplit-subset.png" width="50%">
+<img src="images/bestsplit-subset.png" width="85%">
 
 We could also improve generality by picking splits midway *between* X values rather than at X values, but that means sorting or scanning values looking for the nearest value less than the split point.
 
