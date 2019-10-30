@@ -131,7 +131,8 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 * [Decision trees](https://github.com/parrt/msds621/raw/master/lectures/decision-trees.pdf) (slides) (Day 5)
   * [Lab: Partitioning feature space](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/trees/partitioning-feature-space.ipynb) (Day 5)
   * [Binary tree crash course](https://github.com/parrt/msds621/raw/master/lectures/binary-trees.pdf) (slides) (Day 6)
-  * [Training decision trees](https://github.com/parrt/msds621/raw/master/lectures/training-decision-trees.pdf) (slides) (Day 6)
+  * [Lab: Binary trees](https://github.com/parrt/msds621/blob/master/labs/trees/binary-trees.ipynb) (Day 6)
+  * [Training decision trees](https://github.com/parrt/msds621/raw/master/lectures/training-decision-trees.pdf) (slides) (Day 6, 7)
   * (*[Decision trees project](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md)*)
 * [Random Forests](https://github.com/parrt/msds621/raw/master/lectures/random-forests.pdf) (slides) (Day 7)
   * (*[Random Forest project](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md)*)
@@ -143,17 +144,17 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 ## Model assessment
 
-* [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf) (slides) 
-* [Model assessment](https://github.com/parrt/msds621/raw/master/lectures/model-assessment.pdf) (slides)
+* [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf) (slides) (Day 10)
+* [Model assessment](https://github.com/parrt/msds621/raw/master/lectures/model-assessment.pdf) (slides) (Day 11)
 
 ## Model interpretation
 
-* [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides)
+* [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides) (Day 12)
 * Partial dependence
 
 ## Unsupervised learning
 
-* [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)
+* [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)  (Day 13)
   * k-means clustering
   * Hierarchical clustering
   * Breiman's trick for clustering with RFs
