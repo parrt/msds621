@@ -139,7 +139,8 @@ def vocab(neg:Sequence[Sequence], pos:Sequence[Sequence]) -> dict:
 
 def vectorize(V:dict, docwords:Sequence) -> np.ndarray:
     """
-    Return a row vector (based upon V) for docwords.
+    Return a row vector (based upon V) for docwords. The first element of the
+    returned vector is the count of unknown words.
     """
     ...
 
