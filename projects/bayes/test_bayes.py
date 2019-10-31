@@ -271,9 +271,10 @@ def test_kfold_sklearn_vs_621():
 
     accuracies = kfold_CV(NaiveBayes621(), X, y, k=4)
     sklearn_accuracies = kfold_CV(GaussianNB(), X, y, k=4)
+    # print(f"sklearn kfold {sklearn_accuracies} vs yours {accuracies}")
 
     our_avg = np.mean(accuracies)
     sklearn_avg = np.mean(sklearn_accuracies)
 
-    assert np.abs(sklearn_avg-our_avg) < 0.01, f"sklearn accuracies {sklearn_avg} and your kfold {our_avg} differ"
+    assert our_avg-sklearn_avg > 0.10, f"sklearn accuracies {sklearn_avg} and your kfold {our_avg} differ"
 
