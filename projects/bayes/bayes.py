@@ -72,12 +72,12 @@ class defaultintdict(dict):
 
 
 def filelist(root) -> Sequence[str]:
-    """Return a fully-qualified list of filenames under root directory"""
+    """Return a fully-qualified list of filenames under root directory; sort names alphabetically."""
     allfiles = []
     for path, subdirs, files in os.walk(root):
         for name in files:
             allfiles.append(os.path.join(path, name))
-    return allfiles
+    return sorted(allfiles)
 
 
 def get_text(filename:str) -> str:
