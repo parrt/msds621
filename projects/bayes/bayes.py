@@ -127,12 +127,17 @@ def vocab(neg:Sequence[Sequence], pos:Sequence[Sequence]) -> dict:
     Given neg and pos lists of word lists, construct a mapping from word to word index.
     Use index 0 to mean unknown word, '__unknown__'. The real words start from index one.
     The words should be sorted so the first vocabulary word is index one.
-    The length of the dictionary is |V|+1 where |V| is the length of the vocabulary.
+    The length of the dictionary is |uniquewords|+1 because of "unknown word".
+    |V| is the length of the vocabulary including the unknown word slot.
+
     Sort the unique words in the vocab alphabetically so we standardize which
-    word is associated with which word vector index. 
+    word is associated with which word vector index.
+
     E.g., given neg = [['hi']] and pos=[['mom']], return:
 
     V = {'__unknown__':0, 'hi':1, 'mom:2}
+
+    and so |V| is 3
     """
     V = defaultdict(int)
     ...
@@ -142,7 +147,7 @@ def vocab(neg:Sequence[Sequence], pos:Sequence[Sequence]) -> dict:
 def vectorize(V:dict, docwords:Sequence) -> np.ndarray:
     """
     Return a row vector (based upon V) for docwords. The first element of the
-    returned vector is the count of unknown words.
+    returned vector is the count of unknown words. So |V| is |uniquewords|+1.
     """
     ...
 
