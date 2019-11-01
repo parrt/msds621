@@ -142,7 +142,7 @@ def test_load():
 def test_vocab():
     neg, pos = load()
     V = vocab(neg,pos)
-    assert len(V)==38372+1 # Add one for unknown at index 0
+    assert len(V)==38373 # includes unknown
 
     rs = np.random.RandomState(42) # get same list back each time
     idx = rs.randint(0,len(V),size=100)
@@ -178,7 +178,7 @@ def test_vectorize():
     V, X, y = training_data()
     d1 = vectorize(V, words("mostly very funny , the story is quite appealing."))
     d2 = vectorize(V, words("there is already a candidate for the worst of 1997."))
-    p = len(V) + 1
+    p = len(V)
     assert len(d1)==p, f"d1 should be 1x{p} but is 1x{len(d1)}"
     assert len(d2)==p, f"d2 should be 1x{p} but is 1x{len(d2)}"
     d1_idx = np.nonzero(d1)
@@ -193,7 +193,7 @@ def test_simple_docs_error():
     V, X, y = training_data()
     d1 = vectorize(V, words("mostly very funny, the story is quite appealing."))
     d2 = vectorize(V, words("there is already a candidate for the worst of 1997."))
-    p = len(V) + 1
+    p = len(V)
     assert len(d1)==p, f"d1 should be 1x{p} but is 1x{len(d1)}"
     assert len(d2)==p, f"d2 should be 1x{p} but is 1x{len(d2)}"
     y_test = np.array([1,0])
@@ -213,7 +213,7 @@ def test_unknown_words_vectorize():
     d2_words = words("brexit vote postponed")
     d1 = vectorize(V, d1_words)
     d2 = vectorize(V, d2_words)
-    p = len(V) + 1
+    p = len(V)
     assert len(d1)==p, f"d1 should be 1x{p} but is 1x{len(d1)}"
     assert len(d2)==p, f"d2 should be 1x{p} but is 1x{len(d2)}"
     assert d1[0]==4, f"d1 should have 4 unknown words"
