@@ -55,19 +55,19 @@ If you are a student with a disability or disabling condition, or if you think y
 
 *Behavioral Expectations*
 
-All students are expected to behave in accordance with the <a href="/fogcutter">Student Conduct Code</a> and other University policies.
+All students are expected to behave in accordance with the <a href="https://usfca.edu/fogcutter">Student Conduct Code</a> and other University policies.
 
 *Academic Integrity*
 
-USF upholds the standards of honesty and integrity from all members of the academic community. All students are expected to know and adhere to the University's <a href="/academic-integrity/">Honor Code</a>.
+USF upholds the standards of honesty and integrity from all members of the academic community. All students are expected to know and adhere to the University's <a href="https://usfca.edu/academic-integrity/">Honor Code</a>.
 
 *Counseling and Psychological Services (CAPS)*
 
-CAPS provides confidential, free <a href="/student-health-safety/caps">counseling</a> to student members of our community.
+CAPS provides confidential, free <a href="https://usfca.edu/student-health-safety/caps">counseling</a> to student members of our community.
 
 *Confidentiality, Mandatory Reporting, and Sexual Assault*
 
-For information and resources regarding sexual misconduct or assault visit the <a href="/TITLE-IX">Title IX</a> coordinator or USFs <a href="http://usfca.callistocampus.org" target="_blank">Callisto website</a>.
+For information and resources regarding sexual misconduct or assault visit the <a href="https://myusf.usfca.edu/title-ix">Title IX</a> coordinator or USFs <a href="http://usfca.callistocampus.org" target="_blank">Callisto website</a>.
 
 ## Student evaluation
 
