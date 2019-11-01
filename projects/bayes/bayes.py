@@ -200,7 +200,7 @@ def kfold_CV(model, X:np.ndarray, y:np.ndarray, k=4) -> np.ndarray:
     can use KFold from sklearn to get the splits but must loop through the splits
     with a loop to implement the cross-fold testing.  Pass random_state=999 to KFold
     so we always get same sequence (wrong in practice) so student eval unit tests
-    are consistent.
+    are consistent. Shuffle the elements before walking the folds.
     """
     ...
     return np.array(accuracies)
