@@ -259,11 +259,11 @@ def test_kfold_621():
 
     sklearn_accuracies = kfold_CV(GaussianNB(), X, y, k=4)
     true_sklearn_accuracies = np.array([0.638, 0.644, 0.67, 0.63])
-    sklearn_avg = np.mean(true_sklearn_accuracies)
+    sklearn_avg = np.mean(sklearn_accuracies)
     true_avg = np.mean(true_sklearn_accuracies)
     # print(f"kfold {sklearn_accuracies} vs true {true_sklearn_accuracies}")
     # print(np.abs(sklearn_avg-true_avg))
-    assert np.abs(sklearn_avg-true_avg) < 0.0001, f"true accuracies {true_sklearn_accuracies} and your kfold {sklearn_accuracies} differ"
+    assert np.abs(sklearn_avg-true_avg) < 0.003, f"true accuracies {true_sklearn_accuracies} and your kfold {sklearn_accuracies} differ"
 
 
 def test_kfold_sklearn_vs_621():
