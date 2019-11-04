@@ -8,7 +8,7 @@ You will work in git repo `dtree`-*userid*.
 
 ## Description
 
-We will learn how to build a decision trees as part of our lectures but here's a brief synopsis. Decision trees partition feature space into hyper volumes with similar features, subject to the goal of reducing variance in the target y variable. For example, a regression of y against a single feature begins by finding the split point in x that gets two regions with the lowest variance within those regions. This is done by exhaustively testing locations in x space, computing the variance of y for observations to the left and the variance of observations on the right of the split point. The location of the best average of these two variances is the split point. Then, the algorithm recursively splits the two new regions. Here's what it looks like after 1, 2, and 3 splits for regression:
+We will learn how to build a decision trees as part of our lectures but here's a brief synopsis. Decision trees partition feature space into hyper volumes with similar features, subject to the goal of reducing impurity in the target y variable. For example, a regression of y against a single feature begins by finding the split point in x that gets two regions with the lowest variance within those regions. This is done by exhaustively testing locations in x space, computing the variance of y for observations to the left and the variance of observations on the right of the split point. The location of the best average of these two variances is the split point. Then, the algorithm recursively splits the two new regions. Here's what it looks like after 1, 2, and 3 splits for regression:
 
 <img src="images/cars-1.svg" width="30%"> <img src="images/cars-2.svg" width="30%"> <img src="images/cars-3.svg" width="30%">
 
@@ -16,7 +16,7 @@ The same process works for classification. The only difference is that, instead 
 
 <img src="images/iris-1.svg" width="30%"> <img src="images/iris-2.svg" width="30%"> <img src="images/iris-3.svg" width="30%">
 
-If you prefer, you can also look at the partitions with stacked bar charts:
+If you prefer, you can also look at the partitions with stacked bar charts using [dtreeviz](https://github.com/parrt/dtreeviz):
  
  <img src="images/iris-1-bar.svg" width="40%">
 
@@ -58,11 +58,11 @@ class LeafNode:
         self.prediction = prediction
 
     def predict(self, x_test):
-        # Predict mean if regressor else mode
+        # Predict mean if regressor else mode (x_test ignored)
         ...
 ```
 
-Please make sure, however, that your tree nodes respond to function `t.predict(x)` for some tree node `t` and feature vector `x`.
+Please make sure, however, that your tree nodes respond to function `t.predict(x)` for some tree node `t` and feature vector `x`.  In other words, the `t.predict()` will invoke `DecisionNode.predict()` or `LeafNode.predict()`, depending on the type of `t`.  
 
 The primary interface to your code from the testing script is the `fit()` function:
 
@@ -140,7 +140,7 @@ class DecisionNode
 
 class LeafNode:
     def predict(self, x_test):
-        # Predict mean if regressor else mode
+        # Predict mean if regressor else mode (x_test ignored)
 ```
 
 The `DecisionNode.predict()` method invokes `predict()` on the left or right child depending on `x_test`'s values.  The leaf node contains just the part from the algorithm above dealing with "node is leaf".
