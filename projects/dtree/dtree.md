@@ -111,7 +111,7 @@ The first decision node is created by looking at the entire set of training reco
 
 The algorithm looks like this:
 
-<img src="images/fit.png" width="43%">
+<img src="images/fit.png" width="45%">
 
 Finding the optimal split looks like this:
 
@@ -125,7 +125,7 @@ We could also improve generality by picking splits midway *between* X values rat
 
 ### Prediction algorithm
 
-<img src="images/predict.png" width="55%">
+<img src="images/predict.png" width="57%">
 
 ### Wrapping your functions in objects
 
