@@ -139,7 +139,7 @@ def vocab(neg:Sequence[Sequence], pos:Sequence[Sequence]) -> dict:
 
     and so |V| is 3
     """
-    V = defaultdict(int)
+    V = defaultintdict()
     ...
     return V
 
