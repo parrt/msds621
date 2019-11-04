@@ -47,6 +47,7 @@ class DecisionNode:
         self.rchild = rchild
 
     def predict(self, x_test):
+        # Make decision based upon x_test[col] and split
         ...
 ```
 
@@ -57,6 +58,7 @@ class LeafNode:
         self.prediction = prediction
 
     def predict(self, x_test):
+        # Predict mean if regressor else mode
         ...
 ```
 
@@ -125,7 +127,23 @@ We could also improve generality by picking splits midway *between* X values rat
 
 ### Prediction algorithm
 
+To make a prediction for a feature vector *x*, we start at the root node and descend through the decision nodes to the appropriate leaf. At each decision node, we test a specific variable's value against the split value stored in the decision node. If the variable's value is less than or equal to the split value, prediction descends down the left child. Otherwise, it descends down the right child. Upon reaching a leaf, we predict either the most common class or the average value among the *y* targets associated with that leaf. Here is the algorithm:
+
 <img src="images/predict.png" width="57%">
+
+In our project, we are breaking up this algorithm actually into two main parts, one for the decision nodes and one for the leaves. That is why you see the same method repeated in the class definitions associated with binary trees:
+
+```
+class DecisionNode
+    def predict(self, x_test):
+        # Make decision based upon x_test[col] and split
+
+class LeafNode:
+    def predict(self, x_test):
+        # Predict mean if regressor else mode
+```
+
+The `DecisionNode.predict()` method invokes `predict()` on the left or right child depending on `x_test`'s values.  The leaf node contains just the part from the algorithm above dealing with "node is leaf".
 
 ### Wrapping your functions in objects
 
