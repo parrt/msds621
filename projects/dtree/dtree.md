@@ -1,6 +1,8 @@
-#  Classifier and regressor decision trees
+# Classifier and regressor decision trees
 
 ## Goal
+
+**TODO: test num samples leaf**
 
 Your goal is to implement decision trees for classification and regression. You will make two similar implementations, first as a small set of functions and then as a objects similar to sklearn's `DecisionTreeClassifier` and `DecisionTreeRegressor`.  This project can be challenging because you must recursively construct trees, but my solution is only 100 lines of Python with comments.
 
@@ -64,7 +66,7 @@ class LeafNode:
 
 Please make sure, however, that your tree nodes respond to function `t.predict(x)` for some tree node `t` and feature vector `x`.  In other words, the `t.predict()` will invoke `DecisionNode.predict()` or `LeafNode.predict()`, depending on the type of `t`.  
 
-The primary interface to your code from the testing script is the `fit()` function:
+The primary interface to your code from the testing script `test_dtree_funcs.py` is the `fit()` function:
 
 ```
 def fit(X, y, isclassifier, min_samples_leaf=1, loss=None):
