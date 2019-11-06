@@ -2,19 +2,17 @@
 
 ## Goal
 
-**TODO: test num samples leaf**
+Your goal is to implement decision trees for classification and regression as objects similar to sklearn's `DecisionTreeClassifier` and `DecisionTreeRegressor`.  This project can be challenging because you must recursively construct trees, but my solution is only 100 lines of Python with comments.
 
-Your goal is to implement decision trees for classification and regression. You will make two similar implementations, first as a small set of functions and then as a objects similar to sklearn's `DecisionTreeClassifier` and `DecisionTreeRegressor`.  This project can be challenging because you must recursively construct trees, but my solution is only 100 lines of Python with comments.
-
-You will work in git repo `dtree`-*userid*.
+You will work in git repo `dtree`-*userid* and must create Python file `dtree.py`.
 
 ## Description
 
-We will learn how to build a decision trees as part of our lectures but here's a brief synopsis. Decision trees partition feature space into hyper volumes with similar features, subject to the goal of reducing impurity in the target y variable. For example, a regression of y against a single feature begins by finding the split point in x that gets two regions with the lowest variance within those regions. This is done by exhaustively testing locations in x space, computing the variance of y for observations to the left and the variance of observations on the right of the split point. The location of the best average of these two variances is the split point. Then, the algorithm recursively splits the two new regions. Here's what it looks like after 1, 2, and 3 splits for regression:
+We will learn how to build a decision trees as part of our lectures but here's a brief synopsis. Decision trees partition feature space into hyper volumes with similar features, subject to the goal of reducing variance or impurity in the target y variable. For example, a regression of y against a single feature begins by finding the split point in x that gets two regions with the lowest average variance within those subregions. This is done by exhaustively testing locations in x space, computing the variance of y for observations to the left and the variance of observations on the right of the split point. The x location of the best average of these two variances is the split point. Then, the algorithm recursively splits the two new subregions. Here's what it looks like after 1, 2, and 3 recursive split operations (2, 4, and 8 subregions) for regression:
 
 <img src="images/cars-1.svg" width="30%"> <img src="images/cars-2.svg" width="30%"> <img src="images/cars-3.svg" width="30%">
 
-The same process works for classification. The only difference is that, instead of measuring variance, we measure and try to reduce the uncertainty/purity ([gini impurity](https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity)) of the y values to the left and right of the split.
+The same process works for classification. The only difference is that, instead of measuring MSE (or variance), we measure and try to reduce the uncertainty/purity ([gini impurity](https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity)) of the y values to the left and right of the split.
 
 <img src="images/iris-1.svg" width="30%"> <img src="images/iris-2.svg" width="30%"> <img src="images/iris-3.svg" width="30%">
 
@@ -60,52 +58,71 @@ class LeafNode:
         self.prediction = prediction
 
     def predict(self, x_test):
-        # Predict mean if regressor else mode (x_test ignored)
+        # return prediction
         ...
 ```
 
-Please make sure, however, that your tree nodes respond to function `t.predict(x)` for some tree node `t` and feature vector `x`.  In other words, the `t.predict()` will invoke `DecisionNode.predict()` or `LeafNode.predict()`, depending on the type of `t`.  
+You can define your own objects, but make sure that your tree nodes respond to function `t.predict(x)` for some tree node `t` and 1D feature vector `x`.  In other words, the `t.predict()` will invoke `DecisionNode.predict()` or `LeafNode.predict()`, depending on the type of `t`.
 
-The primary interface to your code from the testing script `test_dtree_funcs.py` is the `fit()` function:
-
-```
-def fit(X, y, isclassifier, min_samples_leaf=1, loss=None):
-    """
-    Recursively create and return a decision tree fit to (X,y) for
-    either a classifier or regressor. Leaf nodes for classifiers predict
-    the most common class (the mode) and regressors predict the average y
-    for samples in that leaf.
-
-    The loss function is either np.std (if isclassifier) or gini.
-    """
-```
-
-For example, the test script has the following function for classification:
+Those classes define the interior and leaf nodes of your decision trees. Now, we need objects to represent the regressors and classifiers. As we talked about, their implementation is virtually identical. The only difference is the loss function, MSE or gini impurity, and the prediction made in leaves (mean or mode). We can squirrel away all of that common functionality in a generic `DecisionTree621` class:
 
 ```
-def classifier_fit(X, y, min_samples_leaf=1):
-    return fit(X, y, isclassifier=True, min_samples_leaf=min_samples_leaf, loss=gini)
+class DecisionTree621:
+    def __init__(self, min_samples_leaf=1, loss=None):
+        self.min_samples_leaf = min_samples_leaf
+        self.loss = loss # loss function; either np.std or gini
+
+    def fit(self, X, y):
+        """
+        Recursively create and return a decision tree fit to (X,y) for
+        either a classifier or regressor.  Leaf nodes for classifiers predict
+        the most common class (the mode) and regressors predict the average y
+        for samples in that leaf. This function should call self.create_leaf(X,y)
+        to create the appropriate leaf node.
+        """
+        ...
+        
+    def predict(self, X_test): ...
 ```
 
-Note that it is passing in the `gini()` function (see below).
-
-Next, you must define a function that takes a decision tree root and one or more feature vectors (in a 2D matrix) and returns one or more predictions: 
+Then, the `RegressionTree621` can *inherit* the `fit` and `predict` methods from `DecisionTree621`:
 
 ```
-def predict(root, X_test):
-    ...
+class RegressionTree621(DecisionTree621):
+    def __init__(self, min_samples_leaf=1):
+        super().__init__(min_samples_leaf, loss=np.std)
+    def score(self, X_test, y_test): ...
+    def create_leaf(self, y):
+        "Return LeafNode for regressor"
+        ...
 ```
 
-The predictions are either numeric values for regression or integer class identifiers for classification.
+In essence, we are designing a new class as it differs from the parent class. We are inheriting `fit` and `predict` methods and defining `score` and `create_leaf`.
 
-You must also define a function that implements the gini impurity score, as shown at Wikipedia:
+`ClassifierTree621` also inherits from methods from `DecisionTree621`:
+
+```
+class ClassifierTree621(DecisionTree621):
+    def __init__(self, min_samples_leaf=1):
+        super().__init__(min_samples_leaf, loss=gini)
+    def score(self, X_test, y_test): ...
+    def create_leaf(self, y):
+        """Return LeafNode for classifier."""
+        ...
+```
+
+All of this object-oriented programming mumbo-jumbo is a bit overwhelming at first, but it's crucial to implementing models that look like sklearn models.  It also makes it easier to use these models when they are classes. 
+
+Object-oriented programming is probably unfamiliar to you, but there is plenty of material on the web (most of it is crap though).  You can check out [my OO summary](https://github.com/parrt/msds501/blob/master/notes/OO.ipynb), which sucks slightly less than other stuff on the web. 
+
+You must also need a function that implements the gini impurity score, as shown at Wikipedia:
 
 ```
 def gini(y):
     "Return the gini impurity score for values in y"
 ```
 
-Script `test_dtree_funcs.py` tests your implementation.
+It is passed to the `DecisionTree621` constructor by `ClassifierTree621`'s constructor as the loss function.
 
 ### Training algorithm
 
@@ -142,135 +159,50 @@ class DecisionNode
 
 class LeafNode:
     def predict(self, x_test):
-        # Predict mean if regressor else mode (x_test ignored)
+        # return prediction
 ```
 
 The `DecisionNode.predict()` method invokes `predict()` on the left or right child depending on `x_test`'s values.  The leaf node contains just the part from the algorithm above dealing with "node is leaf".
 
-### Wrapping your functions in objects
-
-After successfully building the functions that construct trees and make predictions, the next phase is to wrap or pull apart these functions and wrap them into class definitions: `RegressionTree621` and `ClassifierTree621` to mimic sklearn's `DecisionTreeClassifier` and `DecisionTreeRegressor` objects. Script `test_dtree.py` tests your implementation.
-
-Object-oriented programming is probably unfamiliar to you, but there is plenty of material on the web (most of it is crap though).  You can check out [my OO summary](https://github.com/parrt/msds501/blob/master/notes/OO.ipynb), which sucks slightly less than other stuff on the web. 
-
-The basic idea is that class definitions organize multiple functions together (functions within a class definition are called methods). For example, here is the skeleton class definitions that you will need:
-
-```
-class RegressionTree621:
-    def __init__(self, min_samples_leaf=1, loss=None):
-        self.min_samples_leaf = min_samples_leaf
-        self.loss = loss # loss function; either np.std or gini
-    def fit(self, X, y):
-        self.root = self.fit_(X, y)
-
-    def fit_(self, X, y): # recursive version of fit()
-        """
-        Recursively create and return a decision tree fit to (X,y) for
-        either a classifier or regressor.
-        """
-        ...
-
-    def predict(self, X_test):
-        ...        
-    def score(self, X_test, y_test):
-        "See regressor_score() in test_dtree_funcs.py"
-        ...
-```
-
-```
-class ClassifierTree621:
-    def __init__(self, min_samples_leaf=1, loss=None):
-        self.min_samples_leaf = min_samples_leaf
-        self.loss = loss # loss function; either np.std or gini
-    def fit(self, X, y):
-        ...
-    def predict(self, X_test):
-        ...        
-    def score(self, X_test, y_test):
-        ...
-```
-
-If you have a strong programming background, you are welcome to use class inheritance to inherit and/or override methods. In that case you might use something like:
-
-```
-class DecisionTree621:
-    def __init__(self, min_samples_leaf=1, loss=None):
-        self.min_samples_leaf = min_samples_leaf
-        self.loss = loss # loss function; either np.std or gini
-    ...
-
-class RegressionTree621(DecisionTree621):
-    def __init__(self, min_samples_leaf=1):
-        super().__init__(min_samples_leaf, loss=np.std)
-    ...
-
-class ClassifierTree621(DecisionTree621):
-    def __init__(self, min_samples_leaf=1):
-        super().__init__(min_samples_leaf, loss=gini)
-    ...
-```
-
 ## Getting started
 
-Download the [test scripts](https://github.com/parrt/msds621/tree/master/projects/dtree) and create blank script files `dtree_funcs.py` and `dtree.py` with perhaps `import numpy as np` as starter code.   I would focus on making sure that the functions work properly in `dtree_funcs.py` and and worry about the object-oriented implementation after all of your tests pass.
-
-Cut/paste my definitions of `DecisionNode` and `LeafNode` into `dtree_funcs.py` if you plan on using those, but you are free to use your own binary tree implementation.
-
-Define skeletons for functions `fit()`, `gini()`, and `predict()`.
-
-Add the files to your repository, commit, and push back to github.
+1. Download the [test script](https://github.com/parrt/msds621/tree/master/projects/dtree)
+2. Create blank script file `dtree.py` with perhaps `import numpy as np` as starter code
+3. Cut/paste my definitions of `DecisionNode` and `LeafNode` into `dtree.py` if you plan on using those, but you are free to use your own binary tree implementation
+4. Add the files to your repository, commit, and push back to github. 
 
 In this way, you have started on the project without actually having to do any work. Getting over inertia is an important step in any project.
  
 ## Deliverables
 
-In your github repo `dtree`-*userid*, you must provide the following files at the root of the repository directory:
-
-* `dtree_funcs.py` This is the initial implementation with the functions `fit()`, `gini()`, and `predict()` as well as the class definitions you need for decision tree implementation
-* `dtree.py` This is the same code cut-and-paste into methods of class definitions to organize your code in an object-oriented way
+In your github repo `dtree`-*userid*, you must provide the `dtree.py` file at the root of the repository directory.  It must have the `RegressionTree621` and `ClassifierTree621` classes as well as the decision tree node classes; basically all of your code will be in this file. My test script will import all functions and classes.
 
 I will copy in clean versions of the test scripts before grading your projects.
 
 ## Evaluation
 
-Your code will be tested using the unit tests provided to you as part of this project. There are two regression and three classification toy data sets. Hopefully, getting even one of the tests to pass means you will get all of the test to pass. Nonetheless, each test is worth 17% for the function-based implementation that you start with. That means 85% of your grade  comes from getting the basic functionality to work.
+Your code will be tested using the unit tests provided to you as part of this project. There are two regression and three classification toy data sets. Hopefully, getting even one of the tests to pass means you will get all of the test to pass. Each `test_dtree.py` test failure costs 10%.
 
-```
-$ python -m pytest -v test_dtree_funcs.py 
-============================================== test session starts ===============================================
-platform darwin -- Python 3.7.1, pytest-4.0.2, py-1.7.0, pluggy-0.8.0 -- /Users/parrt/anaconda3/bin/python
-cachedir: .pytest_cache
-rootdir: ...
-plugins: remotedata-0.3.1, openfiles-0.3.1, doctestplus-0.2.0, arraydiff-0.3
-collected 5 items                                                                                                
-
-test_dtree_funcs.py::test_boston PASSED                                                                    [ 20%]
-test_dtree_funcs.py::test_california_housing PASSED                                                        [ 40%]
-test_dtree_funcs.py::test_iris PASSED                                                                      [ 60%]
-test_dtree_funcs.py::test_wine PASSED                                                                      [ 80%]
-test_dtree_funcs.py::test_breast_cancer PASSED                                                             [100%]
-
-=========================================== 5 passed in 26.71 seconds ============================================
-```
-
-Next, we will test the object-oriented version of your software using a similar script that simply invokes your objects as if they were sklearn objects. The functionality should not change in so you should get all of these test to pass if the test pass for the function-based code. With that in mind, there is an overall score of 15% given to you if you get the following tests to work; no partial credit for this part as they should all work or not work.
+I also have created a hidden test on a different data set and failing it costs 15% of your grade.
 
 ```
 $ python -m pytest -v test_dtree.py 
-============================================== test session starts ===============================================
+================================ test session starts =================================
 platform darwin -- Python 3.7.1, pytest-4.0.2, py-1.7.0, pluggy-0.8.0 -- ...
 cachedir: .pytest_cache
 rootdir: /Users/parrt/courses/msds621-private/projects/dtree, inifile:
 plugins: remotedata-0.3.1, openfiles-0.3.1, doctestplus-0.2.0, arraydiff-0.3
-collected 5 items                                                                                                
+collected 7 items                                                                    
 
-test_dtree.py::test_boston PASSED                                                                          [ 20%]
-test_dtree.py::test_california_housing PASSED                                                              [ 40%]
-test_dtree.py::test_iris PASSED                                                                            [ 60%]
-test_dtree.py::test_wine PASSED                                                                            [ 80%]
-test_dtree.py::test_breast_cancer PASSED                                                                   [100%]
+test_dtree.py::test_boston PASSED                                              [ 14%]
+test_dtree.py::test_boston_min_samples_leaf PASSED                             [ 28%]
+test_dtree.py::test_california_housing PASSED                                  [ 42%]
+test_dtree.py::test_iris PASSED                                                [ 57%]
+test_dtree.py::test_wine PASSED                                                [ 71%]
+test_dtree.py::test_wine_min_samples_leaf PASSED                               [ 85%]
+test_dtree.py::test_breast_cancer PASSED                                       [100%]
 
-=========================================== 5 passed in 26.63 seconds ============================================
+============================= 7 passed in 28.53 seconds ==============================
 ```
 
-*My test scripts complete in less than 30 seconds and I will take off 10% if either of the test scripts take longer than one minute each. Please pay attention to efficiency.*
+*My test script completes in less than 30 seconds and I will take off 10% if your test takes longer than one minute. Please pay attention to efficiency.*
