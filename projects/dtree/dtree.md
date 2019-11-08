@@ -210,7 +210,7 @@ In this way, you have started on the project without actually having to do any w
  
 ## Deliverables
 
-In your github repo `dtree`-*userid*, you must provide the `dtree.py` file at the root of the repository directory.  It must have the `RegressionTree621` and `ClassifierTree621` classes as well as the decision tree node classes; basically all of your code will be in this file. My test script will import all functions and classes.
+In your github repo `dtree`-*userid*, you must provide the `dtree.py` file at the root of the repository directory.  It must have the `RegressionTree621` and `ClassifierTree621` classes as well as the decision tree node classes; basically all of your code will be in this file. My test script will import all functions and classes.  Please make sure there is no main program in `dtree.py` (as it runs when we do an import).
 
 I will copy in clean versions of the test scripts before grading your projects.
 
