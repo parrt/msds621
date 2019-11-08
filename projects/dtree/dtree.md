@@ -36,7 +36,7 @@ If you record the sequence of splits, you get a binary tree. For example, here i
 
 ### Functions and objects to build
 
-First, define two classes that will represent the objects in your decision trees. You can build them anywhere you want, but here's the outline of how I built mine:
+First, define two classes that will represent the objects in your decision trees. You can build them however you want and put them anywhere in `dtree.py`, but here's the outline of how I built mine:
 
 ```
 class DecisionNode:
@@ -54,6 +54,7 @@ class DecisionNode:
 ```
 class LeafNode:
     def __init__(self, y, prediction):
+        "Create leaf node from y values and prediction; prediction is mean(y) or mode(y)"
         self.n = len(y)
         self.prediction = prediction
 
@@ -62,9 +63,9 @@ class LeafNode:
         ...
 ```
 
-You can define your own objects, but make sure that your tree nodes respond to function `t.predict(x)` for some tree node `t` and 1D feature vector `x`.  In other words, the `t.predict()` will invoke `DecisionNode.predict()` or `LeafNode.predict()`, depending on the type of `t`.
+You can define your own objects, but make sure that your tree nodes respond to function `t.predict(x)` for some tree node `t` and 1D feature vector `x`.  In other words, calling `t.predict()` will invoke `DecisionNode.predict()` or `LeafNode.predict()`, depending on the type of `t`. Those classes define the interior and leaf nodes of your decision trees. Now, we need objects to represent the regressors and classifiers. 
 
-Those classes define the interior and leaf nodes of your decision trees. Now, we need objects to represent the regressors and classifiers. As we talked about, their implementation is virtually identical. The only difference is the loss function, MSE or gini impurity, and the prediction made in leaves (mean or mode). We can squirrel away all of that common functionality in a generic `DecisionTree621` class:
+As we talked about, regressor and classifier implementation is virtually identical. The only difference is the loss function, MSE or gini impurity, and the prediction stored in leaves (mean or mode). We can squirrel away all of that common functionality in a generic `DecisionTree621` class:
 
 ```
 class DecisionTree621:
@@ -74,11 +75,27 @@ class DecisionTree621:
 
     def fit(self, X, y):
         """
+        Create a decision tree fit to (X,y) and save as self.root, the root of
+        our decision tree, for either a classifier or regressor.  Leaf nodes for classifiers
+        predict the most common class (the mode) and regressors predict the average y
+        for samples in that leaf.  
+              
+        This function is a wrapper around fit_() that just stores the tree in self.root.
+        """
+        self.root = self.fit_(X, y)
+        
+    def fit_(self, X, y):
+        """
         Recursively create and return a decision tree fit to (X,y) for
-        either a classifier or regressor.  Leaf nodes for classifiers predict
-        the most common class (the mode) and regressors predict the average y
-        for samples in that leaf. This function should call self.create_leaf(X,y)
-        to create the appropriate leaf node.
+        either a classifier or regressor.  This function should call self.create_leaf(X,y)
+        to create the appropriate leaf node, which will invoke either
+        RegressionTree621.create_leaf() or ClassifierTree621. create_leaf() depending
+        on the type of self.
+        
+        This function is not part of the class "interface" and is for internal use, but it
+        embodies the decision tree fitting algorithm.
+
+        (Make sure to call fit_() not fit() recursively.)
         """
         ...
         
@@ -93,7 +110,10 @@ class RegressionTree621(DecisionTree621):
         super().__init__(min_samples_leaf, loss=np.std)
     def score(self, X_test, y_test): ...
     def create_leaf(self, y):
-        "Return LeafNode for regressor"
+        """
+        Return a new LeafNode for regression, passing y and mean(y) to
+        the LeafNode constructor.
+        """
         ...
 ```
 
@@ -107,7 +127,10 @@ class ClassifierTree621(DecisionTree621):
         super().__init__(min_samples_leaf, loss=gini)
     def score(self, X_test, y_test): ...
     def create_leaf(self, y):
-        """Return LeafNode for classifier."""
+        """
+        Return a new LeafNode for classification, passing y and mode(y) to
+        the LeafNode constructor.
+        """
         ...
 ```
 
@@ -140,7 +163,7 @@ Finding the optimal split looks like this:
 
 In our case, for speed reasons (and to improve generality), we're going to pick a subset of all possible split values.
 
-<img src="images/bestsplit-subset.png" width="65%">
+<img src="images/bestsplit-subset.png" width="70%">
 
 We could also improve generality by picking splits midway *between* X values rather than at X values, but that means sorting or scanning values looking for the nearest value less than the split point.
 
@@ -156,13 +179,15 @@ In our project, we are breaking up this algorithm actually into two main parts, 
 class DecisionNode
     def predict(self, x_test):
         # Make decision based upon x_test[col] and split
+        # lines 6 and 7 from predict() algorithm above
 
 class LeafNode:
     def predict(self, x_test):
-        # return prediction
+        # return prediction passed to constructor of LeafNode
+        # lines 3,4 from algorithm above
 ```
 
-The `DecisionNode.predict()` method invokes `predict()` on the left or right child depending on `x_test`'s values.  The leaf node contains just the part from the algorithm above dealing with "node is leaf".
+The `DecisionNode.predict()` method invokes `predict()` on the left or right child depending on `x_test`'s values.  The leaf node just returns the prediction (mean or mode) passed into the constructot for `LeafNode`, so it deviates a bit from the `predict()` algorithm.  
 
 ## Getting started
 
