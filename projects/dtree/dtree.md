@@ -132,7 +132,7 @@ The first decision node is created by looking at the entire set of training reco
 
 The algorithm looks like this:
 
-<img src="images/fit.png" width="45%">
+<img src="images/fit.png" width="50%">
 
 Finding the optimal split looks like this:
 
