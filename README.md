@@ -134,7 +134,8 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
   * [Lab: Binary trees](https://github.com/parrt/msds621/blob/master/labs/trees/binary-trees.ipynb) (Day 6)
   * [Training decision trees](https://github.com/parrt/msds621/raw/master/lectures/training-decision-trees.pdf) (slides) (Day 7)
   * (*[Decision trees project](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md)*)
-* [Random Forests](https://github.com/parrt/msds621/raw/master/lectures/random-forests.pdf) (slides) (Day 7)
+* [Random Forests](https://github.com/parrt/msds621/raw/master/lectures/random-forests.pdf) (slides) (Day 7, 8)
+  * [Lab: Exploring Random Forests](https://github.com/parrt/msds621/blob/master/labs/trees/random-forests.ipynb) (Day 8)
   * (*[Random Forest project](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md)*)
 
 ## Mechanics
