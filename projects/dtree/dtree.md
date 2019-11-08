@@ -99,7 +99,13 @@ class DecisionTree621:
         """
         ...
         
-    def predict(self, X_test): ...
+    def predict(self, X_test):
+        """
+        Make a prediction for each record in X_test and return as array.
+        This method is inherited by RegressionTree621 and ClassifierTree621 and
+        works for both without modification!
+        """
+        ...
 ```
 
 Then, the `RegressionTree621` can *inherit* the `fit` and `predict` methods from `DecisionTree621`:
@@ -108,7 +114,9 @@ Then, the `RegressionTree621` can *inherit* the `fit` and `predict` methods from
 class RegressionTree621(DecisionTree621):
     def __init__(self, min_samples_leaf=1):
         super().__init__(min_samples_leaf, loss=np.std)
-    def score(self, X_test, y_test): ...
+    def score(self, X_test, y_test):
+        "Return the R^2 of y_test vs predictions for each record in X_test"
+        ...
     def create_leaf(self, y):
         """
         Return a new LeafNode for regression, passing y and mean(y) to
@@ -125,7 +133,9 @@ In essence, we are designing a new class as it differs from the parent class. We
 class ClassifierTree621(DecisionTree621):
     def __init__(self, min_samples_leaf=1):
         super().__init__(min_samples_leaf, loss=gini)
-    def score(self, X_test, y_test): ...
+    def score(self, X_test, y_test):
+        "Return the accuracy_score() of y_test vs predictions for each record in X_test"
+        ...
     def create_leaf(self, y):
         """
         Return a new LeafNode for classification, passing y and mode(y) to
