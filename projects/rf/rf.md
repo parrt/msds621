@@ -86,10 +86,6 @@ class RandomForestRegressor621:
     def predict(self, X_test) -> np.ndarray:
         ...
         
-    def leaf(self, x_test):
-        "Like predict(), but returns the leaf node not the prediction"
-        return self.root.leaf(x_test)
-
     def score(self, X_test, y_test) -> float:
         ...
 ```
@@ -109,17 +105,13 @@ class RandomForestClassifier621:
     def predict(self, X_test) -> np.ndarray:
         ...
         
-    def leaf(self, x_test):
-        "Like predict(), but returns the leaf node not the prediction"
-        return self.root.leaf(x_test)
-
     def score(self, X_test, y_test) -> float:
         ...    
 ```
 
 ## Getting started
 
-Download the [test scripts](https://github.com/parrt/msds621/tree/master/projects/rf) and create blank script file `rf.py` with perhaps `import numpy as np` as starter code.  Copy your `dtree.py` script from the previous project into your project directory as well.  Make sure that you are creating files in the root directory of the repository. Add the files to your repository, commit, and push back to github.
+Download the [test scripts](https://github.com/parrt/msds621/tree/master/projects/rf) and create blank script file `rf.py` with perhaps `import numpy as np` as starter code.  Copy your `dtree.py` script from the previous project into this new `rf-`*userid* project directory as well.  Make sure that you are creating files in the root directory of the repository. Add the files to your repository, commit, and push back to github.
 
 In this way, you have started on the project without actually having to do any work. Getting over inertia is an important step in any project.
 
