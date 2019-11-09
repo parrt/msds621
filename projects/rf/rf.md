@@ -62,9 +62,9 @@ For classification, it's a little more complicated Because we need a majority vo
 
 <table border=0>
 <tr valign="top">
-<td><img src="images/predict-regr.png" width="70%"></td>
+<td><img src="images/predict-regr.png" width="80%"></td>
 </tr>
-<tr><td><img src="images/predict-class.png" width="70%"></td>
+<tr><td><img src="images/predict-class.png" width="55%"></td>
 </tr>
 </table>
 
