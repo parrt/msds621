@@ -47,7 +47,7 @@ class DecisionNode:
         ...
 ```
 
-You might find the Python conditional `isinstance(child, LeafNode)` of use. And answers whether or not the `child` object is a `LeafNode` as opposed to a decision node.
+A `LeafNode` obviously just returns itself (`self`) rather than the prediction.
 
 The second change is in the training mechanism. Conventional decision trees exhaustively scan all available features and the feature values looking for the optimal variable/split combination. To reduce overfitting, each split should pick from a random subset of the features; the subset size is the square root of the number of features.  Function `np.random.choice()` is useful here to get a list of feature indexes and then `X[:, i]` gives us the ith column.  In my solution,  the change is to the outermost loop in `find_best_split()`. The algorithm looks like:
 
@@ -62,7 +62,9 @@ For classification, it's a little more complicated Because we need a majority vo
 
 <table border=0>
 <tr valign="top">
-<td><img src="images/predict-regr.png" width="100%"></td><td><img src="images/predict-class.png" width="100%"></td>
+<td><img src="images/predict-regr.png" width="70%"></td>
+</tr>
+<tr><td><img src="images/predict-class.png" width="70%"></td>
 </tr>
 </table>
 
