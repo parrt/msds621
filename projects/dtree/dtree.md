@@ -171,7 +171,7 @@ Finding the optimal split looks like this:
 
 <img src="images/bestsplit.png" width="70%">
 
-In our case, for speed reasons (and to improve generality), we're going to pick a subset of all possible split values.
+In our case, for speed reasons (and to improve generality), we're going to pick a subset of all possible split values.   Choose k=11 for our project.
 
 <img src="images/bestsplit-subset.png" width="70%">
 
