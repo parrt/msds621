@@ -133,14 +133,16 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
   * [Binary tree crash course](https://github.com/parrt/msds621/raw/master/lectures/binary-trees.pdf) (slides) (Day 6)
   * [Lab: Binary trees](https://github.com/parrt/msds621/blob/master/labs/trees/binary-trees.ipynb) (Day 6)
   * [Training decision trees](https://github.com/parrt/msds621/raw/master/lectures/training-decision-trees.pdf) (slides) (Day 7)
-  * (*[Decision trees project](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md)*)
-* [Random Forests](https://github.com/parrt/msds621/raw/master/lectures/random-forests.pdf) (slides) (Day 7, 8)
-  * [Lab: Exploring Random Forests](https://github.com/parrt/msds621/blob/master/labs/trees/random-forests.ipynb) (Day 8)
+  * (*[Decision trees project](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md)*) 
+* [Random Forests](https://github.com/parrt/msds621/raw/master/lectures/random-forests.pdf) (slides) (Day 7 got halfway, Day 8 up to, but not including, OOB, Day 9 finished)
+  * [Lab: Exploring Random Forests](https://github.com/parrt/msds621/blob/master/labs/trees/random-forests.ipynb) (Day 9)
   * (*[Random Forest project](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md)*)
+
+Day 8: consisted of review of decision tree training and prediction algorithms, re-examination of how random forests reduce variance, discussed decision tree project; finished up to, but not including, OOB in RF slides.
 
 ## Mechanics
 
-* [Preparing data for modeling](https://github.com/parrt/msds621/raw/master/lectures/data-prep.pdf) (slides) (Day 9)
+* [Preparing data for modeling](https://github.com/parrt/msds621/raw/master/lectures/data-prep.pdf) (slides) (Day 10)
 * [Basic feature engineering](https://github.com/parrt/msds621/raw/master/lectures/feature-engineering.pdf) (slides) (Day 10)
 
 ## Model assessment
