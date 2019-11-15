@@ -4,7 +4,7 @@
 
 The goal of this project is to leverage the decision tree implementation from the previous project to make a random forest implementation. The goal is to build the simplest possible functional random forest without concern for efficiency but with accuracy comparable to sklearn. You will create objects `RandomForestRegressor621` and `RandomForestClassifier621` as drop in replacements for sklearn's implementations. My implementation is about 100 lines of code, but minor changes are also required to the decision tree implementation in `dtree.py`.
 
-Your implementation must include code to support out-of-bag (OOB) validation error estimation. It's a bit tricky to get right, so the OOB unit tests or worth less in my evaluation. You can still get 85% total, even if you don't implement OOB error estimation.
+Your implementation must include code to support out-of-bag (OOB) validation error estimation. It's a bit tricky to get right, so the OOB unit tests are worth less in my evaluation. You can still get 92% total, even if you don't implement OOB error estimation.
 
 You will work in git repo `rf`-*userid* and create `rf.py` in the root directory of the repo. Also copy your `dtree.py` from the previous project into the root directory, as you will need to modify it and use it for this project.
 
@@ -120,8 +120,6 @@ class RandomForestRegressor621(RandomForest621):
         ...
 ```
 
-and
-
 ```
 class RandomForestClassifier621:
     def __init__(self, n_estimators=10, min_samples_leaf=3, max_features=0.3, oob_score=False):
@@ -134,6 +132,11 @@ class RandomForestClassifier621:
         ...
         
     def score(self, X_test, y_test) -> float:
+        """
+        Given a 2D nxp X_test array and 1D nx1 y_test array with one or more records,
+        collect the predicted class for each record and then compute accuracy between
+        that and y_test.
+        """
         ...    
 ```
 
@@ -158,7 +161,7 @@ A bootstrapped sample is roughly 2/3 of the training records for any given tree,
 In your github repo `rf`-*userid*, you must provide the following files at the root of the repository directory:
 
 * `dtree.py` This is the code from your previous project  but with the updates specified above to randomly select from a subset of the features during each split.
-* `rf.py` This is file containing your `RandomForestRegressor621` and `RandomForestClassifier621` implementations.
+* `rf.py` This is file containing your `RandomForestRegressor621` and `RandomForestClassifier621` implementations, and any other functions or classes you need.
 
 I will copy in a clean version of the test script before grading your projects.
 
