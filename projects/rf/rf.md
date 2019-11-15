@@ -114,44 +114,9 @@ The R^2 and accuracy scores for OOB observations is an accurate estimate of the 
 
 A bootstrapped sample is roughly 2/3 of the training records for any given tree, which leaves 1/3 of the samples (OOB) as test set. After training each decision tree, keep track of the OOB records in the tree.  For example, I do `t = ...` inside my `fit()` method (for each tree `t`).  After training all trees in `fit()`, loop through the trees again and compute the OOB score, if hyperparameter `self.oob_score` is true. Saves the score in `self.oob_score_` for either the RF regressor or classifier object, which is consistent with the sklearn implementation. See the class lecture slides for more details, but here are the algorithms again:
 
-<img src="images/oob-score-regr.png" width="60%">
+<img src="images/oob-score-regr.png" width="70%">
 
-<img src="images/oob-score-class.png" width="60%">
-
- make predictions for the OOB samples (those records not use to train that specific tree).  You will get a prediction for each OOB sample and you must add that to an overall prediction for that record. You must also track how many predictions were added so that you can compute an average later. Set field `self.oob_score_` to be consistent with the sklearn implementation.
-
-For classification, you must track class counts for each OOB record with something like:
-
-```
-oob_sample_predictions = np.zeros(shape=(len(X),self.nunique))
-```
-
-Then, as with RF prediction, bump the count of the class predicted for each OOB record. Not every record from X will appear in some OOB sample because we're using a small number of trees like 15 or 20. Ignoring the zero counts, the OOB prediction should be the category with the largest count. That gives you the prediction for all X that appeared in some OOB sample. Test the accuracy of that with the associated y records. That is not the best OOB accuracy measure we can do, but it's close enough for our purposes.
-
-I have provided a version of the tests for you so you can check your work:
-
-```
-$ python -m pytest -v test_rf_oob.py 
-=============================== test session starts ================================
-platform darwin -- Python 3.7.1, pytest-4.0.2, py-1.7.0, pluggy-0.8.0 -- ...
-cachedir: .pytest_cache
-rootdir: ...
-plugins: remotedata-0.3.1, openfiles-0.3.1, doctestplus-0.2.0, arraydiff-0.3
-collected 6 items                                                                  
-
-test_rf_oob.py::test_boston_oob PASSED                                       [ 16%]
-test_rf_oob.py::test_diabetes_oob PASSED                                     [ 33%]
-test_rf_oob.py::test_california_oob PASSED                                   [ 50%]
-test_rf_oob.py::test_iris_oob PASSED                                         [ 66%]
-test_rf_oob.py::test_wine_oob PASSED                                         [ 83%]
-test_rf_oob.py::test_breast_cancer_oob PASSED                                [100%]
-
-================================= warnings summary =================================
-...
-
--- Docs: https://docs.pytest.org/en/latest/warnings.html
-====================== 6 passed, 3 warnings in 29.94 seconds =======================
-```
+<img src="images/oob-score-class.png" width="70%">
 
 ## Deliverables
 
@@ -175,6 +140,10 @@ For me, it cuts the time in half when I use `-n 6` option:
 ```
 $ pytest -v -n 6 test_rf.py
 ```
+
+PyCharm knows how to do this as well, if you look at the configurations:
+
+<img src="images/pycharm-pytest.png" width="50%">
 
 We will run test script `test_rf.py` to evaluate your projects. With luck, getting a single test to pass for regression means that all regressors will pass. Getting a single classifier test to pass should mean you pass all of those. Regardless, you will receive 16.6% for each of 6 tests passed.
 
