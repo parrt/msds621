@@ -67,13 +67,15 @@ For classification, it's a little more complicated Because we need a majority vo
 
 <img src="images/predict-class.png" width="50%">
 
-### Object definitions
+###  Regressor and classifier class definitions
 
 To mimic sklearn machine learning models, we need to create some class definitions. You are free to implement the regression and classifier tree objects as you like, but you must satisfy the appropriate interface so that the unit tests will run.  Here is my setup:
 
 <img src="images/hierarchy.png" width="60%">
 
-The `RandomForest621` class has my generic `fit()` method that is inherited by subclasses `RandomForest Regressor621` and `RandomForestClassifier621`
+The `RandomForest621` class has my generic `fit()` method that is inherited by subclasses `RandomForest Regressor621` and `RandomForestClassifier621`. 
+
+Method `compute_oob_score()` is just a helper method that I used to encapsulate that functionality, but you can do whatever you want. `RandomForest621.fit()` calls  `self.compute_oob_score()` and that calls the implementation either in regressor or classifier, depending on which object I created.
 
 You can use the following class definitions as templates:
 
@@ -102,9 +104,19 @@ class RandomForestRegressor621(RandomForest621):
         self.trees = ...
 
     def predict(self, X_test) -> np.ndarray:
+        """
+        Given a 2D nxp array with one or more records, compute the weighted average
+        prediction from all trees in this forest. Weight each trees prediction by
+        the number of samples in the leaf making that prediction.  Return a 1D vector
+        with the predictions for each input record of X_test.
+        """
         ...
         
     def score(self, X_test, y_test) -> float:
+        """
+        Given a 2D nxp X_test array and 1D nx1 y_test array with one or more records,
+        collect the prediction for each record and then compute R^2 on that and y_test.
+        """
         ...
 ```
 
