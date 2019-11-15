@@ -135,16 +135,18 @@ Because these tests take so long and they are completely independent, we can tes
 $ pip install pytest-xdist
 ```
 
-For me, it cuts the time in half when I use `-n 6` option:
+For me, it's 3x faster when I use `-n 8` option (on my 4-core fast intel i7 CPU):
 
 ```
-$ pytest -v -n 6 test_rf.py
+$ pytest -v -n 8 test_rf.py
 ```
 
-PyCharm knows how to do this as well, if you look at the configurations:
+PyCharm knows how to do this as well, if you look at the configurations and add `-n 6` or `-n 8` as an additional argument to run six unit tests at once::
 
 <img src="images/pycharm-pytest.png" width="50%">
 
-We will run test script `test_rf.py` to evaluate your projects. With luck, getting a single test to pass for regression means that all regressors will pass. Getting a single classifier test to pass should mean you pass all of those. Regardless, you will receive 16.6% for each of 6 tests passed.
+There are 8 OOB tests and each failed test costs you 1%, for total of 92% maximum if you don't implement this functionality.
 
-*My test passes in roughly 90 seconds and you will lose 10% if all tests takes longer than 2 minutes total, running in parallel.*
+The other unit tests check basic regression classification but also try out combinations of `max_features`, `min_samples_leaf`, `n_estimators`.   For the non-OOB tests, each failed test cost you 5%.
+
+*My test passes in roughly 65 seconds and you will lose 10% if all tests takes longer than 2 minutes total, running in parallel with -n 8.*
