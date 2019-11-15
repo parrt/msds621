@@ -4,6 +4,7 @@ from sklearn.datasets import \
     load_breast_cancer, fetch_california_housing
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.model_selection import train_test_split
+import inspect
 
 from rf import RandomForestRegressor621, RandomForestClassifier621
 
@@ -18,19 +19,39 @@ def test_boston_oob():
 
 def test_boston_min_samples_leaf():
     X, y = load_boston(return_X_y=True)
-    run_regression_test(X, y, ntrials=10, min_samples_leaf=5, min_training_score=.90, grace=0.08)
+    run_regression_test(X, y, ntrials=5, min_samples_leaf=5, min_training_score=.90, grace=0.08)
+
+def test_boston_all_features():
+    X, y = load_boston(return_X_y=True)
+    run_regression_test(X, y, ntrials=3, max_features=1.0, min_training_score=.90, grace=0.08)
+
+def test_boston_most_features():
+    X, y = load_boston(return_X_y=True)
+    run_regression_test(X, y, ntrials=4, max_features=2/3, min_training_score=.90, grace=0.08)
 
 def test_boston_min_samples_leaf_oob():
     X, y = load_boston(return_X_y=True)
-    run_regression_test(X, y, ntrials=10, min_samples_leaf=5, min_training_score=.90, grace=0.08, oob=True)
+    run_regression_test(X, y, ntrials=5, min_samples_leaf=5, min_training_score=.90, grace=0.08, oob=True)
 
 def test_diabetes():
     X, y = load_diabetes(return_X_y=True)
     run_regression_test(X, y, min_training_score = .85)
 
+def test_diabetes_ntrees():
+    X, y = load_diabetes(return_X_y=True)
+    run_regression_test(X, y, min_training_score = .85, n_estimators=25)
+
+def test_diabetes_all_features():
+    X, y = load_diabetes(return_X_y=True)
+    run_regression_test(X, y, min_training_score = .85, max_features=1.0)
+
+def test_diabetes_most_features():
+    X, y = load_diabetes(return_X_y=True)
+    run_regression_test(X, y, min_training_score = .85, max_features=2/3)
+
 def test_diabetes_oob():
     X, y = load_diabetes(return_X_y=True)
-    run_regression_test(X, y, min_training_score = .85, oob=True)
+    run_regression_test(X, y, min_training_score = .85, grace=0.08, oob=True)
 
 def test_california_housing():
     X, y = fetch_california_housing(return_X_y=True)
@@ -41,9 +62,21 @@ def test_california_housing_oob():
     run_regression_test(X, y, oob=True)
 
 
+def test_iris_ntrees():
+    X, y = load_iris(return_X_y=True)
+    run_classification_test(X, y, ntrials=5, min_training_score=0.96, n_estimators=25)
+
 def test_iris():
     X, y = load_iris(return_X_y=True)
     run_classification_test(X, y, ntrials=5, min_training_score=0.96)
+
+def test_iris_all_features():
+    X, y = load_iris(return_X_y=True)
+    run_classification_test(X, y, ntrials=5, min_training_score=0.96, max_features=1.0)
+
+def test_iris_most_features():
+    X, y = load_iris(return_X_y=True)
+    run_classification_test(X, y, ntrials=5, min_training_score=0.96, max_features=2/3)
 
 def test_iris_oob():
     X, y = load_iris(return_X_y=True)
@@ -51,19 +84,27 @@ def test_iris_oob():
 
 def test_wine():
     X, y = load_wine(return_X_y=True)
-    run_classification_test(X, y, ntrials=5, min_training_score=0.99)
+    run_classification_test(X, y, ntrials=5, min_training_score=0.98)
+
+def test_wine_all_features():
+    X, y = load_wine(return_X_y=True)
+    run_classification_test(X, y, ntrials=5, min_training_score=0.98, max_features=1.0)
+
+def test_wine_most_features():
+    X, y = load_wine(return_X_y=True)
+    run_classification_test(X, y, ntrials=5, min_training_score=0.98, max_features=2/3)
 
 def test_wine_oob():
     X, y = load_wine(return_X_y=True)
-    run_classification_test(X, y, ntrials=5, min_training_score=0.99, oob=True)
+    run_classification_test(X, y, ntrials=5, min_training_score=0.98, oob=True)
 
 def test_wine_min_samples_leaf():
     X, y = load_wine(return_X_y=True)
-    run_classification_test(X, y, ntrials=10, min_training_score=0.99, min_samples_leaf=5, grace=0.2)
+    run_classification_test(X, y, ntrials=10, min_training_score=0.98, min_samples_leaf=5, grace=0.2)
 
 def test_wine_min_samples_leaf_oob():
     X, y = load_wine(return_X_y=True)
-    run_classification_test(X, y, ntrials=10, min_training_score=0.99, min_samples_leaf=5, grace=0.2, oob=True)
+    run_classification_test(X, y, ntrials=10, min_training_score=0.98, min_samples_leaf=5, grace=0.2, oob=True)
 
 def test_breast_cancer():
     X, y = load_breast_cancer(return_X_y=True)
@@ -74,7 +115,9 @@ def test_breast_cancer_oob():
     run_classification_test(X, y, ntrials=5, min_training_score=0.96, oob=True)
 
 
-def run_regression_test(X, y, ntrials=2, min_training_score = .90, min_samples_leaf=3, max_features=0.3, grace=.08, oob=False):
+def run_regression_test(X, y, ntrials=2, min_training_score = .90, min_samples_leaf=3, max_features=0.3, grace=.08, oob=False, n_estimators=18):
+    stack = inspect.stack()
+    caller_name = stack[1].function[len('test_'):]
     X = X[:500]
     y = y[:500]
 
@@ -90,7 +133,7 @@ def run_regression_test(X, y, ntrials=2, min_training_score = .90, min_samples_l
         X_train, X_test, y_train, y_test = \
             train_test_split(X, y, test_size=0.20)
 
-        rf = RandomForestRegressor621(n_trees=15, min_samples_leaf=min_samples_leaf, max_features=max_features, oob_score=oob)
+        rf = RandomForestRegressor621(n_estimators=n_estimators, min_samples_leaf=min_samples_leaf, max_features=max_features, oob_score=oob)
         rf.fit(X_train, y_train)
         score = rf.score(X_train, y_train)
         train_scores.append(score)
@@ -98,7 +141,7 @@ def run_regression_test(X, y, ntrials=2, min_training_score = .90, min_samples_l
         scores.append(score)
         oob_scores.append(rf.oob_score_)
 
-        sklearn_rf = RandomForestRegressor(n_estimators=15, min_samples_leaf=3, max_features=max_features, oob_score=oob)
+        sklearn_rf = RandomForestRegressor(n_estimators=n_estimators, min_samples_leaf=min_samples_leaf, max_features=max_features, oob_score=oob)
         sklearn_rf.fit(X_train, y_train)
         sklearn_score = sklearn_rf.score(X_train, y_train)
         sklearn_train_scores.append(sklearn_score)
@@ -119,12 +162,12 @@ def run_regression_test(X, y, ntrials=2, min_training_score = .90, min_samples_l
 
     print()
     if oob:
-        print(f"621 OOB score {np.mean(oob_scores):.2f} vs sklearn OOB {np.mean(sklearn_oob_scores):.2f}")
-    print(f"621 R^2 score {np.mean(train_scores):.2f}, {np.mean(scores):.2f}")
-    print(f"Sklearn R^2 score {np.mean(sklearn_train_scores):.2f}, {np.mean(sklearn_scores):.2f}")
+        print(f"{caller_name}: 621 OOB score {np.mean(oob_scores):.2f} vs sklearn OOB {np.mean(sklearn_oob_scores):.2f}")
+    print(f"{caller_name}: 621 R^2 score {np.mean(train_scores):.2f}, {np.mean(scores):.2f}")
+    print(f"{caller_name}: Sklearn R^2 score {np.mean(sklearn_train_scores):.2f}, {np.mean(sklearn_scores):.2f}")
 
 
-def run_classification_test(X, y, ntrials=1, min_samples_leaf=3, max_features=0.3, min_training_score=1.0, grace=.05, oob=False):
+def run_classification_test(X, y, ntrials=1, min_samples_leaf=3, max_features=0.3, min_training_score=1.0, grace=.05, oob=False, n_estimators=15):
     X = X[:500]
     y = y[:500]
 
@@ -140,7 +183,7 @@ def run_classification_test(X, y, ntrials=1, min_samples_leaf=3, max_features=0.
         X_train, X_test, y_train, y_test = \
             train_test_split(X, y, test_size=0.20)
 
-        rf = RandomForestClassifier621(n_trees=20, min_samples_leaf=min_samples_leaf, max_features=max_features, oob_score=oob)
+        rf = RandomForestClassifier621(n_estimators=n_estimators, min_samples_leaf=min_samples_leaf, max_features=max_features, oob_score=oob)
         rf.fit(X_train, y_train)
         score = rf.score(X_train, y_train)
         train_scores.append(score)
@@ -148,7 +191,7 @@ def run_classification_test(X, y, ntrials=1, min_samples_leaf=3, max_features=0.
         scores.append(score)
         oob_scores.append(rf.oob_score_)
 
-        sklearn_rf = RandomForestClassifier(n_estimators=20, min_samples_leaf=3, max_features=max_features, oob_score=oob)
+        sklearn_rf = RandomForestClassifier(n_estimators=n_estimators, min_samples_leaf=min_samples_leaf, max_features=max_features, oob_score=oob)
         sklearn_rf.fit(X_train, y_train)
         sklearn_score = sklearn_rf.score(X_train, y_train)
         sklearn_train_scores.append(sklearn_score)

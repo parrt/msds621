@@ -45,12 +45,13 @@ class DecisionNode:
 
 A `LeafNode` obviously just returns itself (`self`) rather than the prediction.
 
-The second change is in the training mechanism. Conventional decision trees exhaustively scan all available features and the feature values looking for the optimal variable/split combination. To reduce overfitting, each split should pick from a random subset of the features; the subset size is the square root of the number of features.  Function `np.random.choice()` is useful here to get a list of feature indexes and then `X[:, i]` gives us the ith column.  In my solution,  the change is to the outermost loop in `find_best_split()`. The algorithm looks like:
+The second change is in the training mechanism. The  decision tree for looks like:
 
 <img src="images/dtreefit.png" width="60%">
 
-<img src="images/bestsplit.png" width="50%">
+For fitting conventional decision trees, `bestsplit()` exhaustively scans all available features and the feature values looking for the optimal variable/split combination. To reduce overfitting, each split should pick from a random subset of the features; the subset size is the hyper perimeter `max_features`.  Function `np.random.choice()` is useful here to get a list of feature indexes and then `X[:, i]` gives us the ith column.  In my solution,  the change is to the outermost loop in `find_best_split()`:
 
+<img src="images/bestsplit.png" width="50%">
 
 ### RF Prediction
 
@@ -139,6 +140,147 @@ For me, it's 3x faster when I use `-n 8` option (on my 4-core fast intel i7 CPU)
 
 ```
 $ pytest -v -n 8 test_rf.py
+test_rf.py::test_boston_min_samples_leaf 
+test_rf.py::test_boston_min_samples_leaf_oob 
+test_rf.py::test_boston 
+test_rf.py::test_boston_most_features 
+test_rf.py::test_boston_all_features 
+test_rf.py::test_diabetes_ntrees 
+test_rf.py::test_boston_oob 
+test_rf.py::test_diabetes 
+[gw6] [  3%] PASSED test_rf.py::test_diabetes 
+test_rf.py::test_iris 
+[gw6] [  7%] PASSED test_rf.py::test_iris 
+test_rf.py::test_iris_most_features 
+621 R^2 score 0.95, 0.85
+Sklearn R^2 score 0.89, 0.82
+
+621 OOB score 0.83 vs sklearn OOB 0.79
+621 R^2 score 0.95, 0.85
+Sklearn R^2 score 0.89, 0.84
+
+621 R^2 score 0.96, 0.84
+Sklearn R^2 score 0.92, 0.88
+
+test_rf.py::test_wine_all_features 
+[gw4] [ 88%] PASSED test_rf.py::test_boston_most_features 
+621 R^2 score 0.97, 0.86
+Sklearn R^2 score 0.94, 0.86
+
+test_rf.py::test_california_housing_oob 
+621 R^2 score 0.97, 0.86
+Sklearn R^2 score 0.95, 0.89
+
+621 R^2 score 0.89, 0.49
+Sklearn R^2 score 0.78, 0.52
+
+621 OOB score 0.79 vs sklearn OOB 0.82
+621 R^2 score 0.96, 0.87
+Sklearn R^2 score 0.93, 0.84
+
+621 R^2 score 0.88, 0.46
+Sklearn R^2 score 0.78, 0.49
+
+621 accuracy score 0.97, 0.95
+Sklearn accuracy score 0.97, 0.96
+
+[gw1] [ 11%] PASSED test_rf.py::test_boston_oob 
+test_rf.py::test_diabetes_most_features 
+[gw0] [ 15%] PASSED test_rf.py::test_boston 
+test_rf.py::test_diabetes_all_features 
+[gw6] [ 19%] PASSED test_rf.py::test_iris_most_features 
+621 accuracy score 0.98, 0.97
+Sklearn accuracy score 0.97, 0.96
+
+test_rf.py::test_iris_oob 
+[gw7] [ 23%] PASSED test_rf.py::test_diabetes_ntrees 
+test_rf.py::test_iris_all_features 
+[gw6] [ 26%] PASSED test_rf.py::test_iris_oob 
+test_rf.py::test_wine_most_features 
+[gw7] [ 30%] PASSED test_rf.py::test_iris_all_features 
+test_rf.py::test_wine_oob 
+[gw7] [ 34%] PASSED test_rf.py::test_wine_oob 
+test_rf.py::test_wine_min_samples_leaf_oob 
+[gw6] [ 38%] PASSED test_rf.py::test_wine_most_features 
+test_rf.py::test_wine_min_samples_leaf 
+[gw7] [ 42%] PASSED test_rf.py::test_wine_min_samples_leaf_oob 
+test_rf.py::test_breast_cancer 
+[gw6] [ 46%] PASSED test_rf.py::test_wine_min_samples_leaf 
+test_rf.py::test_breast_cancer_oob 
+[gw2] [ 50%] PASSED test_rf.py::test_boston_min_samples_leaf 
+test_rf.py::test_diabetes_oob 
+621 R^2 score 0.89, 0.30
+Sklearn R^2 score 0.82, 0.30
+
+[gw1] [ 73%] PASSED test_rf.py::test_wine 
+[gw6] [ 76%] PASSED test_rf.py::test_breast_cancer_oob 
+[gw0] [ 80%] PASSED test_rf.py::test_diabetes_all_features 
+621 R^2 score 0.90, 0.43
+Sklearn R^2 score 0.82, 0.48
+
+621 OOB score 0.91 vs sklearn OOB 0.93
+621 accuracy score 0.98, 0.97
+Sklearn accuracy score 0.97, 0.97
+
+621 accuracy score 0.98, 0.95
+Sklearn accuracy score 0.97, 0.96
+
+621 accuracy score 1.00, 0.98
+Sklearn accuracy score 1.00, 0.97
+
+621 OOB score 0.95 vs sklearn OOB 0.94
+621 accuracy score 0.99, 0.97
+Sklearn accuracy score 1.00, 0.98
+
+621 OOB score 0.95 vs sklearn OOB 0.94
+621 accuracy score 1.00, 0.97
+Sklearn accuracy score 0.99, 0.96
+
+621 accuracy score 0.99, 0.95
+Sklearn accuracy score 0.99, 0.97
+
+621 accuracy score 0.98, 0.93
+Sklearn accuracy score 0.99, 0.93
+
+621 OOB score 0.94 vs sklearn OOB 0.94
+621 accuracy score 0.97, 0.95
+Sklearn accuracy score 0.99, 0.97
+
+[gw5] [ 53%] PASSED test_rf.py::test_boston_min_samples_leaf_oob 
+test_rf.py::test_iris_ntrees 
+[gw5] [ 57%] PASSED test_rf.py::test_iris_ntrees 
+[gw1] [ 61%] PASSED test_rf.py::test_diabetes_most_features 
+test_rf.py::test_wine 
+[gw7] [ 65%] PASSED test_rf.py::test_breast_cancer 
+[gw2] [ 69%] PASSED test_rf.py::test_diabetes_oob 
+621 OOB score 0.35 vs sklearn OOB 0.40
+621 R^2 score 0.88, 0.46
+Sklearn R^2 score 0.80, 0.43
+
+621 accuracy score 0.97, 0.94
+Sklearn accuracy score 0.98, 0.93
+
+621 accuracy score 1.00, 0.97
+Sklearn accuracy score 0.99, 0.97
+
+[gw0] [ 84%] PASSED test_rf.py::test_wine_all_features 
+621 accuracy score 0.99, 0.92
+Sklearn accuracy score 1.00, 0.94
+
+[gw3] [ 92%] PASSED test_rf.py::test_boston_all_features 
+test_rf.py::test_california_housing 
+[gw4] [ 96%] PASSED test_rf.py::test_california_housing_oob 
+621 OOB score 0.77 vs sklearn OOB 0.75
+621 R^2 score 0.95, 0.82
+Sklearn R^2 score 0.91, 0.81
+
+[gw3] [100%] PASSED test_rf.py::test_california_housing 
+621 R^2 score 0.94, 0.82
+Sklearn R^2 score 0.89, 0.82
+
+
+=============================== warnings summary ===============================
+...
 ```
 
 PyCharm knows how to do this as well, if you look at the configurations and add `-n 6` or `-n 8` as an additional argument to run six unit tests at once::
@@ -149,4 +291,4 @@ There are 8 OOB tests and each failed test costs you 1%, for total of 92% maximu
 
 The other unit tests check basic regression classification but also try out combinations of `max_features`, `min_samples_leaf`, `n_estimators`.   For the non-OOB tests, each failed test cost you 5%.
 
-*My test passes in roughly 65 seconds and you will lose 10% if all tests takes longer than 2 minutes total, running in parallel with -n 8.*
+*My test passes in roughly 85 seconds and you will lose 10% if all tests takes longer than about 2 minutes total, running in parallel with -n 8.*
