@@ -58,14 +58,9 @@ Once we've trained a forest of decision trees, we can make predictions for one o
 
 For classification, it's a little more complicated Because we need a majority vote across all trees.  As with regression, go through all of the trees, and get the leaves associated with the prediction of a single feature vector.  Create a numpy array, say, `class_counts` that is big enough so that the maximum integer representing a class is a valid index in the array. Then, `class_counts[c]` gives the count associated with class `c`.  Add `leaf.n` to the `class_counts[leaf.prediction]` count. The class with the largest count should be the prediction; `np.argmax` is useful here.
 
-<table border=0>
-<tr valign="top">
-<td><img src="images/predict-regr.png" width="70%"></td>
-</tr>
-<tr><td><img src="images/predict-class.png" width="50%"></td>
-</tr>
-</table>
+<img src="images/predict-regr.png" width="70%">
 
+<img src="images/predict-class.png" width="50%">
 
 ### Object definitions
 
