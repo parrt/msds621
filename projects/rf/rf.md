@@ -136,147 +136,146 @@ Because these tests take so long and they are completely independent, we can tes
 $ pip install pytest-xdist
 ```
 
-For me, it's 3x faster when I use `-n 8` option (on my 4-core fast intel i7 CPU):
+For me, it's 3x faster when I use `-n 8` option (on my 4-core fast intel i7 CPU).  Here is the output I get using PyCharm, but you can use `pytest -v -n 8 test_rf.py` from the command line:
 
 ```
-$ pytest -v -n 8 test_rf.py
+test_rf.py::test_boston_oob 
 test_rf.py::test_boston_min_samples_leaf 
-test_rf.py::test_boston_min_samples_leaf_oob 
+test_rf.py::test_boston_all_features 
 test_rf.py::test_boston 
 test_rf.py::test_boston_most_features 
-test_rf.py::test_boston_all_features 
-test_rf.py::test_diabetes_ntrees 
-test_rf.py::test_boston_oob 
 test_rf.py::test_diabetes 
+test_rf.py::test_boston_min_samples_leaf_oob 
+test_rf.py::test_diabetes_ntrees 
 [gw6] [  3%] PASSED test_rf.py::test_diabetes 
 test_rf.py::test_iris 
 [gw6] [  7%] PASSED test_rf.py::test_iris 
 test_rf.py::test_iris_most_features 
-621 R^2 score 0.95, 0.85
-Sklearn R^2 score 0.89, 0.82
+boston_oob: 621 OOB score 0.81 vs sklearn OOB 0.81
+boston_oob: 621 R^2 score 0.96, 0.88
+boston_oob: Sklearn R^2 score 0.94, 0.86
 
-621 OOB score 0.83 vs sklearn OOB 0.79
-621 R^2 score 0.95, 0.85
-Sklearn R^2 score 0.89, 0.84
+boston_min_samples_leaf: 621 R^2 score 0.96, 0.84
+boston_min_samples_leaf: Sklearn R^2 score 0.89, 0.78
 
-621 R^2 score 0.96, 0.84
-Sklearn R^2 score 0.92, 0.88
-
-test_rf.py::test_wine_all_features 
+test_rf.py::test_wine 
 [gw4] [ 88%] PASSED test_rf.py::test_boston_most_features 
-621 R^2 score 0.97, 0.86
-Sklearn R^2 score 0.94, 0.86
-
 test_rf.py::test_california_housing_oob 
-621 R^2 score 0.97, 0.86
-Sklearn R^2 score 0.95, 0.89
+[gw3] [ 92%] PASSED test_rf.py::test_boston_all_features 
+boston_all_features: 621 R^2 score 0.97, 0.87
+boston_all_features: Sklearn R^2 score 0.94, 0.87
 
-621 R^2 score 0.89, 0.49
-Sklearn R^2 score 0.78, 0.52
+boston: 621 R^2 score 0.96, 0.85
+boston: Sklearn R^2 score 0.92, 0.82
 
-621 OOB score 0.79 vs sklearn OOB 0.82
-621 R^2 score 0.96, 0.87
-Sklearn R^2 score 0.93, 0.84
+boston_most_features: 621 R^2 score 0.97, 0.83
+boston_most_features: Sklearn R^2 score 0.94, 0.84
 
-621 R^2 score 0.88, 0.46
-Sklearn R^2 score 0.78, 0.49
+diabetes: 621 R^2 score 0.88, 0.42
+diabetes: Sklearn R^2 score 0.79, 0.47
 
-621 accuracy score 0.97, 0.95
-Sklearn accuracy score 0.97, 0.96
+boston_min_samples_leaf_oob: 621 OOB score 0.81 vs sklearn OOB 0.80
+boston_min_samples_leaf_oob: 621 R^2 score 0.95, 0.83
+boston_min_samples_leaf_oob: Sklearn R^2 score 0.89, 0.80
 
-[gw1] [ 11%] PASSED test_rf.py::test_boston_oob 
-test_rf.py::test_diabetes_most_features 
-[gw0] [ 15%] PASSED test_rf.py::test_boston 
+diabetes_ntrees: 621 R^2 score 0.89, 0.42
+diabetes_ntrees: Sklearn R^2 score 0.79, 0.45
+
+iris: 621 accuracy score 0.97, 0.95
+iris: Sklearn accuracy score 0.97, 0.94
+
+[gw0] [ 11%] PASSED test_rf.py::test_boston 
 test_rf.py::test_diabetes_all_features 
-[gw6] [ 19%] PASSED test_rf.py::test_iris_most_features 
-621 accuracy score 0.98, 0.97
-Sklearn accuracy score 0.97, 0.96
+[gw6] [ 15%] PASSED test_rf.py::test_iris_most_features 
+iris_most_features: 621 accuracy score 0.97, 0.95
+iris_most_features: Sklearn accuracy score 0.98, 0.97
 
 test_rf.py::test_iris_oob 
-[gw7] [ 23%] PASSED test_rf.py::test_diabetes_ntrees 
+[gw1] [ 19%] PASSED test_rf.py::test_boston_oob 
+test_rf.py::test_diabetes_most_features 
+[gw6] [ 23%] PASSED test_rf.py::test_iris_oob 
+test_rf.py::test_wine_all_features 
+[gw7] [ 26%] PASSED test_rf.py::test_diabetes_ntrees 
 test_rf.py::test_iris_all_features 
-[gw6] [ 26%] PASSED test_rf.py::test_iris_oob 
-test_rf.py::test_wine_most_features 
 [gw7] [ 30%] PASSED test_rf.py::test_iris_all_features 
-test_rf.py::test_wine_oob 
-[gw7] [ 34%] PASSED test_rf.py::test_wine_oob 
-test_rf.py::test_wine_min_samples_leaf_oob 
-[gw6] [ 38%] PASSED test_rf.py::test_wine_most_features 
 test_rf.py::test_wine_min_samples_leaf 
-[gw7] [ 42%] PASSED test_rf.py::test_wine_min_samples_leaf_oob 
+[gw6] [ 34%] PASSED test_rf.py::test_wine_all_features 
+test_rf.py::test_wine_oob 
+[gw7] [ 38%] PASSED test_rf.py::test_wine_min_samples_leaf 
+test_rf.py::test_wine_min_samples_leaf_oob 
+[gw6] [ 42%] PASSED test_rf.py::test_wine_oob 
 test_rf.py::test_breast_cancer 
-[gw6] [ 46%] PASSED test_rf.py::test_wine_min_samples_leaf 
-test_rf.py::test_breast_cancer_oob 
+[gw5] [ 46%] PASSED test_rf.py::test_boston_min_samples_leaf_oob 
+test_rf.py::test_iris_ntrees 
 [gw2] [ 50%] PASSED test_rf.py::test_boston_min_samples_leaf 
 test_rf.py::test_diabetes_oob 
-621 R^2 score 0.89, 0.30
-Sklearn R^2 score 0.82, 0.30
-
-[gw1] [ 73%] PASSED test_rf.py::test_wine 
-[gw6] [ 76%] PASSED test_rf.py::test_breast_cancer_oob 
+[gw1] [ 73%] PASSED test_rf.py::test_wine_most_features 
+[gw7] [ 76%] PASSED test_rf.py::test_breast_cancer_oob 
 [gw0] [ 80%] PASSED test_rf.py::test_diabetes_all_features 
-621 R^2 score 0.90, 0.43
-Sklearn R^2 score 0.82, 0.48
+diabetes_all_features: 621 R^2 score 0.90, 0.41
+diabetes_all_features: Sklearn R^2 score 0.83, 0.43
 
-621 OOB score 0.91 vs sklearn OOB 0.93
-621 accuracy score 0.98, 0.97
-Sklearn accuracy score 0.97, 0.97
+iris_oob: 621 OOB score 0.94 vs sklearn OOB 0.94
+iris_oob: 621 accuracy score 0.97, 0.96
+iris_oob: Sklearn accuracy score 0.98, 0.96
 
-621 accuracy score 0.98, 0.95
-Sklearn accuracy score 0.97, 0.96
+diabetes_most_features: 621 R^2 score 0.88, 0.43
+diabetes_most_features: Sklearn R^2 score 0.82, 0.42
 
-621 accuracy score 1.00, 0.98
-Sklearn accuracy score 1.00, 0.97
+wine_all_features: 621 accuracy score 0.99, 0.97
+wine_all_features: Sklearn accuracy score 0.99, 0.96
 
-621 OOB score 0.95 vs sklearn OOB 0.94
-621 accuracy score 0.99, 0.97
-Sklearn accuracy score 1.00, 0.98
+iris_all_features: 621 accuracy score 0.98, 0.96
+iris_all_features: Sklearn accuracy score 0.97, 0.96
 
-621 OOB score 0.95 vs sklearn OOB 0.94
-621 accuracy score 1.00, 0.97
-Sklearn accuracy score 0.99, 0.96
+wine_min_samples_leaf: 621 accuracy score 1.00, 0.99
+wine_min_samples_leaf: Sklearn accuracy score 0.99, 0.98
 
-621 accuracy score 0.99, 0.95
-Sklearn accuracy score 0.99, 0.97
+wine_oob: 621 OOB score 0.94 vs sklearn OOB 0.94
+wine_oob: 621 accuracy score 0.99, 0.96
+wine_oob: Sklearn accuracy score 1.00, 0.98
 
-621 accuracy score 0.98, 0.93
-Sklearn accuracy score 0.99, 0.93
+wine_min_samples_leaf_oob: 621 OOB score 0.95 vs sklearn OOB 0.94
+wine_min_samples_leaf_oob: 621 accuracy score 1.00, 0.97
+wine_min_samples_leaf_oob: Sklearn accuracy score 0.99, 0.94
 
-621 OOB score 0.94 vs sklearn OOB 0.94
-621 accuracy score 0.97, 0.95
-Sklearn accuracy score 0.99, 0.97
+breast_cancer: 621 accuracy score 0.97, 0.94
+breast_cancer: Sklearn accuracy score 0.99, 0.96
 
-[gw5] [ 53%] PASSED test_rf.py::test_boston_min_samples_leaf_oob 
-test_rf.py::test_iris_ntrees 
-[gw5] [ 57%] PASSED test_rf.py::test_iris_ntrees 
+iris_ntrees: 621 accuracy score 0.98, 0.97
+iris_ntrees: Sklearn accuracy score 0.97, 0.99
+
+[gw5] [ 53%] PASSED test_rf.py::test_iris_ntrees 
+[gw7] [ 57%] PASSED test_rf.py::test_wine_min_samples_leaf_oob 
+test_rf.py::test_breast_cancer_oob 
 [gw1] [ 61%] PASSED test_rf.py::test_diabetes_most_features 
-test_rf.py::test_wine 
-[gw7] [ 65%] PASSED test_rf.py::test_breast_cancer 
+test_rf.py::test_wine_most_features 
+[gw6] [ 65%] PASSED test_rf.py::test_breast_cancer 
 [gw2] [ 69%] PASSED test_rf.py::test_diabetes_oob 
-621 OOB score 0.35 vs sklearn OOB 0.40
-621 R^2 score 0.88, 0.46
-Sklearn R^2 score 0.80, 0.43
+diabetes_oob: 621 OOB score 0.36 vs sklearn OOB 0.41
+diabetes_oob: 621 R^2 score 0.89, 0.36
+diabetes_oob: Sklearn R^2 score 0.80, 0.39
 
-621 accuracy score 0.97, 0.94
-Sklearn accuracy score 0.98, 0.93
+breast_cancer_oob: 621 OOB score 0.94 vs sklearn OOB 0.94
+breast_cancer_oob: 621 accuracy score 0.98, 0.96
+breast_cancer_oob: Sklearn accuracy score 0.99, 0.96
 
-621 accuracy score 1.00, 0.97
-Sklearn accuracy score 0.99, 0.97
+wine_most_features: 621 accuracy score 0.99, 0.97
+wine_most_features: Sklearn accuracy score 1.00, 0.94
 
-[gw0] [ 84%] PASSED test_rf.py::test_wine_all_features 
-621 accuracy score 0.99, 0.92
-Sklearn accuracy score 1.00, 0.94
+[gw0] [ 84%] PASSED test_rf.py::test_wine 
+wine: 621 accuracy score 0.99, 0.94
+wine: Sklearn accuracy score 1.00, 0.97
 
-[gw3] [ 92%] PASSED test_rf.py::test_boston_all_features 
 test_rf.py::test_california_housing 
 [gw4] [ 96%] PASSED test_rf.py::test_california_housing_oob 
-621 OOB score 0.77 vs sklearn OOB 0.75
-621 R^2 score 0.95, 0.82
-Sklearn R^2 score 0.91, 0.81
+california_housing_oob: 621 OOB score 0.76 vs sklearn OOB 0.77
+california_housing_oob: 621 R^2 score 0.95, 0.77
+california_housing_oob: Sklearn R^2 score 0.91, 0.76
 
 [gw3] [100%] PASSED test_rf.py::test_california_housing 
-621 R^2 score 0.94, 0.82
-Sklearn R^2 score 0.89, 0.82
+california_housing: 621 R^2 score 0.94, 0.80
+california_housing: Sklearn R^2 score 0.89, 0.80
 
 
 =============================== warnings summary ===============================
@@ -291,4 +290,12 @@ There are 8 OOB tests and each failed test costs you 1%, for total of 92% maximu
 
 The other unit tests check basic regression classification but also try out combinations of `max_features`, `min_samples_leaf`, `n_estimators`.   For the non-OOB tests, each failed test cost you 5%.
 
-*My test passes in roughly 85 seconds and you will lose 10% if all tests takes longer than about 2 minutes total, running in parallel with -n 8.*
+*My test passes in roughly 90 seconds and you will lose 10% if all tests takes longer than about 180 seconds total, running in parallel with -n 8.*
+
+I ran some experiments and found the following results for one run.
+
+<img src="images/results-regr.png" width="80%">
+
+<img src="images/results-class.png" width="80%">
+
+In summary, my implementation is about as good as sklearn for both regression and classification (despite using k=11 not all X_i column values during splitting). For regression, however, my models were able to capture the training data better than sklearn. We usually don't care about the training error, but it's still interesting.
