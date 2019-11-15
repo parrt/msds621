@@ -69,21 +69,37 @@ For classification, it's a little more complicated Because we need a majority vo
 
 ### Object definitions
 
-To mimic sklearn machine learning models, we need to create some class definitions. You are free to implement the regression and classifier tree objects as you like, but you must satisfy the appropriate interface so that the unit tests will run.  It also makes it mimic how sklearn objects work. Here is my setup:
+To mimic sklearn machine learning models, we need to create some class definitions. You are free to implement the regression and classifier tree objects as you like, but you must satisfy the appropriate interface so that the unit tests will run.  Here is my setup:
 
-<img src="images/hierarchy.png" width="50%">
+<img src="images/hierarchy.png" width="60%">
 
- You can use the following as templates:
+The `RandomForest621` class has my generic `fit()` method that is inherited by subclasses `RandomForest Regressor621` and `RandomForestClassifier621`
+
+You can use the following class definitions as templates:
 
 ```
-class RandomForestRegressor621:
-    def __init__(self, n_trees=10, min_samples_leaf=3):
-        self.n_trees = n_trees
-        self.min_samples_leaf = min_samples_leaf
-        self.trees = ...
+class RandomForest621:
+    def __init__(self, n_estimators=10, oob_score=False):
+        self.n_estimators = n_estimators
+        self.oob_score = oob_score
+        self.oob_score_ = np.nan
 
-    def fit(self, X, y) -> None:
+    def fit(self, X, y):
+        """
+        Given an (X, y) training set, fit all n_estimators trees to different,
+        bootstrapped versions of the training data.  Keep track of the indexes of
+        the OOB records for each tree.  After fitting all of the trees in the forest,
+        compute the OOB validation score estimate and store as self.oob_score_, to
+        mimic sklearn.
+        """
         ...
+```
+
+```
+class RandomForestRegressor621(RandomForest621):
+    def __init__(self, n_estimators=10, min_samples_leaf=3, max_features=0.3, oob_score=False):
+        super().__init__(n_estimators, oob_score=oob_score)
+        self.trees = ...
 
     def predict(self, X_test) -> np.ndarray:
         ...
@@ -96,13 +112,11 @@ and
 
 ```
 class RandomForestClassifier621:
-    def __init__(self, n_trees=10, min_samples_leaf=3):
+    def __init__(self, n_estimators=10, min_samples_leaf=3, max_features=0.3, oob_score=False):
+        super().__init__(n_estimators, oob_score=oob_score)
         self.n_trees = n_trees
         self.min_samples_leaf = min_samples_leaf
         self.trees = ...
-
-    def fit(self, X, y) -> None:
-        ...
 
     def predict(self, X_test) -> np.ndarray:
         ...
