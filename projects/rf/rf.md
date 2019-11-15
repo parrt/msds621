@@ -2,30 +2,26 @@
 
 ## Goal
 
-The goal of this project is to leverage the decision tree implementation from the previous project to make a random forest implementation. The goal is to build the simplest possible functional random forest without concern for efficiency or getting the best accuracy. You will create objects `RandomForestRegressor621` and `RandomForestClassifier621` as drop in replacements for sklearn's implementations. My implementation is about 60 lines of code but changes are also required to the decision tree implementation in `dtree.py`.
+The goal of this project is to leverage the decision tree implementation from the previous project to make a random forest implementation. The goal is to build the simplest possible functional random forest without concern for efficiency but with accuracy comparable to sklearn. You will create objects `RandomForestRegressor621` and `RandomForestClassifier621` as drop in replacements for sklearn's implementations. My implementation is about 100 lines of code, but minor changes are also required to the decision tree implementation in `dtree.py`.
 
-As a bonus for strong programmers, I provide a description of how to implement out-of-bag test error estimates (and a test script).
+Your implementation must include code to support out-of-bag (OOB) validation error estimation. It's a bit tricky to get right, so the OOB unit tests or worth less in my evaluation. You can still get 85% total, even if you don't implement OOB error estimation.
 
-You will work in git repo `rf`-*userid*.
+You will work in git repo `rf`-*userid* and create `rf.py` in the root directory of the repo. Also copy your `dtree.py` from the previous project into the root directory, as you will need to modify it and use it for this project.
 
 ## Description
 
-Classification and regression trees do an excellent job of fitting a model to the training data. Unfortunately, it is a little too good and they overfit like mad, meaning that they do not generalize well to previously-unseen test data. To increase generality, random forests use a collection of decision trees that have been weakened. We trade a bit of bias for dramatically improved generality.
+Classification and regression trees do an excellent job of fitting a model to the training data. Unfortunately, decision trees are a little too good and they overfit like mad, meaning that they do not generalize well to previously-unseen test data. To increase generality, random forests use a collection of decision trees that have been weakened to make them more independent. We trade a bit of bias for dramatically improved generality.
 
-A random forest does not feed all data to every decision tree in its collection. Further, it sometimes forgets about available features during training. In our case, decision node splitting will be limited to the considering a random selection of features of size "square root of the number of total features." Naturally, both of these introduce bias into the individual decision trees, but combining results of these trees brings the bias back down. We get the best of both worlds.
+A random forest does not feed all data to every decision tree in its collection. Each tree is trained on a bootstrapped version of the original training set. Further, RFs must sometimes forget some of the available features during training. In our case, decision node splitting will be limited to considering a random selection of features of size `max_features`, a hyper parameter not used in our decision trees. Naturally, both of bootstrapping and setting a maximum features per split introduce bias into the individual decision trees. But, averaging results of these tree estimators brings the bias back down. We get the best of both worlds!
 
 ### Bootstrapping
 
-The goal of bootstrapping for random forests is to train a number of uncorrelated decision trees on similar but different training data sets.  Each tree trains on a slightly different subset of the training data. Bootstrapping, in principle, asks the underlying distribution that generated the data to generate another independent sample. In practice, bootstrapping gets about 2/3 of the X rows, leaving 1/3 "out of bag" (OOB). See [sklearn's resample function](https://scikit-learn.org/stable/modules/generated/sklearn.utils.resample.html) for a handy way to get a list of indexes to help create a bootstrap sample training set. For example, if I have a numpy array with a list of indexes in `idx` from `X`, then `X[idx]`  is a list of rows from 2D matrix `X`.
+The goal of bootstrapping for random forests is to train a number of decision trees that are as independent as possible by using different but similar training sets.  Each tree trains on a slightly different subset of the training data. Bootstrapping, in theory, asks the underlying distribution that generated the data to generate another independent sample. In practice, bootstrapping gets about 2/3 of the X rows, leaving 1/3 "out of bag" (OOB). See [sklearn's resample function](https://scikit-learn.org/stable/modules/generated/sklearn.utils.resample.html) for a handy way to get a list of indexes to help create a bootstrap sample training set. For example, if I have a numpy array with a list of indexes in `idx` from `X`, then `X[idx,:]`  is a list of rows from 2D matrix `X`.
 
 The algorithm for fitting a random forest is then:
 
-```
-fit(X, y):
-	for each tree t:
-		X_, y_ = bootstrapped sample from X, y
-		t.fit(X_, y_)
-```
+<img src="images/fit.png" width="60%">
+
 
 ### Changes to decision tree training
 
@@ -51,6 +47,8 @@ A `LeafNode` obviously just returns itself (`self`) rather than the prediction.
 
 The second change is in the training mechanism. Conventional decision trees exhaustively scan all available features and the feature values looking for the optimal variable/split combination. To reduce overfitting, each split should pick from a random subset of the features; the subset size is the square root of the number of features.  Function `np.random.choice()` is useful here to get a list of feature indexes and then `X[:, i]` gives us the ith column.  In my solution,  the change is to the outermost loop in `find_best_split()`. The algorithm looks like:
 
+<img src="images/dtreefit.png" width="60%">
+
 <img src="images/bestsplit.png" width="50%">
 
 
@@ -62,9 +60,9 @@ For classification, it's a little more complicated Because we need a majority vo
 
 <table border=0>
 <tr valign="top">
-<td><img src="images/predict-regr.png" width="80%"></td>
+<td><img src="images/predict-regr.png" width="70%"></td>
 </tr>
-<tr><td><img src="images/predict-class.png" width="55%"></td>
+<tr><td><img src="images/predict-class.png" width="50%"></td>
 </tr>
 </table>
 
@@ -165,25 +163,18 @@ I will copy in a clean version of the test script before grading your projects.
 
 ## Evaluation
 
+Because these tests take so long and they are completely independent, we can test a number of them in parallel to speed things up. 
+
+```
+$ pip install pytest-xdist
+```
+
+For me, it cuts the time in half when I use `-n 6` option:
+
+```
+$ pytest -v -n 6 test_rf.py
+```
+
 We will run test script `test_rf.py` to evaluate your projects. With luck, getting a single test to pass for regression means that all regressors will pass. Getting a single classifier test to pass should mean you pass all of those. Regardless, you will receive 16.6% for each of 6 tests passed.
 
-```
-$ python -m pytest -v test_rf.py
-=============================== test session starts ================================
-platform darwin -- Python 3.7.1, pytest-4.0.2, py-1.7.0, pluggy-0.8.0 -- ...
-cachedir: .pytest_cache
-rootdir: ...
-plugins: remotedata-0.3.1, openfiles-0.3.1, doctestplus-0.2.0, arraydiff-0.3
-collected 6 items                                                                  
-
-test_rf.py::test_boston PASSED                                               [ 16%]
-test_rf.py::test_diabetes PASSED                                             [ 33%]
-test_rf.py::test_california_housing PASSED                                   [ 50%]
-test_rf.py::test_iris PASSED                                                 [ 66%]
-test_rf.py::test_wine PASSED                                                 [ 83%]
-test_rf.py::test_breast_cancer PASSED                                        [100%]
-
-============================ 6 passed in 30.26 seconds =============================
-```
-
-*My test passes in roughly 30 seconds and you will lose 10% if your test takes longer than 1 minute.*
+*My test passes in roughly 90 seconds and you will lose 10% if all tests takes longer than 2 minutes total, running in parallel.*
