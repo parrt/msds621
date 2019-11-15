@@ -108,11 +108,17 @@ Download the [test scripts](https://github.com/parrt/msds621/tree/master/project
 
 In this way, you have started on the project without actually having to do any work. Getting over inertia is an important step in any project.
 
-## Optional extension for out of bag error
+## Out-of-bag (OOB) error
 
-If this project was too easy for you, and you would like more of a challenge, try to implement the OOB functionality. The R^2 and accuracy scores for OOB observations is and accurate estimate of the test error, all without requiring manual creation of a validation or test set. This is a major advantage of random forests.
+The R^2 and accuracy scores for OOB observations is an accurate estimate of the validation error, all without having to manually hold out a validation or test set. This is a major advantage of random forests.
 
-A bootstrapped sample is roughly 2/3 of the training records for any given tree, which leaves 1/3 of the samples (OOB) as test set. After training each decision tree, make predictions for the OOB samples (those records not use to train that specific tree).  You will get a prediction for each OOB sample and you must add that to an overall prediction for that record. You must also track how many predictions were added so that you can compute an average later. Set field `self.oob_score_` to be consistent with the sklearn implementation.
+A bootstrapped sample is roughly 2/3 of the training records for any given tree, which leaves 1/3 of the samples (OOB) as test set. After training each decision tree, keep track of the OOB records in the tree.  For example, I do `t = ...` inside my `fit()` method (for each tree `t`).  After training all trees in `fit()`, loop through the trees again and compute the OOB score, if hyperparameter `self.oob_score` is true. Saves the score in `self.oob_score_` for either the RF regressor or classifier object, which is consistent with the sklearn implementation. See the class lecture slides for more details, but here are the algorithms again:
+
+<img src="images/oob-score-regr.png" width="60%">
+
+<img src="images/oob-score-class.png" width="60%">
+
+ make predictions for the OOB samples (those records not use to train that specific tree).  You will get a prediction for each OOB sample and you must add that to an overall prediction for that record. You must also track how many predictions were added so that you can compute an average later. Set field `self.oob_score_` to be consistent with the sklearn implementation.
 
 For classification, you must track class counts for each OOB record with something like:
 
