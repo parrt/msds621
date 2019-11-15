@@ -168,6 +168,8 @@ def run_regression_test(X, y, ntrials=2, min_training_score = .90, min_samples_l
 
 
 def run_classification_test(X, y, ntrials=1, min_samples_leaf=3, max_features=0.3, min_training_score=1.0, grace=.05, oob=False, n_estimators=15):
+    stack = inspect.stack()
+    caller_name = stack[1].function[len('test_'):]
     X = X[:500]
     y = y[:500]
 
@@ -212,6 +214,6 @@ def run_classification_test(X, y, ntrials=1, min_samples_leaf=3, max_features=0.
 
     print()
     if oob:
-        print(f"621 OOB score {np.mean(oob_scores):.2f} vs sklearn OOB {np.mean(sklearn_oob_scores):.2f}")
-    print(f"621 accuracy score {np.mean(train_scores):.2f}, {np.mean(scores):.2f}")
-    print(f"Sklearn accuracy score {np.mean(sklearn_train_scores):.2f}, {np.mean(sklearn_scores):.2f}")
+        print(f"{caller_name}: 621 OOB score {np.mean(oob_scores):.2f} vs sklearn OOB {np.mean(sklearn_oob_scores):.2f}")
+    print(f"{caller_name}: 621 accuracy score {np.mean(train_scores):.2f}, {np.mean(scores):.2f}")
+    print(f"{caller_name}: Sklearn accuracy score {np.mean(sklearn_train_scores):.2f}, {np.mean(sklearn_scores):.2f}")
