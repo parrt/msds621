@@ -39,7 +39,11 @@ class DecisionNode:
     def predict(self, x_test):
         ...
     def leaf(self, x_test):
-        "Like predict(), but returns the leaf node not the prediction"
+        """
+        Given a single test record, x_test, return the leaf node reached by running
+        it down the tree starting at this node.  This is just like prediction,
+        except we return the decision tree leaf rather than the prediction from that leaf.
+        """
         ...
 ```
 
@@ -65,7 +69,11 @@ For classification, it's a little more complicated Because we need a majority vo
 
 ### Object definitions
 
-To mimic sklearn machine learning models, we need to create some class definitions. You can use the following as templates:
+To mimic sklearn machine learning models, we need to create some class definitions. You are free to implement the regression and classifier tree objects as you like, but you must satisfy the appropriate interface so that the unit tests will run.  It also makes it mimic how sklearn objects work. Here is my setup:
+
+<img src="images/hierarchy.png" width="50%">
+
+ You can use the following as templates:
 
 ```
 class RandomForestRegressor621:
