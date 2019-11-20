@@ -35,31 +35,31 @@ def test_boston_min_samples_leaf_oob():
 
 def test_diabetes():
     X, y = load_diabetes(return_X_y=True)
-    run_regression_test(X, y, min_training_score = .85)
+    run_regression_test(X, y, min_training_score = .85, grace=0.095)
 
 def test_diabetes_ntrees():
     X, y = load_diabetes(return_X_y=True)
-    run_regression_test(X, y, min_training_score = .85, n_estimators=25)
+    run_regression_test(X, y, min_training_score = .85, grace=0.095, n_estimators=25)
 
 def test_diabetes_all_features():
     X, y = load_diabetes(return_X_y=True)
-    run_regression_test(X, y, min_training_score = .85, max_features=1.0)
+    run_regression_test(X, y, min_training_score = .85, grace=0.095, max_features=1.0)
 
 def test_diabetes_most_features():
     X, y = load_diabetes(return_X_y=True)
-    run_regression_test(X, y, min_training_score = .85, max_features=2/3)
+    run_regression_test(X, y, min_training_score = .85, grace=0.095, max_features=2/3)
 
 def test_diabetes_oob():
     X, y = load_diabetes(return_X_y=True)
-    run_regression_test(X, y, min_training_score = .85, grace=0.08, oob=True)
+    run_regression_test(X, y, min_training_score = .85, grace=0.095, oob=True)
 
 def test_california_housing():
     X, y = fetch_california_housing(return_X_y=True)
-    run_regression_test(X, y)
+    run_regression_test(X, y, min_training_score = .84)
 
 def test_california_housing_oob():
     X, y = fetch_california_housing(return_X_y=True)
-    run_regression_test(X, y, oob=True)
+    run_regression_test(X, y, min_training_score = .84, oob=True)
 
 
 def test_iris_ntrees():

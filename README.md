@@ -143,7 +143,7 @@ Day 8: consisted of review of decision tree training and prediction algorithms, 
 ## Model assessment
 
 * [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf) (slides) (Day 10)
-* [Model assessment](https://github.com/parrt/msds621/raw/master/lectures/model-assessment.pdf) (slides) (Day 10)
+* [Model assessment](https://github.com/parrt/msds621/raw/master/lectures/model-assessment.pdf) (slides) (Day 10, 11)
 
 ## Mechanics
 
