@@ -148,7 +148,7 @@ Day 8: consisted of review of decision tree training and prediction algorithms, 
 ## Mechanics
 
 * [Preparing data for modeling](https://github.com/parrt/msds621/raw/master/lectures/data-prep.pdf) (slides) (Day 11)
-* [Basic feature engineering](https://github.com/parrt/msds621/raw/master/lectures/feature-engineering.pdf) (slides) (Day 11)
+* [Basic feature engineering](https://github.com/parrt/msds621/raw/master/lectures/feature-engineering.pdf) (slides) (Day 11, 12 (didn't get to log(y) discussion))
 
 ## Model interpretation
 
