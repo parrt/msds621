@@ -55,7 +55,7 @@ The second change is in the training mechanism. The  decision tree for looks lik
 
 For fitting conventional decision trees, `bestsplit()` exhaustively scans all available features and the feature values looking for the optimal variable/split combination. To reduce overfitting, each split should pick from a random subset of the features; the subset size is the hyper perimeter `max_features`.  Function `np.random.choice()` is useful here to get a list of feature indexes and then `X[:, i]` gives us the ith column.  In my solution,  the change is to the outermost loop in `find_best_split()`:
 
-<img src="images/bestsplit.png" width="50%">
+<img src="images/bestsplit.png" width="70%">
 
 ### RF Prediction
 
@@ -173,65 +173,156 @@ Because these tests take so long and they are completely independent, we can tes
 $ pip install pytest-xdist
 ```
 
-For me, it's 3x faster when I use `-n 8` option (on my 4-core fast intel i7 CPU).  Here is the output I get: 
+For me, it's 3x faster when I use `-n 8` option (on my 4-core fast intel i7 CPU): `pytest -v -n 8 test_rf.py`.  For clarity, though, here is the output I get from PyCharm (using just one processor, not 8):
 
 ```
-$ pytest -v -n 8 test_rf.py
-test_rf.py::test_diabetes 
-test_rf.py::test_diabetes_ntrees 
-test_rf.py::test_boston 
-test_rf.py::test_boston_oob 
-test_rf.py::test_boston_min_samples_leaf 
-test_rf.py::test_boston_min_samples_leaf_oob 
-test_rf.py::test_boston_all_features 
-test_rf.py::test_boston_most_features 
-[gw6] [  3%] PASSED test_rf.py::test_diabetes 
-test_rf.py::test_iris 
-[gw6] [  7%] PASSED test_rf.py::test_iris 
-test_rf.py::test_iris_most_features 
-[gw0] [ 11%] PASSED test_rf.py::test_boston 
-test_rf.py::test_diabetes_all_features 
-[gw1] [ 15%] PASSED test_rf.py::test_boston_oob 
-test_rf.py::test_diabetes_most_features 
-[gw6] [ 19%] PASSED test_rf.py::test_iris_most_features 
-test_rf.py::test_iris_oob 
-[gw6] [ 23%] PASSED test_rf.py::test_iris_oob 
-test_rf.py::test_wine_most_features 
-[gw7] [ 26%] PASSED test_rf.py::test_diabetes_ntrees 
-test_rf.py::test_iris_all_features 
-[gw7] [ 30%] PASSED test_rf.py::test_iris_all_features 
-test_rf.py::test_wine_min_samples_leaf 
-[gw6] [ 34%] PASSED test_rf.py::test_wine_most_features 
-test_rf.py::test_wine_oob 
-[gw7] [ 38%] PASSED test_rf.py::test_wine_min_samples_leaf 
-test_rf.py::test_wine_min_samples_leaf_oob 
-[gw6] [ 42%] PASSED test_rf.py::test_wine_oob 
-test_rf.py::test_breast_cancer 
-[gw2] [ 46%] PASSED test_rf.py::test_boston_min_samples_leaf 
-test_rf.py::test_diabetes_oob 
-[gw5] [ 50%] PASSED test_rf.py::test_boston_min_samples_leaf_oob 
-test_rf.py::test_iris_ntrees 
-[gw7] [ 53%] PASSED test_rf.py::test_wine_min_samples_leaf_oob 
-test_rf.py::test_breast_cancer_oob 
-[gw5] [ 57%] PASSED test_rf.py::test_iris_ntrees 
-[gw6] [ 61%] PASSED test_rf.py::test_breast_cancer 
-[gw1] [ 65%] PASSED test_rf.py::test_diabetes_most_features 
-test_rf.py::test_wine_all_features 
-[gw2] [ 69%] PASSED test_rf.py::test_diabetes_oob 
-[gw7] [ 73%] PASSED test_rf.py::test_breast_cancer_oob 
-[gw1] [ 76%] PASSED test_rf.py::test_wine_all_features 
-[gw0] [ 80%] PASSED test_rf.py::test_diabetes_all_features 
-test_rf.py::test_wine 
-[gw0] [ 84%] PASSED test_rf.py::test_wine 
-[gw4] [ 88%] PASSED test_rf.py::test_boston_most_features 
-test_rf.py::test_california_housing_oob 
-[gw3] [ 92%] PASSED test_rf.py::test_boston_all_features 
-test_rf.py::test_california_housing 
-[gw4] [ 96%] PASSED test_rf.py::test_california_housing_oob 
-[gw3] [100%] PASSED test_rf.py::test_california_housing
+============================= test session starts ==============================
+platform darwin -- Python 3.7.1, pytest-5.3.0, py-1.7.0, pluggy-0.13.0 -- /Users/parrt/anaconda3/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/parrt/courses/msds621-private/projects/rf
+plugins: xdist-1.30.0, doctestplus-0.2.0, arraydiff-0.3, remotedata-0.3.1, openfiles-0.3.1, forked-1.1.3
+collecting ... collected 26 items
+
+test_rf.py::test_boston PASSED                                           [  3%]
+boston: 621     Train R^2 score mean 0.92, stddev 0.008252
+boston: Sklearn Train R^2 score mean 0.94, stddev 0.002283
+boston: 621     Test  R^2 score mean 0.83, stddev 0.039512
+boston: Sklearn Test  R^2 score mean 0.87, stddev 0.016250
+
+test_rf.py::test_boston_oob PASSED                                       [  7%]
+boston_oob: 621 OOB score 0.79 vs sklearn OOB 0.81
+boston_oob: 621     Train R^2 score mean 0.90, stddev 0.017967
+boston_oob: Sklearn Train R^2 score mean 0.92, stddev 0.000181
+boston_oob: 621     Test  R^2 score mean 0.85, stddev 0.029832
+boston_oob: Sklearn Test  R^2 score mean 0.84, stddev 0.050604
+
+test_rf.py::test_boston_min_samples_leaf PASSED                          [ 11%]
+boston_min_samples_leaf: 621     Train R^2 score mean 0.89, stddev 0.024142
+boston_min_samples_leaf: Sklearn Train R^2 score mean 0.88, stddev 0.007884
+boston_min_samples_leaf: 621     Test  R^2 score mean 0.84, stddev 0.050672
+boston_min_samples_leaf: Sklearn Test  R^2 score mean 0.82, stddev 0.051951
+
+test_rf.py::test_boston_all_features PASSED                              [ 15%]
+boston_all_features: 621     Train R^2 score mean 0.94, stddev 0.003891
+boston_all_features: Sklearn Train R^2 score mean 0.94, stddev 0.001431
+boston_all_features: 621     Test  R^2 score mean 0.83, stddev 0.048552
+boston_all_features: Sklearn Test  R^2 score mean 0.84, stddev 0.069147
+
+test_rf.py::test_boston_most_features PASSED                             [ 19%]
+boston_most_features: 621     Train R^2 score mean 0.94, stddev 0.002705
+boston_most_features: Sklearn Train R^2 score mean 0.95, stddev 0.002711
+boston_most_features: 621     Test  R^2 score mean 0.84, stddev 0.045269
+boston_most_features: Sklearn Test  R^2 score mean 0.85, stddev 0.036696
+
+test_rf.py::test_boston_min_samples_leaf_oob PASSED                      [ 23%]
+boston_min_samples_leaf_oob: 621 OOB score 0.80 vs sklearn OOB 0.80
+boston_min_samples_leaf_oob: 621     Train R^2 score mean 0.89, stddev 0.011317
+boston_min_samples_leaf_oob: Sklearn Train R^2 score mean 0.90, stddev 0.004134
+boston_min_samples_leaf_oob: 621     Test  R^2 score mean 0.78, stddev 0.060680
+boston_min_samples_leaf_oob: Sklearn Test  R^2 score mean 0.77, stddev 0.050456
+
+test_rf.py::test_diabetes PASSED                                         [ 26%]
+diabetes: 621     Train R^2 score mean 0.76, stddev 0.003718
+diabetes: Sklearn Train R^2 score mean 0.79, stddev 0.008023
+diabetes: 621     Test  R^2 score mean 0.47, stddev 0.035870
+diabetes: Sklearn Test  R^2 score mean 0.50, stddev 0.052362
+
+test_rf.py::test_diabetes_ntrees PASSED                                  [ 30%]
+diabetes_ntrees: 621     Train R^2 score mean 0.77, stddev 0.000719
+diabetes_ntrees: Sklearn Train R^2 score mean 0.80, stddev 0.003353
+diabetes_ntrees: 621     Test  R^2 score mean 0.44, stddev 0.054706
+diabetes_ntrees: Sklearn Test  R^2 score mean 0.48, stddev 0.057942
+
+test_rf.py::test_diabetes_all_features PASSED                            [ 34%]
+diabetes_all_features: 621     Train R^2 score mean 0.80, stddev 0.008528
+diabetes_all_features: Sklearn Train R^2 score mean 0.81, stddev 0.010541
+diabetes_all_features: 621     Test  R^2 score mean 0.57, stddev 0.024089
+diabetes_all_features: Sklearn Test  R^2 score mean 0.55, stddev 0.050219
+
+test_rf.py::test_diabetes_most_features PASSED                           [ 38%]
+diabetes_most_features: 621     Train R^2 score mean 0.80, stddev 0.003375
+diabetes_most_features: Sklearn Train R^2 score mean 0.81, stddev 0.003624
+diabetes_most_features: 621     Test  R^2 score mean 0.42, stddev 0.016757
+diabetes_most_features: Sklearn Test  R^2 score mean 0.47, stddev 0.009754
+
+test_rf.py::test_diabetes_oob PASSED                                     [ 42%]
+diabetes_oob: 621 OOB score 0.37 vs sklearn OOB 0.36
+diabetes_oob: 621     Train R^2 score mean 0.77, stddev 0.012186
+diabetes_oob: Sklearn Train R^2 score mean 0.78, stddev 0.002872
+diabetes_oob: 621     Test  R^2 score mean 0.44, stddev 0.046698
+diabetes_oob: Sklearn Test  R^2 score mean 0.48, stddev 0.010731
+
+test_rf.py::test_california_housing PASSED                               [ 46%]
+california_housing: 621     Train R^2 score mean 0.89, stddev 0.006762
+california_housing: Sklearn Train R^2 score mean 0.88, stddev 0.007321
+california_housing: 621     Test  R^2 score mean 0.81, stddev 0.015160
+california_housing: Sklearn Test  R^2 score mean 0.80, stddev 0.006308
+
+test_rf.py::test_california_housing_oob PASSED                           [ 50%]
+california_housing_oob: 621 OOB score 0.74 vs sklearn OOB 0.75
+california_housing_oob: 621     Train R^2 score mean 0.89, stddev 0.009270
+california_housing_oob: Sklearn Train R^2 score mean 0.90, stddev 0.000961
+california_housing_oob: 621     Test  R^2 score mean 0.81, stddev 0.038924
+california_housing_oob: Sklearn Test  R^2 score mean 0.79, stddev 0.041484
+
+test_rf.py::test_iris_ntrees PASSED                                      [ 53%]
+iris_ntrees: 621 accuracy score 0.97, 0.95
+iris_ntrees: Sklearn accuracy score 0.98, 0.95
+
+test_rf.py::test_iris PASSED                                             [ 57%]
+iris: 621 accuracy score 0.96, 0.92
+iris: Sklearn accuracy score 0.98, 0.93
+
+test_rf.py::test_iris_all_features PASSED                                [ 61%]
+iris_all_features: 621 accuracy score 0.97, 0.93
+iris_all_features: Sklearn accuracy score 0.98, 0.93
+
+test_rf.py::test_iris_most_features PASSED                               [ 65%]
+iris_most_features: 621 accuracy score 0.97, 0.95
+iris_most_features: Sklearn accuracy score 0.97, 0.95
+
+test_rf.py::test_iris_oob PASSED                                         [ 69%]
+iris_oob: 621 OOB score 0.94 vs sklearn OOB 0.94
+iris_oob: 621 accuracy score 0.97, 0.91
+iris_oob: Sklearn accuracy score 0.98, 0.93
+
+test_rf.py::test_wine PASSED                                             [ 73%]
+wine: 621 accuracy score 0.99, 0.94
+wine: Sklearn accuracy score 1.00, 0.97
+
+test_rf.py::test_wine_all_features PASSED                                [ 76%]
+wine_all_features: 621 accuracy score 1.00, 0.97
+wine_all_features: Sklearn accuracy score 0.99, 0.98
+
+test_rf.py::test_wine_most_features PASSED                               [ 80%]
+wine_most_features: 621 accuracy score 0.99, 0.96
+wine_most_features: Sklearn accuracy score 1.00, 0.97
+
+test_rf.py::test_wine_oob PASSED                                         [ 84%]
+wine_oob: 621 OOB score 0.93 vs sklearn OOB 0.94
+wine_oob: 621 accuracy score 0.99, 0.98
+wine_oob: Sklearn accuracy score 0.99, 0.98
+
+test_rf.py::test_wine_min_samples_leaf PASSED                            [ 88%]
+wine_min_samples_leaf: 621 accuracy score 1.00, 0.98
+wine_min_samples_leaf: Sklearn accuracy score 0.99, 0.97
+
+test_rf.py::test_wine_min_samples_leaf_oob PASSED                        [ 92%]
+wine_min_samples_leaf_oob: 621 OOB score 0.94 vs sklearn OOB 0.93
+wine_min_samples_leaf_oob: 621 accuracy score 0.99, 0.97
+wine_min_samples_leaf_oob: Sklearn accuracy score 0.99, 0.97
+
+test_rf.py::test_breast_cancer PASSED                                    [ 96%]
+breast_cancer: 621 accuracy score 0.97, 0.95
+breast_cancer: Sklearn accuracy score 0.99, 0.95
+
+test_rf.py::test_breast_cancer_oob PASSED                                [100%]
+breast_cancer_oob: 621 OOB score 0.94 vs sklearn OOB 0.94
+breast_cancer_oob: 621 accuracy score 0.97, 0.94
+breast_cancer_oob: Sklearn accuracy score 0.99, 0.94
 =============================== warnings summary ===============================
 ...
-======================== 26 passed, 7 warnings in 83.78s (0:01:23) ========================
+================= 26 passed, 17 warnings in 131.47s (0:02:11) ==================
 ```
 
 PyCharm knows how to do this as well, if you look at the configurations and add `-n 6` or `-n 8` as an additional argument to run six unit tests at once::
@@ -242,12 +333,4 @@ There are 8 OOB tests and each failed test costs you 1%, for total of 92% maximu
 
 The other unit tests check basic regression classification but also try out combinations of `max_features`, `min_samples_leaf`, `n_estimators`.   For the non-OOB tests, each failed test cost you 5%.
 
-*My test passes in roughly 90 seconds and you will lose 10% if all tests takes longer than about 180 seconds total, running in parallel with -n 8.*
-
-I ran some experiments and found the following results for one run.
-
-<img src="images/results-regr.png" width="80%">
-
-<img src="images/results-class.png" width="80%">
-
-In summary, my implementation is about as good as sklearn for both regression and classification (despite using k=11 not all X_i column values during splitting). For regression, however, my models were able to capture the training data better than sklearn. We usually don't care about the training error, but it's still interesting.
+*My test passes in roughly 45 seconds and you will lose 10% if all tests takes longer than about 90 seconds total, running in parallel with -n 8.*
