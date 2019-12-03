@@ -156,6 +156,23 @@ A bootstrapped sample is roughly 2/3 of the training records for any given tree,
 
 <img src="images/oob-score-class.png" width="75%">
 
+### Speed issues
+
+Make sure to avoid loops and use vector operations. For example, don't loop through OOB sample indexes, use the list of indexes as an index into NumPy array:
+
+```
+a = np.arange(10,20)
+idx = [1,3,5]
+print(a[idx]) # gives [11, 13, 15]
+```
+
+To find all array values greator than 0, use:
+
+```
+nonzero_idx = np.where(a > 0)
+```
+
+
 ## Deliverables
 
 In your github repo `rf`-*userid*, you must provide the following files at the root of the repository directory:
