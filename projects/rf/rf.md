@@ -152,9 +152,9 @@ The R^2 and accuracy scores for OOB observations is an accurate estimate of the 
 
 A bootstrapped sample is roughly 2/3 of the training records for any given tree, which leaves 1/3 of the samples (OOB) as test set. After training each decision tree, keep track of the OOB records in the tree.  For example, I do `t.oob_idxs = ...` inside my `fit()` method (for each tree `t`).  After training all trees in `fit()`, loop through the trees again and compute the OOB score, if hyperparameter `self.oob_score` is true. Save the score in `self.oob_score_` for either the RF regressor or classifier object, which is consistent with the sklearn implementation. See the class lecture slides for more details, but here are the algorithms again:
 
-<img src="images/oob-score-regr.png" width="75%">
+<img src="images/oob-score-regr.png" width="80%">
 
-<img src="images/oob-score-class.png" width="75%">
+<img src="images/oob-score-class.png" width="80%">
 
 ### Speed issues
 
