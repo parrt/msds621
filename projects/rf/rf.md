@@ -350,4 +350,6 @@ There are 8 OOB tests and each failed test costs you 1%, for total of 92% maximu
 
 The other unit tests check basic regression classification but also try out combinations of `max_features`, `min_samples_leaf`, `n_estimators`.   For the non-OOB tests, each failed test cost you 5%.
 
+I also have created a hidden test on a different data set and failing it costs 14% of your grade. (F19 only 10%)
+
 *My test passes in roughly 45 seconds and you will lose 10% if all tests takes longer than about 90 seconds total, running in parallel with -n 8.*
