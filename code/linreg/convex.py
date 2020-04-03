@@ -25,7 +25,7 @@ def diamond(lmbda=1, n=100):
 
 #print(diamond(lmbda=1, n=40))
 
-w,h = 5,5
+w,h = 10,10
 beta0 = np.linspace(-w, w, 100)
 beta1 = np.linspace(-h, h, 100)
 B0, B1 = np.meshgrid(beta0, beta1)
@@ -33,40 +33,62 @@ B0, B1 = np.meshgrid(beta0, beta1)
 def loss(b0, b1,
          a = 1,
          b = 1,
-         c = 0, # axis stretch
-         x = -10, # shift x location
-         y = 5): # shift y
-    return a*(b0-x)**2 + b*(b1-y)**2 + c*b0*b1
+         c = 0,     # axis stretch
+         cx = -10,  # shift center x location
+         cy = 5):   # shift center y
+    return a * (b0 - cx) ** 2 + b * (b1 - cy) ** 2 + c * (b0 - cx) * (b1 - cy)
 
-def plot_loss(boundary = diamond(lmbda=1, n=100)):
-    a = np.random.random()*3
-    b = np.random.random()*3
-    c = 0
-    x = 0
-    while np.abs(x)<1:
-        x = np.random.random()*2*w - w
-    y = 0
-    while np.abs(y)<1:
-        y = np.random.random()*2*h - h
+
+def select_parameters():
+    while True:
+        a = np.random.random() * 10
+        b = np.random.random() * 10
+        c = np.random.random() * 4 - 1.5
+        x = 0
+        while np.abs(x) < 1:
+            x = np.random.random() * 2 * w - w
+        y = 0
+        while np.abs(y) < 1:
+            y = np.random.random() * 2 * h - h
+
+        Z = loss(B0, B1, a=a, b=b, c=c, cx=x, cy=y)
+        loss_at_min = loss(x, y, a=a, b=b, c=c, cx=x, cy=y)
+        if (Z >= loss_at_min).all(): # hooray! we didn't make a saddle point
+            break # fake repeat-until in python
+        print("loss not min", loss_at_min)
+
+    return Z, a, b, c, x, y
+
+
+def plot_loss(boundary, show_contours=True, contour_levels=50, show_loss_eqn=False):
+    Z, a, b, c, x, y = select_parameters()
+    eqn = f"{a:.2f}(b0 - {x:.2f})^2 + {b:.2f}(b1 - {y:.2f})^2 + {c:.2f} b0 b1"
 
     fig,ax = plt.subplots(1,1,figsize=(6,6))
+    if show_loss_eqn:
+        ax.set_title(eqn, fontsize=10)
+    ax.set_xticks([-10,-5,0,5,10])
+    ax.set_yticks([-10,-5,0,5,10])
 
-    Z = loss(B0,B1,a=a,b=b,c=c,x=x,y=y)
-    ax.contour(B0, B1, Z, levels=20, linewidths=.5)
+    if show_contours:
+        ax.contour(B0, B1, Z, levels=contour_levels, linewidths=.5, cmap='coolwarm')
+    else:
+        ax.contourf(B0, B1, Z, levels=contour_levels, cmap='coolwarm')
 
-    lmbda = 1
+    # Draw axes
     ax.plot([-w,+w],[0,0], '-', c='k')
     ax.plot([0, 0],[-h,h], '-', c='k')
-    ax.plot([0,lmbda,0,-lmbda,0], [lmbda,0,-lmbda,0,lmbda], '-', lw=1.5, c='#A22396')
+    ax.plot(boundary[:,0], boundary[:,1], '-', lw=1.5, c='#A22396')
+
+    # Draw center of loss func
     ax.scatter([x],[y],s=80, c='k')
 
-    losses = [loss(*edgeloc,a=a,b=b,c=c,x=x,y=y) for edgeloc in boundary]
-    # print(losses)
+    # Draw point on boundary
+    losses = [loss(*edgeloc, a=a, b=b, c=c, cx=x, cy=y) for edgeloc in boundary]
     minloss_idx = np.argmin(losses)
     coeff = boundary[minloss_idx]
-    # print(coeff)
-
     ax.scatter([coeff[0]], [coeff[1]], s=80, c='#D73028')
+    # plt.show()
 
 
 def animate(ntrials=20, dpi=100, duration=600):
@@ -74,8 +96,9 @@ def animate(ntrials=20, dpi=100, duration=600):
     for f in glob.glob(f'/tmp/L1-frame-*.png'):
         os.remove(f)
 
+    dia = diamond(lmbda=2, n=100)
     for i in range(ntrials):
-        plot_loss()
+        plot_loss(boundary=dia)
         print(f"/tmp/frame-{i}.png")
         plt.savefig(f"/tmp/frame-{i}.png", bbox_inches=0, pad_inches=0, dpi=dpi)
         plt.close()
@@ -86,7 +109,10 @@ def animate(ntrials=20, dpi=100, duration=600):
                    save_all=True,
                    append_images=images[1:],
                    duration=duration,
+                   optimize=False,
                    loop=0)
     print("Saved /tmp/L1-animation.gif")
 
-animate()
+np.random.seed(1)
+
+animate(duration=600)
