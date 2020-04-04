@@ -44,6 +44,7 @@ def select_parameters(lmbda, reg):
 
 def plot_cloud(lmbda, reg, n_trials, zero_color = '#40DE2D',
                nonzero_color = '#3C659D',
+               nonzero_color_l2 = '#F46C43',
                ncolors=100, dpi=200):
     zeroes = [(0,lmbda), (lmbda,0), (0,-lmbda), (-lmbda,0)]
     if reg=='l1':
@@ -95,17 +96,17 @@ def plot_cloud(lmbda, reg, n_trials, zero_color = '#40DE2D',
         distances_to_0 = np.array(distances_to_0)
 
         # use order of distance to color so must be very close to 0 to be green
-        distances_to_0 = np.log(distances_to_0)
-        # distances_to_0 = np.sqrt(distances_to_0)
+        # distances_to_0 = np.log(distances_to_0)
+        distances_to_0 = np.sqrt(distances_to_0)*3
         dmin = np.min(distances_to_0)
         dmax = np.max(distances_to_0)
         drange = dmax - dmin
 
         normalized_distances_to_0 = (distances_to_0-dmin)/drange
 
-        orange = Color('orange')
+        blue = Color(nonzero_color_l2)
         green = Color(zero_color)
-        spectrum = np.array( list(green.range_to(orange, ncolors)) )
+        spectrum = np.array(list(green.range_to(blue, ncolors)))
 
         colors = spectrum[(normalized_distances_to_0*(ncolors-1)).astype(int)]
         colors = [c.rgb for c in colors]
@@ -132,4 +133,4 @@ def plot_cloud(lmbda, reg, n_trials, zero_color = '#40DE2D',
     plt.show()
 
 
-plot_cloud(lmbda=2, reg='l1', n_trials=10_000, ncolors=1000)
+plot_cloud(lmbda=2, reg='l1', n_trials=10000, ncolors=100)
