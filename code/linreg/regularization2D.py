@@ -69,7 +69,7 @@ def plot_loss(boundary, reg, show_contours=True, contour_levels=50, show_loss_eq
     # plt.show()
 
 
-def animate(ntrials=20, reg='l1', dpi=200, duration=600):
+def animate(ntrials=20, reg='l1', dpi=200, duration=600, show_contours=True, contour_levels=50):
     plt.close()
     for f in glob.glob(f'/tmp/{reg}-frame-*.png'):
         os.remove(f)
@@ -79,7 +79,7 @@ def animate(ntrials=20, reg='l1', dpi=200, duration=600):
     else:
         boundary = circle(lmbda=lmbda, n=100)
     for i in range(ntrials):
-        plot_loss(boundary=boundary, reg=reg)
+        plot_loss(boundary=boundary, reg=reg, show_contours=show_contours, contour_levels=contour_levels)
         print(f"/tmp/{reg}-frame-{i}.png")
         plt.savefig(f"/tmp/{reg}-frame-{i}.png", bbox_inches=0, pad_inches=0, dpi=dpi)
         plt.close()
@@ -94,4 +94,5 @@ def animate(ntrials=20, reg='l1', dpi=200, duration=600):
                    loop=0)
     print(f"Saved /tmp/{reg}-animation.gif")
 
-animate(ntrials=30, duration=600, reg='l2', dpi=110)
+animate(ntrials=10, duration=1000, reg='l2', dpi=120, contour_levels=100)
+# animate(ntrials=10, duration=600, reg='l2', dpi=110, show_contours=False)
