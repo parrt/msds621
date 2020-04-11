@@ -15,13 +15,21 @@ beta1 = np.linspace(-h, h, 100)
 B0, B1 = np.meshgrid(beta0, beta1)
 
 
-def select_parameters(lmbda, reg, force_symmetric_loss):
+def select_parameters(lmbda, reg, force_symmetric_loss, force_one_nonpredictive):
     while True:
         a = np.random.random() * 10
         b = np.random.random() * 10
         c = np.random.random() * 4 - 1.5
         if force_symmetric_loss:
             b = a # make symmetric
+            c = 0
+        elif force_one_nonpredictive:
+            if np.random.random() > 0.5:
+                a = np.random.random() * 15 - 5
+                b = .1
+            else:
+                b = np.random.random() * 15 - 5
+                a = .1
             c = 0
 
         # get x,y outside of circle radius lmbda
@@ -47,7 +55,8 @@ def select_parameters(lmbda, reg, force_symmetric_loss):
     return Z, a, b, c, x, y
 
 
-def plot_cloud(lmbda, reg, n_trials, force_symmetric_loss=False,
+def plot_cloud(lmbda, reg, n_trials,
+               force_symmetric_loss=False, force_one_nonpredictive=False,
                zero_color = '#40DE2D',# zero_edgecolor='#40DE2D',
                nonzero_color = '#8073ac',
                nonzero_color_l2 = '#8073ac',
@@ -58,7 +67,7 @@ def plot_cloud(lmbda, reg, n_trials, force_symmetric_loss=False,
     else:
         boundary = circle(lmbda=lmbda)
 
-    fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+    fig, ax = plt.subplots(1, 1, figsize=(4.5, 4.5))
     ax.set_xticks([-10, -5, 0, 5, 10])
     ax.set_yticks([-10, -5, 0, 5, 10])
     ax.get_xaxis().set_visible(False)
@@ -81,7 +90,9 @@ def plot_cloud(lmbda, reg, n_trials, force_symmetric_loss=False,
     centers0 = []
     for i in range(n_trials):
         print(i)
-        Z, a, b, color, x, y = select_parameters(lmbda, reg, force_symmetric_loss=force_symmetric_loss)
+        Z, a, b, color, x, y = select_parameters(lmbda, reg,
+                                                 force_symmetric_loss=force_symmetric_loss,
+                                                 force_one_nonpredictive=force_one_nonpredictive)
 
         # Find point on boundary
         losses = [loss(*edgeloc, a=a, b=b, c=color, cx=x, cy=y) for edgeloc in boundary]
@@ -122,22 +133,33 @@ def plot_cloud(lmbda, reg, n_trials, force_symmetric_loss=False,
     # Draw centers of loss functions
     centers = np.array(centers)
     centers0 = np.array(centers0)
-    if reg=='l1' and not force_symmetric_loss:
+    if reg == 'l1' and force_symmetric_loss:
         ax.scatter(centers0[:, 0], centers0[:, 1], s=20, c=zero_color, alpha=0.8)
-        ax.scatter(centers[:, 0],  centers[:, 1],  s=20, c=colors,     alpha=0.5)
-    elif reg=='l1' and force_symmetric_loss:
-            ax.scatter(centers[:, 0], centers[:, 1], s=20, c=colors, alpha=.5)
-            ax.scatter(centers0[:, 0], centers0[:, 1], s=20, c=zero_color, alpha=.5)
-    else: # l2
+        ax.scatter(centers[:, 0], centers[:, 1], s=20, c=colors, alpha=0.5)
+    elif reg=='l1' and force_one_nonpredictive:
+        ax.scatter(centers[:, 0], centers[:, 1], s=20, c=colors, alpha=.8)
+        ax.scatter(centers0[:, 0], centers0[:, 1], s=20, c=zero_color, alpha=.5)
+    elif reg == 'l1':
+        ax.scatter(centers0[:, 0], centers0[:, 1], s=20, c=zero_color, alpha=0.8)
+        ax.scatter(centers[:, 0], centers[:, 1], s=20, c=colors, alpha=0.5)
+    elif reg == 'l2' and force_one_nonpredictive:
+        ax.scatter(centers[:, 0], centers[:, 1], s=20, c=colors, alpha=0.6)
+        ax.scatter(centers0[:, 0], centers0[:, 1], s=38, c=zero_color, alpha=.5)
+    elif reg == 'l2':
         ax.scatter(centers[:, 0],  centers[:, 1],  s=20, c=colors,     alpha=0.35)
         ax.scatter(centers0[:, 0], centers0[:, 1], s=38, c=zero_color, alpha=1.0)
 
-    symm = "symmetric-" if force_symmetric_loss else ""
-    symm2 = "Symmetric " if force_symmetric_loss else ""
+    shape = shape_fname = ""
+    if force_symmetric_loss:
+        shape_fname = "symmetric-"
+        shape = "Symmetric "
+    elif force_one_nonpredictive:
+        shape_fname = "orthogonal-"
+        shape = "Orthogonal "
 
-    ax.set_title(f"{symm2}Loss function minimum cloud\n{reg.upper()} gives {100*c//n_trials}% zeroes", fontsize=12)
+    ax.set_title(f"{shape}Loss function min cloud\n{reg.upper()} gives {100*c//n_trials}% zeroes", fontsize=14)
     plt.tight_layout()
-    plt.savefig(f"/tmp/{reg}-{symm}cloud.png", bbox_inches=0, pad_inches=0, dpi=dpi)
+    plt.savefig(f"/tmp/{reg}-{shape_fname}cloud.png", bbox_inches=0, pad_inches=0, dpi=dpi)
     plt.show()
 
 sage = '#D7E2A9'
@@ -146,8 +168,10 @@ darker_faint_blue_edge = '#4096B6'
 light_blue_metal = '#A4B7C7'
 dark_mustard = '#E1BD4D'
 
-# plot_cloud(lmbda=2, reg='l1', n_trials=6000, ncolors=100)
-plot_cloud(lmbda=2, reg='l2', n_trials=6000, ncolors=100)
+plot_cloud(lmbda=2, reg='l1', n_trials=6000, ncolors=100)
+plot_cloud(lmbda=2, reg='l1', n_trials=6000, ncolors=100, force_symmetric_loss=True)
+plot_cloud(lmbda=2, reg='l1', n_trials=6000, ncolors=100, force_one_nonpredictive=True)
 
-# plot_cloud(lmbda=2, reg='l1', n_trials=6000, ncolors=100, force_symmetric_loss=True)
+plot_cloud(lmbda=2, reg='l2', n_trials=6000, ncolors=100)
 plot_cloud(lmbda=2, reg='l2', n_trials=6000, ncolors=100, force_symmetric_loss=True)
+plot_cloud(lmbda=2, reg='l2', n_trials=4500, ncolors=100, force_one_nonpredictive=True)

@@ -11,11 +11,22 @@ beta0 = np.linspace(-w, w, 100)
 beta1 = np.linspace(-h, h, 100)
 B0, B1 = np.meshgrid(beta0, beta1)
 
-def select_parameters(lmbda, reg):
+def select_parameters(lmbda, reg, force_symmetric_loss, force_one_nonpredictive):
     while True:
         a = np.random.random() * 10
         b = np.random.random() * 10
         c = np.random.random() * 4 - 1.5
+        if force_symmetric_loss:
+            b = a # make symmetric
+            c = 0
+        elif force_one_nonpredictive:
+            if np.random.random() > 0.5:
+                a = np.random.random() * 15 - 5
+                b = .1
+            else:
+                b = np.random.random() * 15 - 5
+                a = .1
+            c = 0
 
         # get x,y outside of circle radius lmbda
         x, y = 0, 0
@@ -38,8 +49,9 @@ def select_parameters(lmbda, reg):
     return Z, a, b, c, x, y
 
 
-def plot_loss(boundary, reg, show_contours=True, contour_levels=50, show_loss_eqn=False):
-    Z, a, b, c, x, y = select_parameters(lmbda, reg)
+def plot_loss(boundary, reg, force_symmetric_loss=False, force_one_nonpredictive=False,
+              show_contours=True, contour_levels=50, show_loss_eqn=False):
+    Z, a, b, c, x, y = select_parameters(lmbda, reg, force_symmetric_loss, force_one_nonpredictive)
     eqn = f"{a:.2f}(b0 - {x:.2f})^2 + {b:.2f}(b1 - {y:.2f})^2 + {c:.2f} b0 b1"
 
     fig,ax = plt.subplots(1,1,figsize=(6,6))
@@ -69,7 +81,9 @@ def plot_loss(boundary, reg, show_contours=True, contour_levels=50, show_loss_eq
     # plt.show()
 
 
-def animate(ntrials=20, reg='l1', dpi=200, duration=600, show_contours=True, contour_levels=50):
+def animate(ntrials=20, reg='l1', dpi=200, duration=600,
+            force_symmetric_loss=False, force_one_nonpredictive=False,
+            show_contours=True, contour_levels=50):
     plt.close()
     for f in glob.glob(f'/tmp/{reg}-frame-*.png'):
         os.remove(f)
@@ -79,7 +93,10 @@ def animate(ntrials=20, reg='l1', dpi=200, duration=600, show_contours=True, con
     else:
         boundary = circle(lmbda=lmbda, n=100)
     for i in range(ntrials):
-        plot_loss(boundary=boundary, reg=reg, show_contours=show_contours, contour_levels=contour_levels)
+        plot_loss(boundary=boundary, reg=reg,
+                  force_symmetric_loss=force_symmetric_loss,
+                  force_one_nonpredictive=force_one_nonpredictive,
+                  show_contours=show_contours, contour_levels=contour_levels)
         print(f"/tmp/{reg}-frame-{i}.png")
         plt.savefig(f"/tmp/{reg}-frame-{i}.png", bbox_inches=0, pad_inches=0, dpi=dpi)
         plt.close()
@@ -94,5 +111,7 @@ def animate(ntrials=20, reg='l1', dpi=200, duration=600, show_contours=True, con
                    loop=0)
     print(f"Saved /tmp/{reg}-animation.gif")
 
-animate(ntrials=10, duration=1000, reg='l2', dpi=120, contour_levels=100)
+animate(ntrials=10, duration=1000, reg='l1', dpi=120, contour_levels=100,
+        # force_symmetric_loss=True,
+        force_one_nonpredictive=True)
 # animate(ntrials=10, duration=600, reg='l2', dpi=110, show_contours=False)
