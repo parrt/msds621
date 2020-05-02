@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 def diamond(lmbda=1, n=100):
     "get points along diamond at distance lmbda from origin"
@@ -48,5 +49,16 @@ def loss(b0, b1,
          cy = 5):   # shift center y
     return a * (b0 - cx) ** 2 + b * (b1 - cy) ** 2 + c * (b0 - cx) * (b1 - cy)
 
+
+# def cirdist(a, b, r):
+#     # compute the arctan of 'a' and 'b' then get angle between them
+#     # then use ratio of full circle circumference to get distance
+#     if np.isclose(a,0.0).any():
+#         return
+#     else:
+#         theta = math.atan(b2/b1)
+#     circum = 2*np.pi*r
+#     frac_of_circum = circum * (theta / (2*np.pi))
+#     return frac_of_circum
 
 #print(circle(1,n=20))

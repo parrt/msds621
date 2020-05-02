@@ -6,6 +6,7 @@ from PIL import Image as PIL_Image
 from reg_support import *
 from scipy.spatial.distance import euclidean
 from colour import Color
+import math
 
 GREY = '#444443'
 
@@ -19,7 +20,7 @@ def select_parameters(lmbda, reg, force_symmetric_loss, force_one_nonpredictive)
     while True:
         a = np.random.random() * 10
         b = np.random.random() * 10
-        c = np.random.random() * 4 - 1.5
+        c = np.random.random() * 4 - 2
         if force_symmetric_loss:
             b = a # make symmetric
             c = 0
@@ -51,15 +52,18 @@ def select_parameters(lmbda, reg, force_symmetric_loss, force_one_nonpredictive)
         # print("loss not min", loss_at_min)
 
     eqn = f"{a:.2f}(b0 - {x:.2f})^2 + {b:.2f}(b1 - {y:.2f})^2 + {c:.2f} (b0-{x:.2f}) (b1-{y:.2f})"
-    print(eqn)
+    # print(eqn)
     return Z, a, b, c, x, y
 
 
 def plot_cloud(lmbda, reg, n_trials,
                force_symmetric_loss=False, force_one_nonpredictive=False,
-               zero_color = '#40DE2D',# zero_edgecolor='#40DE2D',
+               zero_color = '#40DE2D',  # zero_edgecolor='#40DE2D',
                nonzero_color = '#8073ac',
                nonzero_color_l2 = '#8073ac',
+               close_to_zero_color_l2 ='#A3E78B',
+               isclose_threshold=0.1,
+               markersize = 3,
                ncolors=100, dpi=200):
     zeroes = [(0,lmbda), (lmbda,0), (0,-lmbda), (-lmbda,0)]
     if reg=='l1':
@@ -86,10 +90,10 @@ def plot_cloud(lmbda, reg, n_trials,
     ax.plot(boundary[:, 0], boundary[:, 1], '-', lw=.8, c='#A22396')
 
     c = 0 # count
+    coeffs = []
     centers = []
     centers0 = []
     for i in range(n_trials):
-        print(i)
         Z, a, b, color, x, y = select_parameters(lmbda, reg,
                                                  force_symmetric_loss=force_symmetric_loss,
                                                  force_one_nonpredictive=force_one_nonpredictive)
@@ -102,12 +106,14 @@ def plot_cloud(lmbda, reg, n_trials,
             c += 1
             centers0.append((x,y))
         else:
+            coeffs.append(coeff)
             centers.append((x,y))
 
     if reg=='l2':
-        # what is distance from x,y to a zero?
+        # what is Euclidean distance from beta1,beta2 to a zero?
+        # should use distance around circle but this works for visualization purposes
         distances_to_0 = []
-        for x,y in centers:
+        for x,y in coeffs:
             d0 = [euclidean((x, y), z) for z in zeroes]
             distances_to_0.append( np.min(d0) )
         distances_to_0 = np.array(distances_to_0)
@@ -119,13 +125,24 @@ def plot_cloud(lmbda, reg, n_trials,
         dmax = np.max(distances_to_0)
         drange = dmax - dmin
 
-        normalized_distances_to_0 = (distances_to_0-dmin)/drange
+        # print("DIST", dmin, dmax)
 
-        nonzero_color_C = Color(nonzero_color_l2)
+        normalized_distances_to_0 = (distances_to_0-dmin)/drange
+        # thresholded_distances_to_0 = np.clip(normalized_distances_to_0, 0.0, isclose_threshold)
+        thresholded_distances_to_0 = np.where(normalized_distances_to_0 < isclose_threshold,
+                                              normalized_distances_to_0, 1.0)
+
+        nonzero_color_C = Color(close_to_zero_color_l2)
         zero_color_C = Color(zero_color)
         spectrum = np.array(list(zero_color_C.range_to(nonzero_color_C, ncolors)))
 
-        colors = spectrum[(normalized_distances_to_0*(ncolors-1)).astype(int)]
+        # threshold_0_to_1 = normalized_distances_to_0 * (1 / isclose_threshold)
+        # colors = spectrum[(threshold_0_to_1 * (ncolors - 1)).astype(int)]
+        isclose_idx = np.where(normalized_distances_to_0 < isclose_threshold)[0]
+        close_colors = spectrum[(normalized_distances_to_0[isclose_idx] * (1/isclose_threshold) * (ncolors - 1)).astype(int)]
+        colors = np.full(shape=(len(distances_to_0)), dtype=object, fill_value=Color(nonzero_color_l2))
+        colors[isclose_idx] = close_colors
+        colors[isclose_idx] = Color(close_to_zero_color_l2)
         colors = [c.rgb for c in colors]
     else:
         colors = nonzero_color
@@ -134,20 +151,20 @@ def plot_cloud(lmbda, reg, n_trials,
     centers = np.array(centers)
     centers0 = np.array(centers0)
     if reg == 'l1' and force_symmetric_loss:
-        ax.scatter(centers0[:, 0], centers0[:, 1], s=20, c=zero_color, alpha=0.8)
-        ax.scatter(centers[:, 0], centers[:, 1], s=20, c=colors, alpha=0.5)
+        ax.scatter(centers0[:, 0], centers0[:, 1], s=markersize, c=zero_color, alpha=1.0)
+        ax.scatter(centers[:, 0], centers[:, 1], s=markersize+2, c=colors, alpha=1.0)
     elif reg=='l1' and force_one_nonpredictive:
-        ax.scatter(centers[:, 0], centers[:, 1], s=20, c=colors, alpha=.8)
-        ax.scatter(centers0[:, 0], centers0[:, 1], s=20, c=zero_color, alpha=.5)
+        ax.scatter(centers[:, 0], centers[:, 1], s=markersize+5, c=colors, alpha=1.0)
+        ax.scatter(centers0[:, 0], centers0[:, 1], s=markersize, c=zero_color, alpha=1.0)
     elif reg == 'l1':
-        ax.scatter(centers0[:, 0], centers0[:, 1], s=20, c=zero_color, alpha=0.8)
-        ax.scatter(centers[:, 0], centers[:, 1], s=20, c=colors, alpha=0.5)
+        ax.scatter(centers[:, 0], centers[:, 1], s=markersize+5, c=colors, alpha=1.0)
+        ax.scatter(centers0[:, 0], centers0[:, 1], s=markersize, c=zero_color, alpha=1.0)
     elif reg == 'l2' and force_one_nonpredictive:
-        ax.scatter(centers[:, 0], centers[:, 1], s=20, c=colors, alpha=0.6)
-        ax.scatter(centers0[:, 0], centers0[:, 1], s=38, c=zero_color, alpha=.5)
+        ax.scatter(centers[:, 0], centers[:, 1], s=markersize, c=colors, alpha=1.0)
+        ax.scatter(centers0[:, 0], centers0[:, 1], s=markersize, c=zero_color, alpha=1.0)
     elif reg == 'l2':
-        ax.scatter(centers[:, 0],  centers[:, 1],  s=20, c=colors,     alpha=0.35)
-        ax.scatter(centers0[:, 0], centers0[:, 1], s=38, c=zero_color, alpha=1.0)
+        ax.scatter(centers[:, 0],  centers[:, 1], s=markersize, c=colors, alpha=1.0)
+        ax.scatter(centers0[:, 0], centers0[:, 1], s=markersize+8, c=zero_color, alpha=1.0)
 
     shape = shape_fname = ""
     if force_symmetric_loss:
@@ -168,10 +185,26 @@ darker_faint_blue_edge = '#4096B6'
 light_blue_metal = '#A4B7C7'
 dark_mustard = '#E1BD4D'
 
-plot_cloud(lmbda=2, reg='l1', n_trials=6000, ncolors=100)
-plot_cloud(lmbda=2, reg='l1', n_trials=6000, ncolors=100, force_symmetric_loss=True)
-plot_cloud(lmbda=2, reg='l1', n_trials=6000, ncolors=100, force_one_nonpredictive=True)
+n = 5000
+# plot_cloud(lmbda=2, reg='l1', n_trials=n, ncolors=100,
+#            zero_color='#21FF36', nonzero_color='#59A3D2')
+# plot_cloud(lmbda=2, reg='l1', n_trials=n, ncolors=100, force_symmetric_loss=True,
+#            zero_color='#21FF36', nonzero_color='#59A3D2')
+# plot_cloud(lmbda=2, reg='l1', n_trials=n, ncolors=100, force_one_nonpredictive=True,
+#            zero_color='#21FF36', nonzero_color='#59A3D2')
 
-plot_cloud(lmbda=2, reg='l2', n_trials=6000, ncolors=100)
-plot_cloud(lmbda=2, reg='l2', n_trials=6000, ncolors=100, force_symmetric_loss=True)
-plot_cloud(lmbda=2, reg='l2', n_trials=4500, ncolors=100, force_one_nonpredictive=True)
+plot_cloud(lmbda=2, reg='l2', n_trials=n, ncolors=100,
+           zero_color='#21FF36',
+           close_to_zero_color_l2='#FEE08F',
+           nonzero_color_l2='#59A3D2',
+           isclose_threshold=0.3)
+plot_cloud(lmbda=2, reg='l2', n_trials=n, ncolors=100, force_symmetric_loss=True,
+           zero_color='#21FF36',
+           close_to_zero_color_l2='#FEE08F',
+           nonzero_color_l2='#59A3D2',
+           isclose_threshold=0.3)
+plot_cloud(lmbda=2, reg='l2', n_trials=n, ncolors=100, force_one_nonpredictive=True,
+           zero_color='#21FF36',
+           close_to_zero_color_l2='#FEE08F',
+           nonzero_color_l2='#59A3D2',
+           isclose_threshold=0.3)
