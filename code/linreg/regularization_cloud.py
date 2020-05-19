@@ -120,7 +120,7 @@ def plot_cloud(lmbda, reg, n_trials,
 
         # use order of distance to color so must be very close to 0 to be green
         # distances_to_0 = np.log(distances_to_0)
-        distances_to_0 = np.sqrt(distances_to_0)*3
+        # distances_to_0 = np.sqrt(distances_to_0)*3
         dmin = np.min(distances_to_0)
         dmax = np.max(distances_to_0)
         drange = dmax - dmin
@@ -186,25 +186,25 @@ light_blue_metal = '#A4B7C7'
 dark_mustard = '#E1BD4D'
 
 n = 5000
-# plot_cloud(lmbda=2, reg='l1', n_trials=n, ncolors=100,
-#            zero_color='#21FF36', nonzero_color='#59A3D2')
-# plot_cloud(lmbda=2, reg='l1', n_trials=n, ncolors=100, force_symmetric_loss=True,
-#            zero_color='#21FF36', nonzero_color='#59A3D2')
-# plot_cloud(lmbda=2, reg='l1', n_trials=n, ncolors=100, force_one_nonpredictive=True,
-#            zero_color='#21FF36', nonzero_color='#59A3D2')
+plot_cloud(lmbda=2, reg='l1', n_trials=n, ncolors=100,
+           zero_color='#21FF36', nonzero_color='#59A3D2')
+plot_cloud(lmbda=2, reg='l1', n_trials=n, ncolors=100, force_symmetric_loss=True,
+           zero_color='#21FF36', nonzero_color='#59A3D2')
+plot_cloud(lmbda=2, reg='l1', n_trials=n, ncolors=100, force_one_nonpredictive=True,
+           zero_color='#21FF36', nonzero_color='#59A3D2')
 
 plot_cloud(lmbda=2, reg='l2', n_trials=n, ncolors=100,
            zero_color='#21FF36',
            close_to_zero_color_l2='#FEE08F',
            nonzero_color_l2='#59A3D2',
-           isclose_threshold=0.3)
+           isclose_threshold=0.1)
 plot_cloud(lmbda=2, reg='l2', n_trials=n, ncolors=100, force_symmetric_loss=True,
            zero_color='#21FF36',
            close_to_zero_color_l2='#FEE08F',
            nonzero_color_l2='#59A3D2',
-           isclose_threshold=0.3)
+           isclose_threshold=0.1)
 plot_cloud(lmbda=2, reg='l2', n_trials=n, ncolors=100, force_one_nonpredictive=True,
            zero_color='#21FF36',
            close_to_zero_color_l2='#FEE08F',
            nonzero_color_l2='#59A3D2',
-           isclose_threshold=0.3)
+           isclose_threshold=0.1)
