@@ -7,7 +7,7 @@ import matplotlib as mpl
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.datasets import load_boston, load_iris, load_wine, load_digits, \
-    load_breast_cancer, load_diabetes, fetch_mldata
+    load_breast_cancer, load_diabetes
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, precision_score, recall_score
 import glob
