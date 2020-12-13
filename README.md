@@ -19,19 +19,27 @@ We study a few key models deeply, rather than providing a broad but superficial 
 
 # Class details
 
-**INSTRUCTOR.** [Terence Parr](http://parrt.cs.usfca.edu). I’m a professor in the computer science and [data science program](https://www.usfca.edu/arts-sciences/graduate-programs/data-science) departments and was founding director of the MS in Analytics program at USF (which became the MS data science program).  Please call me Terence or Professor (the use of “Terry” is a capital offense).
+**INSTRUCTOR.** [Terence Parr](http://parrt.cs.usfca.edu). I’m a professor in the computer science and [data science program](https://www.usfca.edu/arts-sciences/graduate-programs/data-science) departments and was founding director of the MS in Analytics program at USF (which became the MS data science program).  Please call me Terence or Professor (“Terry” is not ok).
 
 **SPATIAL COORDINATES:**<br>
 
+All lectures will be online via zoom thanks to COVID.
+
+<!--
 * Class is held at 101 Howard in 1st floor classroom 155-156.
 * Exams are held in 154-156. Both sections meet together.
 * My office is room 607 @ 101 Howard up on mezzanine above the open area on 5th floor
+-->
 
-**TEMPORAL COORDINATES.** Thu Oct 17 to Tue Dec 3.
+**TEMPORAL COORDINATES.** Tue Jan 26 to Thu Mar 11.
 
-* Section 01: 10 - 11:50 AM Room 155-156
-* Section 02: 1:15 - 3:05 PM Room 155-156
+* Lectures: 10AM - noon
+* Exam 1: Tue Feb 23, 2021 2PM-3:30PM
+* Exam 2: Thu Mar 11, 2021 10AM-11:30AM (last day of class)
+
+<!--
 * Exams: Fri 5-6PM Nov 8; Fri 10-11:30AM Dec 6; Room 154-156
+-->
 
 **INSTRUCTION FORMAT**. Class runs for 1:50 hours, 2 days/week. Instructor-student interaction during lecture is encouraged and we'll mix in mini-exercises / labs during class. All programming will be done in the Python 3 programming language, unless otherwise specified.
 
@@ -43,12 +51,23 @@ We study a few key models deeply, rather than providing a broad but superficial 
 
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
+|[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| Tue Feb 9, 10:00AM |
+|[Naive Bayes](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/projects/bayes/bayes.ipynb) | 8% | Fri Feb 19, 11:59PM |
+|[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Mon Feb 25, 11:59PM |
+|[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | Sun Dec 8, 11:59PM |
+|Exam 1| 27%| Fri Nov 8, 5PM-6PM |
+|Exam 2| 28%| Fri, Dec 6 10AM-11:30AM |
+
+<!--
+| Artifact | Grade Weight | Due date |
+|--------|--------|--------|
 |[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| Thu Oct 31, 11:59PM |
 |[Naive Bayes](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/projects/bayes/bayes.ipynb) | 8% | Monday Nov 11, 11:59PM |
 |[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Mon Nov 25, 11:59PM |
 |[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | Sun Dec 8, 11:59PM |
-|Exam 1| 25%| Fri Nov 8, 5PM-6PM |
-|Exam 2| 30%| Fri, Dec 6 10AM-11:30AM |
+|Exam 1| 27%| Fri Nov 8, 5PM-6PM |
+|Exam 2| 28%| Fri, Dec 6 10AM-11:30AM |
+-->
 
 All projects will be graded with the specific input or tests given in the project description, so you understand precisely what is expected of your program. Consequently, projects will be graded in binary fashion: They either work or they do not. Each failed unit test gets a fixed amount off, no partial credit. The only exception is when your program does not run on the grader's or my machine because of some cross-platform issue. This is typically because a student has hardcoded some file name or directory into their program. In that case, we will take off *a minimum* of 10% instead of giving you a 0, depending on the severity of the mistake.  Please go to github and verify that the website has the proper files for your solution. That is what I will download for testing.
 
