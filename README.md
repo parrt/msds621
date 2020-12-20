@@ -71,6 +71,10 @@ All lectures will be online via zoom thanks to COVID.
 
 All projects will be graded with the specific input or tests given in the project description, so you understand precisely what is expected of your program. Consequently, projects will be graded in binary fashion: They either work or they do not. Each failed unit test gets a fixed amount off, no partial credit. The only exception is when your program does not run on the grader's or my machine because of some cross-platform issue. This is typically because a student has hardcoded some file name or directory into their program. In that case, we will take off *a minimum* of 10% instead of giving you a 0, depending on the severity of the mistake.  Please go to github and verify that the website has the proper files for your solution. That is what I will download for testing.
 
+For some projects, I run a small set of hidden tests that you do not have. These are typically worth 10% and the only way to get into the 90% range is to produce code that works on more than just the tests you're given.
+
+Students are sometimes frustrated about not getting partial credit for solutions that almost work. Unfortunately, "almost working" just never counts in a job situation because nonfunctional solutions have no value.  Attention to detail is critical.  If you return an integer to me and my code expects a string, for example, your code makes my code fail.  The other problem I have would be to fairly and objectively quantify how much to take off for simple mistakes when there are so many ways to make mistakes.  It’s just really hard to quantify the difference between, for example, “wrong column name” with “wrong type”.
+
 Each project has a hard deadline and only those projects working correctly before the deadline get credit.  My grading script pulls from github at the deadline.  *All projects are due at the start of class on the day indicated, unless otherwise specified.*
 
 *I reserve the right to change projects until the day they are assigned.*
@@ -109,6 +113,13 @@ The first lecture is an overview of the entire machine learning process:
 	* [Lab: Gradient descent in action](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/gradient-descent.ipynb) (Day 3)
 * (*[Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)*)
 
+## Model assessment
+
+* [Model assessment](https://github.com/parrt/msds621/raw/master/lectures/model-assessment.pdf) (slides) (Day 10)
+* [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf) (slides) (Day 10, 11)
+* [Regressor and classifier metrics](https://github.com/parrt/msds621/raw/master/lectures/metrics.pdf) (slides) (Day 11)
+
+
 ## Models
 
 We will learn 3 models in depth for this course: naive bayes, decision trees, and random forests but will examine k-nearest-neighbor (kNN) briefly.
@@ -128,11 +139,6 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
   * (*[Random Forest project](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md)*)
 
 Day 8: consisted of review of decision tree training and prediction algorithms, re-examination of how random forests reduce variance, discussed decision tree project; finished up to, but not including, OOB in RF slides.
-
-## Model assessment
-
-* [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf) (slides) (Day 10)
-* [Model assessment](https://github.com/parrt/msds621/raw/master/lectures/model-assessment.pdf) (slides) (Day 10, 11)
 
 ## Mechanics
 
