@@ -2,7 +2,7 @@
 
 “*In God we trust; all others bring data.*” — Attributed to W. Edwards Deming and George Box
 
-This course introduces students to the key processes, models, and concepts of machine learning (for tabular, structured data), such as:
+This course introduces students to the key processes, models, and concepts of machine learning for tabular/structured data, such as:
 
 * data cleaning
 * dealing with missing data
