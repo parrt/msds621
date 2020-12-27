@@ -1,3 +1,5 @@
+# NOT REQUIRED but used to test optional LassoLogistic621
+
 import numpy as np
 import pandas as pd
 from scipy.special import lmbda
