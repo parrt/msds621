@@ -5,13 +5,9 @@ from scipy.special import lmbda
 np.random.seed(999) # Force same random sequence for each test
 
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.datasets import load_boston, load_iris, load_wine, load_digits, \
-                             load_breast_cancer, load_diabetes, fetch_mldata
+from sklearn.datasets import load_wine, load_iris
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, precision_score, recall_score, r2_score, log_loss
-
-#import statsmodels.discrete.discrete_model as sm
+from sklearn.metrics import log_loss
 
 from linreg import *
 
@@ -39,6 +35,7 @@ def iris_data():
     y = y.reshape(-1, 1)
     return X, y
 
+
 def check(X, y, mae, model, skmodel, accuracy=1.0):
     normalize(X)
     X_train, X_test, y_train, y_test = \
@@ -49,15 +46,22 @@ def check(X, y, mae, model, skmodel, accuracy=1.0):
     n = len(X_test)
     print(f"Got {correct} / {n} correct = {(correct / n) * 100:.2f}%")
 
+
     estimated_B = model.B.reshape(-1)
     # print(estimated_B)
 
     skmodel.fit(X_train, y_train.reshape(-1))
+
     if skmodel.coef_.ndim==2:
         true_B = np.concatenate([skmodel.intercept_, skmodel.coef_[0]])
     else:
         true_B = np.concatenate([skmodel.intercept_, skmodel.coef_])
     print("MAE of B", MAE(estimated_B, true_B))
+
+    y_proba_estimated = model.predict_proba(X_test)
+    y_proba_true = skmodel.predict_proba(X_test)
+    print(f"Log loss {log_loss(y_test, y_proba_estimated)} vs sklearn {log_loss(y_test, y_proba_true)}")
+    assert np.abs(log_loss(y_test, y_proba_estimated) - log_loss(y_test, y_proba_true)) < 0.002
 
     r = pd.DataFrame()
     r['estimated'] = estimated_B

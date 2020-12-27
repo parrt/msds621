@@ -5,13 +5,9 @@ from scipy.special import lmbda
 np.random.seed(999) # Force same random sequence for each test
 
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.datasets import load_boston, load_iris, load_wine, load_digits, \
-                             load_breast_cancer, load_diabetes, fetch_mldata
+from sklearn.datasets import load_boston
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, precision_score, recall_score, r2_score
-
-import inspect
+from sklearn.metrics import r2_score
 
 from linreg import *
 

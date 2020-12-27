@@ -94,10 +94,26 @@ class LinearRegression621:
                            self.lmbda,
                            self.max_iter)
 
+
 class RidgeRegression621:
-    pass
+    "Use the above class as a guide."
+    def predict_proba(self, X):
+        """
+        Compute the probability that the target is 1. Basically do
+        the usual linear regression and then pass through a sigmoid.
+        """
+        pass
+
+    def predict(self, X):
+        """
+        Call self.predict_proba() to get probabilities then, for each x in X,
+        return a 1 if P(y==1,x) > 0.5 else 0.
+        """
+        pass
+
 
 class LogisticRegression621:
+    "Use the above classes as a guide."
     pass
 
 # NOT REQUIRED but to try to implement for fun
