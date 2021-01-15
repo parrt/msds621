@@ -241,3 +241,17 @@ test_dtree.py::test_breast_cancer PASSED                                       [
 ```
 
 *My test script completes in less than 30 seconds and I will take off 10% if your test takes longer than one minute. Please pay attention to efficiency.*
+
+### Automatic testing using github actions
+
+As with the previous projects, I have provided a [Github actions](https://docs.github.com/en/free-pro-team@latest/actions) file for you to get automatic testing. All you have to do is put the [test.yml](https://github.com/parrt/msds621/blob/master/projects/dtree/test.yml) file I have prepared for you into repo subdirectory `.github/workflows`, commit, and push back to github. Then go to the Actions tab of your repository.
+
+Naturally it will only work if you have your software written and added to the repository. Once you have something basic working, this functionality is very nice because it automatically shows you how your software is going to run on a different computer (a linux computer). This will catch the usual errors where you have hardcoded something from your machine into the software. It also gets you in the habit of committing software to the repository as you develop it, rather than using the repository as a homework submission device.
+
+If you want to get fancy, you can use the following "badge" code in your repo README.md file:
+
+```
+Test naive bayes
+
+![dtree](https://github.com/parrt/parrt-dtree/workflows/Test%20MSDS621%20dtree/badge.svg)
+```
