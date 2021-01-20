@@ -2,7 +2,7 @@
 
 “*In God we trust; all others bring data.*” — Attributed to W. Edwards Deming and George Box
 
-<img src="images/iris-TD-5-X-Arial.svg" width="300" align="right">This course introduces students to the key processes, models, and concepts of machine learning for tabular/structured data, such as:
+<img src="images/iris-TD-5-X-Arial.svg" width="400" align="right">This course introduces students to the key processes, models, and concepts of machine learning for tabular/structured data, such as:
 
 * data cleaning
 * dealing with missing data
@@ -15,7 +15,7 @@
 
 We study a few key models deeply, rather than providing a broad but superficial survey of models. As part of this course, students implement linear and logistic regression with regularization through gradient descent, a Naive Bayes model for text sentiment analysis, decision trees, and random forest models.   
 
-<img src="images/feynman.png" width="400" align="right">Implementing these models yourself is critical to truly understanding them. As Richard Feynman wrote, "**What I cannot create, I do not understand.**" (From his blackboard at the time of his death.) With an intuition behind how the models work, you'll be able to understand and predict their behavior much more easily.
+<img src="images/feynman.png" width="300" align="right">Implementing these models yourself is critical to truly understanding them. As Richard Feynman wrote, "**What I cannot create, I do not understand.**" (From his blackboard at the time of his death.) With an intuition behind how the models work, you'll be able to understand and predict their behavior much more easily.
 
 # Class details
 
