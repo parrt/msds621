@@ -104,11 +104,13 @@ The first lecture is an overview of the entire machine learning process:
 
 ## Regularization for linear models
 
+<img align="right" src="images/L1L2contour.png" width="150">
 * [Review of linear models](https://github.com/parrt/msds621/raw/master/lectures/review-linear-models.pdf) (slides) (Day 1)
 	* [Lab: Plotting decision surfaces for linear models](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/decision-surfaces.ipynb) (Day 1)
 * [Regularization of linear models L1, L2](https://github.com/parrt/msds621/raw/master/lectures/regularization.pdf) (slides) (Day 2)
 	* [Lab: Exploring regularization for linear regression](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/regularization-regr.ipynb) (Day 2)
 	* [Lab: Regularization for logistic regression](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/regularization-logi.ipynb) (Day 2)
+	* See my deep dive: [A visual explanation for regularization of linear models](https://explained.ai/regularization/index.html)
 * [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf) (slides) (Day 3)
 	* [Lab: Gradient descent in action](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/gradient-descent.ipynb) (Day 3)
 * (*[Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)*)
