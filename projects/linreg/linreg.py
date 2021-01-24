@@ -72,7 +72,7 @@ def minimize(X, y, loss, loss_gradient,
     eps = 1e-5 # prevent division by 0
 
 
-class LinearRegression621:
+class LinearRegression621: # REQUIRED
     def __init__(self,
                  eta=0.00001, lmbda=0.0,
                  max_iter=1000):
@@ -95,7 +95,7 @@ class LinearRegression621:
                            self.max_iter)
 
 
-class RidgeRegression621:
+class LogisticRegression621: # REQUIRED
     "Use the above class as a guide."
     def predict_proba(self, X):
         """
@@ -112,9 +112,10 @@ class RidgeRegression621:
         pass
 
 
-class LogisticRegression621:
+class RidgeRegression621: # REQUIRED
     "Use the above classes as a guide."
     pass
+
 
 # NOT REQUIRED but to try to implement for fun
 class LassoLogistic621:
