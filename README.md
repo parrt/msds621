@@ -163,13 +163,12 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 <br>
 <br>
-<br>
 
 ## Unsupervised learning
 
 <img src="images/clustering.png" width="150" align="right">
 
-Clustering, but it's an important part of your education  and is extremely useful in in certain circumstances, such as image color quantization. (image credit [Wikipedia](https://en.wikipedia.org/wiki/Color_quantization)).
+Clustering isn't used nearly as much as supervised learning, but it's an important part of your education  and is extremely useful in in certain circumstances, such as image color quantization. (Image credit [Wikipedia](https://en.wikipedia.org/wiki/Color_quantization).)
 
 * [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)  (Day 14)
   * k-means clustering
