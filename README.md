@@ -120,7 +120,7 @@ This topic more or less finishes off the linear regression course you just finis
 
 ## Models
 
-<img align="right" src="images/boston-TD-3-X-Arial.png" width="400">
+<img align="right" src="images/boston-TD-3-X-Arial.png" width="300">
 
 We will learn 3 models in depth for this course: naive bayes, decision trees, and random forests but will examine k-nearest-neighbor (kNN) briefly.
 
@@ -163,7 +163,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 ## Unsupervised learning
 
-<img src="images/clustering.png" width="150" align="right"><br>Image credit wikipedia
+<img src="images/clustering.png" width="150" align="right">
 
 * [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)  (Day 14)
   * k-means clustering
