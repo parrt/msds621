@@ -163,6 +163,8 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 ## Unsupervised learning
 
+<img src="images/clustering.png" width="150" align="right"><br>Image credit wikipedia
+
 * [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)  (Day 14)
   * k-means clustering
   * Hierarchical clustering
