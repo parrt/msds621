@@ -141,7 +141,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 ## Model assessment
 
-<img src="images/log-dec.svg" width="200" align="right">
+<img src="images/log-dec.svg" width="150" align="right">
 
 * [Model assessment](https://github.com/parrt/msds621/raw/master/lectures/model-assessment.pdf) (slides) (Day 10)
 * [Regressor and classifier metrics](https://github.com/parrt/msds621/raw/master/lectures/metrics.pdf) (slides) (Day 10)
@@ -149,10 +149,14 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 ## Mechanics
 
+<img src="images/split-str.png" width="150" align="right">
+
 * [Preparing data for modeling](https://github.com/parrt/msds621/raw/master/lectures/data-prep.pdf) (slides) (Day 11)
 * [Basic feature engineering](https://github.com/parrt/msds621/raw/master/lectures/feature-engineering.pdf) (slides) (Day 12, 13 (didn't get to log(y) discussion))
 
 ## Model interpretation
+
+<img src="images/heatmap.png" width="150" align="right">
 
 * [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides) (Day 14)
 * Partial dependence
