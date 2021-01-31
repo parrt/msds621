@@ -161,6 +161,10 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 * [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides) (Day 14)
 * Partial dependence
 
+<br>
+<br>
+<br>
+
 ## Unsupervised learning
 
 <img src="images/clustering.png" width="150" align="right">
