@@ -166,9 +166,6 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 <img src="images/clustering.png" width="150" align="right">
 
 * [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)  (Day 14)
-  * k-means clustering
-  * Hierarchical clustering
-  * Breiman's trick for clustering with RFs
 
   
 # Administrivia
