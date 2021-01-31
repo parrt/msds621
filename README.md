@@ -141,6 +141,8 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 ## Model assessment
 
+<img src="images/log-dec.svg" width="200" align="right">
+
 * [Model assessment](https://github.com/parrt/msds621/raw/master/lectures/model-assessment.pdf) (slides) (Day 10)
 * [Regressor and classifier metrics](https://github.com/parrt/msds621/raw/master/lectures/metrics.pdf) (slides) (Day 10)
 
