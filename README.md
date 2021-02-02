@@ -115,7 +115,7 @@ This topic more or less finishes off the linear regression course you just finis
 	* [Lab: Regularization for logistic regression](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/regularization-logi.ipynb) (Day 3)
 	* See my deep dive: [A visual explanation for regularization of linear models](https://explained.ai/regularization/index.html)
 
-## Gradient descent for training linear models
+## Training linear models with gradient descent
 
 This topic is required so we can train regularized linear models, and is critical to understanding neural networks that you'll study in a future class.
 
