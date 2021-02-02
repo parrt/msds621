@@ -114,6 +114,11 @@ This topic more or less finishes off the linear regression course you just finis
 	* [Lab: Exploring regularization for linear regression](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/regularization-regr.ipynb) (Day 2)
 	* [Lab: Regularization for logistic regression](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/regularization-logi.ipynb) (Day 3)
 	* See my deep dive: [A visual explanation for regularization of linear models](https://explained.ai/regularization/index.html)
+
+## Gradient descent for training linear models
+
+This topic is required so we can train regularized linear models, and is critical to understanding neural networks that you'll study in a future class.
+
 * [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf) (slides) (Day 3)
 	* [Lab: Gradient descent in action](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/gradient-descent.ipynb) (Day 3)
 * (*[Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)*)
