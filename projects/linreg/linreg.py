@@ -50,7 +50,7 @@ def L1_log_likelihood_gradient(X, y, B, lmbda):
     """
     pass
 
-def minimize(X, y, loss, loss_gradient,
+def minimize(X, y, loss_gradient,
               eta=0.00001, lmbda=0.0,
               max_iter=1000, addB0=True,
               precision=0.00000001):
@@ -67,7 +67,6 @@ def minimize(X, y, loss, loss_gradient,
     B = np.random.random_sample(size=(p, 1)) * 2 - 1  # make between [-1,1)
 
     prev_B = B
-    step = 0
     eps = 1e-5 # prevent division by 0
 
 
