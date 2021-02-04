@@ -67,7 +67,6 @@ def minimize(X, y, loss, loss_gradient,
     B = np.random.random_sample(size=(p, 1)) * 2 - 1  # make between [-1,1)
 
     prev_B = B
-    cost = 9e99
     step = 0
     eps = 1e-5 # prevent division by 0
 
