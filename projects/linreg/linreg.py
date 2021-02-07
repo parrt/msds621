@@ -53,7 +53,7 @@ def L1_log_likelihood_gradient(X, y, B, lmbda):
 def minimize(X, y, loss_gradient,
               eta=0.00001, lmbda=0.0,
               max_iter=1000, addB0=True,
-              precision=0.00000001):
+              precision=1e-9):
     "Here are various bits and pieces you might want"
     if X.ndim != 2:
         raise ValueError("X must be n x p for p features")
