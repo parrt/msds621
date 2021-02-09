@@ -131,7 +131,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 * [Naive Bayes](https://github.com/parrt/msds621/raw/master/lectures/naive-bayes.pdf)  (slides) (Day 4)
   * [Lab: Naive bayes by hand](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/bayes/naive-bayes.ipynb) (Day 4)
-  * (*[Naive Bayes project](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/projects/bayes/bayes.ipynb)*)
+  * (*[Naive Bayes project](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb)*)
 * [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf) (slides) (Day 4)
 * [Intro to non-parametric machine learning models](https://github.com/parrt/msds621/raw/master/lectures/nonparametric-models.pdf) (slides) (Day 5)
 * [Decision trees](https://github.com/parrt/msds621/raw/master/lectures/decision-trees.pdf) (slides) (Day 5)
