@@ -1,5 +1,5 @@
 import numpy as np
-from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import mean_absolute_error, confusion_matrix, precision_score, recall_score
 
 from bayes import *
@@ -257,8 +257,8 @@ def test_kfold_621():
     # Test just kfold stuff so use sklearn model
     V, X, y = training_data()
 
-    sklearn_accuracies = kfold_CV(GaussianNB(), X, y, k=4)
-    true_sklearn_accuracies = np.array([0.638, 0.644, 0.67, 0.63])
+    sklearn_accuracies = kfold_CV(MultinomialNB(), X, y, k=4)
+    true_sklearn_accuracies = np.array([0.798, 0.78, 0.812, 0.808])
     sklearn_avg = np.mean(sklearn_accuracies)
     true_avg = np.mean(true_sklearn_accuracies)
     # print(f"kfold {sklearn_accuracies} vs true {true_sklearn_accuracies}")
@@ -270,11 +270,11 @@ def test_kfold_sklearn_vs_621():
     V, X, y = training_data()
 
     accuracies = kfold_CV(NaiveBayes621(), X, y, k=4)
-    sklearn_accuracies = kfold_CV(GaussianNB(), X, y, k=4)
+    sklearn_accuracies = kfold_CV(MultinomialNB(), X, y, k=4)
     # print(f"sklearn kfold {sklearn_accuracies} vs yours {accuracies}")
 
     our_avg = np.mean(accuracies)
     sklearn_avg = np.mean(sklearn_accuracies)
 
-    assert our_avg-sklearn_avg > 0.10, f"sklearn accuracies {sklearn_avg} and your kfold {our_avg} differ"
+    assert np.abs(our_avg-sklearn_avg) < 0.10, f"sklearn accuracies {sklearn_avg} and your kfold {our_avg} differ"
 
