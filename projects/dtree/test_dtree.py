@@ -22,11 +22,11 @@ def test_boston():
 
 def test_boston_min_samples_leaf():
     X, y = load_boston(return_X_y=True)
-    run_regression_test(X, y, ntrials=10, min_samples_leaf=5, training_accuracy=.97, grace=0.08)
+    run_regression_test(X, y, ntrials=10, min_samples_leaf=5, grace=0.08, training_accuracy=.87)
 
 def test_california_housing():
     X, y = fetch_california_housing(return_X_y=True)
-    run_regression_test(X, y, ntrials=10, grace=0.16)
+    run_regression_test(X, y, ntrials=10, grace=0.19)
 
 def test_iris():
     X, y = load_iris(return_X_y=True)
@@ -38,14 +38,14 @@ def test_wine():
 
 def test_wine_min_samples_leaf():
     X, y = load_wine(return_X_y=True)
-    run_classification_test(X, y, ntrials=10, min_samples_leaf=3, training_accuracy=.97, grace=0.2)
+    run_classification_test(X, y, ntrials=10, min_samples_leaf=3, grace=0.2)
 
 def test_breast_cancer():
     X, y = load_breast_cancer(return_X_y=True)
     run_classification_test(X, y, ntrials=5, grace=0.05)
 
 
-def run_regression_test(X, y, ntrials=5, min_samples_leaf=1, training_accuracy=1.0, grace=.08):
+def run_regression_test(X, y, ntrials=5, min_samples_leaf=1, training_accuracy=0.90, grace=.08):
     idx = np.random.randint(0,len(X),size=min(len(X),500))
     X = X[idx]
     y = y[idx]
@@ -71,16 +71,19 @@ def run_regression_test(X, y, ntrials=5, min_samples_leaf=1, training_accuracy=1
         sklearn_score = sklearn_dt.score(X_test, y_test)
         sklearn_scores.append(sklearn_score)
 
-    assert np.mean(train_scores)+0.00000001>=training_accuracy, \
+    print()
+    print(f"621     Train R^2 score mean {np.mean(train_scores):.2f}, stddev {np.std(train_scores):3f}")
+    print(f"Sklearn Train R^2 score mean {np.mean(sklearn_train_scores):.2f}, stddev {np.std(sklearn_train_scores):3f}")
+    print(f"621     Test  R^2 score mean {np.mean(scores):.2f}, stddev {np.std(scores):3f}")
+    print(f"Sklearn Test  R^2 score mean {np.mean(sklearn_scores):.2f}, stddev {np.std(sklearn_scores):3f}")
+
+    assert np.mean(train_scores)>=training_accuracy, \
            f"Training R^2: {np.mean(train_scores):.2f} must {training_accuracy:.2f}"
     assert np.mean(scores)+grace >= np.mean(sklearn_scores), \
            f"Testing R^2: {np.mean(scores):.2f} must be within {grace:.2f} of sklearn score: {np.mean(sklearn_scores):.2f}"
-    print()
-    print(f"621 R^2 score {np.mean(train_scores):.2f}, {np.mean(scores):.2f}")
-    print(f"Sklearn R^2 score {np.mean(sklearn_train_scores):.2f}, {np.mean(sklearn_scores):.2f}")
 
 
-def run_classification_test(X, y, ntrials=5, min_samples_leaf=1, training_accuracy=0.99, grace=.05):
+def run_classification_test(X, y, ntrials=5, min_samples_leaf=1, training_accuracy=0.95, grace=.05):
     X = X[:500]
     y = y[:500]
     scores = []
@@ -105,10 +108,11 @@ def run_classification_test(X, y, ntrials=5, min_samples_leaf=1, training_accura
         sklearn_score = sklearn_dt.score(X_test, y_test)
         sklearn_scores.append(sklearn_score)
 
+    print()
+    print(f"621 accuracy score {np.mean(train_scores):.2f}, {np.mean(scores):.2f}")
+    print(f"Sklearn accuracy score {np.mean(sklearn_train_scores):.2f}, {np.mean(sklearn_scores):.2f}")
+
     assert np.mean(train_scores)>=training_accuracy, \
            f"Training accuracy: {np.mean(train_scores):.2f} must {training_accuracy:.2f}"
     assert np.mean(scores)+grace >= np.mean(sklearn_scores), \
            f"Testing accuracy: {np.mean(scores):.2f} must be within {grace:.2f} of sklearn score: {np.mean(sklearn_scores):.2f}"
-    print()
-    print(f"621 accuracy score {np.mean(train_scores):.2f}, {np.mean(scores):.2f}")
-    print(f"Sklearn accuracy score {np.mean(sklearn_train_scores):.2f}, {np.mean(sklearn_scores):.2f}")
