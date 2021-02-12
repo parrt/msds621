@@ -62,7 +62,7 @@ All lectures will be online via zoom thanks to COVID.
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
 |[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| Thu Oct 31, 11:59PM |
-|[Naive Bayes](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/projects/bayes/bayes.ipynb) | 8% | Monday Nov 11, 11:59PM |
+|[Naive Bayes](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb) | 8% | Monday Nov 11, 11:59PM |
 |[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Mon Nov 25, 11:59PM |
 |[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | Sun Dec 8, 11:59PM |
 |Exam 1| 27%| Fri Nov 8, 5PM-6PM |
@@ -87,10 +87,10 @@ Each project has a hard deadline and only those projects working correctly befor
 
 There are a number of notebooks associated with the lecture slides.
 
-* [Linear models, regularization](https://nbviewer.jupyter.org/github/parrt/msds621/tree/master/notebooks/linear-models/)
-* [Binary trees, decision trees, bias-variance](https://nbviewer.jupyter.org/github/parrt/msds621/tree/master/notebooks/trees/)
-* [Model assessment](https://nbviewer.jupyter.org/github/parrt/msds621/tree/master/notebooks/assessment/)
-* [Clustering](https://nbviewer.jupyter.org/github/parrt/msds621/tree/master/notebooks/clustering/)
+* [Linear models, regularization](https://github.com/parrt/msds621/tree/master/notebooks/linear-models/)
+* [Binary trees, decision trees, bias-variance](https://github.com/parrt/msds621/tree/master/notebooks/trees/)
+* [Model assessment](https://github.com/parrt/msds621/tree/master/notebooks/assessment/)
+* [Clustering](https://github.com/parrt/msds621/tree/master/notebooks/clustering/)
 
 The following notebook takes you through a number of important processes, which you are free to do at your leisure. Even if we haven't covered the topics in lecture, you can still get something out of the notebook.
 
@@ -109,10 +109,10 @@ The first lecture is an overview of the entire machine learning process:
 This topic more or less finishes off the linear regression course you just finished.
 
 * [Review of linear models](https://github.com/parrt/msds621/raw/master/lectures/review-linear-models.pdf) (slides) (Day 1)
-	* [Lab: Plotting decision surfaces for linear models](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/decision-surfaces.ipynb) (Day 1)
+	* [Lab: Plotting decision surfaces for linear models](https://github.com/parrt/msds621/blob/master/labs/linear-models/decision-surfaces.ipynb) (Day 1)
 * [Regularization of linear models L1, L2](https://github.com/parrt/msds621/raw/master/lectures/regularization.pdf) (slides) (Day 2)
-	* [Lab: Exploring regularization for linear regression](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/regularization-regr.ipynb) (Day 2)
-	* [Lab: Regularization for logistic regression](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/regularization-logi.ipynb) (Day 3)
+	* [Lab: Exploring regularization for linear regression](https://github.com/parrt/msds621/blob/master/labs/linear-models/regularization-regr.ipynb) (Day 2)
+	* [Lab: Regularization for logistic regression](https://github.com/parrt/msds621/blob/master/labs/linear-models/regularization-logi.ipynb) (Day 3)
 	* See my deep dive: [A visual explanation for regularization of linear models](https://explained.ai/regularization/index.html)
 
 ## Training linear models with gradient descent
@@ -120,7 +120,7 @@ This topic more or less finishes off the linear regression course you just finis
 This topic is required so we can train regularized linear models, and is critical to understanding neural networks that you'll study in a future class.
 
 * [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf) (slides) (Day 3)
-	* [Lab: Gradient descent in action](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/linear-models/gradient-descent.ipynb) (Day 3)
+	* [Lab: Gradient descent in action](https://github.com/parrt/msds621/blob/master/labs/linear-models/gradient-descent.ipynb) (Day 3)
 * (*[Regularization project](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)*)
 
 ## Models
@@ -130,12 +130,12 @@ This topic is required so we can train regularized linear models, and is critica
 We will learn 3 models in depth for this course: naive bayes, decision trees, and random forests but will examine k-nearest-neighbor (kNN) briefly.
 
 * [Naive Bayes](https://github.com/parrt/msds621/raw/master/lectures/naive-bayes.pdf)  (slides) (Day 4)
-  * [Lab: Naive bayes by hand](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/bayes/naive-bayes.ipynb) (Day 4)
+  * [Lab: Naive bayes by hand](https://github.com/parrt/msds621/blob/master/labs/bayes/naive-bayes.ipynb) (Day 4)
   * (*[Naive Bayes project](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb)*)
 * [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf) (slides) (Day 4)
 * [Intro to non-parametric machine learning models](https://github.com/parrt/msds621/raw/master/lectures/nonparametric-models.pdf) (slides) (Day 5)
 * [Decision trees](https://github.com/parrt/msds621/raw/master/lectures/decision-trees.pdf) (slides) (Day 5)
-  * [Lab: Partitioning feature space](https://nbviewer.jupyter.org/github/parrt/msds621/blob/master/labs/trees/partitioning-feature-space.ipynb) (Day 6)
+  * [Lab: Partitioning feature space](https://github.com/parrt/msds621/blob/master/labs/trees/partitioning-feature-space.ipynb) (Day 6)
   * [Binary tree crash course](https://github.com/parrt/msds621/raw/master/lectures/binary-trees.pdf) (slides) (Day 6)
   * [Lab: Binary trees](https://github.com/parrt/msds621/blob/master/labs/trees/binary-trees.ipynb) (Day 6)
   * [Training decision trees](https://github.com/parrt/msds621/raw/master/lectures/training-decision-trees.pdf) (slides) (Day 7)
