@@ -2,7 +2,7 @@
 
 “*In God we trust; all others bring data.*” — Attributed to W. Edwards Deming and George Box
 
-<img src="images/iris-TD-5-X-Arial.svg" width="250" align="right">This course introduces students to the key processes, models, and concepts of machine learning for tabular/structured data, such as:
+<img src="images/iris-TD-5-X-Arial.svg" width="300" align="right">This course introduces students to the key processes, models, and concepts of machine learning for tabular/structured data, such as:
 
 * data cleaning
 * dealing with missing data
@@ -117,7 +117,7 @@ This topic more or less finishes off the linear regression course you just finis
 
 ## Training linear models with gradient descent
 
-<img src="https://explained.ai/gradient-boosting/images/directions.png" width="100" align="right">This topic is required so we can train regularized linear models, and is critical to understanding neural networks that you'll study in a future class.
+<img src="https://explained.ai/gradient-boosting/images/directions.png" width="120" align="right">This topic is required so we can train regularized linear models, and is critical to understanding neural networks that you'll study in a future class.
 
 * [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf) (slides) (Day 3)
 	* [Lab: Gradient descent in action](https://github.com/parrt/msds621/blob/master/labs/linear-models/gradient-descent.ipynb) (Day 3)
