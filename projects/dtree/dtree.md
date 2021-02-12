@@ -179,7 +179,7 @@ We could also improve generality by picking splits midway *between* X values rat
 
 ### Prediction algorithm
 
-To make a prediction for a feature vector *x*, we start at the root node and descend through the decision nodes to the appropriate leaf. At each decision node, we test a specific variable's value against the split value stored in the decision node. If the variable's value is less than or equal to the split value, prediction descends down the left child. Otherwise, it descends down the right child. Upon reaching a leaf, we predict either the most common class or the average value among the *y* targets associated with that leaf. Here is the algorithm:
+To make a prediction for a feature vector *x*, we start at the root node and descend through the decision nodes to the appropriate leaf. At each decision node, we test a specific variable's value, *x[j]*, against the split value stored in the decision node. If *x[j]* is less than or equal to the split value, prediction descends down the left child. Otherwise, prediction descends down the right child. Upon reaching a leaf, we predict either the most common class or the average value among the *y* targets associated with that leaf. Here is the algorithm:
 
 <img src="images/predict.png" width="57%">
 
@@ -212,7 +212,7 @@ In this way, you have started on the project without actually having to do any w
 
 In your github repo `dtree`-*userid*, you must provide the `dtree.py` file at the root of the repository directory.  It must have the `RegressionTree621` and `ClassifierTree621` classes as well as the decision tree node classes; basically all of your code will be in this file. My test script will import all functions and classes.  Please make sure there is no main program in `dtree.py` (as it runs when we do an import).
 
-I will copy in clean versions of the test scripts before grading your projects.
+I will copy in clean versions of the test script before grading your projects.
 
 ## Evaluation
 
