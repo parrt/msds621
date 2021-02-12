@@ -15,7 +15,7 @@
 
 We study a few key models deeply, rather than providing a broad but superficial survey of models. As part of this course, students implement linear and logistic regression with regularization through gradient descent, a Naive Bayes model for text sentiment analysis, decision trees, and random forest models.   
 
-<img src="images/feynman.png" width="200" align="right">Implementing these models yourself is critical to truly understanding them. As Richard Feynman wrote, "**What I cannot create, I do not understand.**" (From his blackboard at the time of his death.) With an intuition behind how the models work, you'll be able to understand and predict their behavior much more easily.
+<img src="images/feynman.png" width="150" align="right">Implementing these models yourself is critical to truly understanding them. As Richard Feynman wrote, "**What I cannot create, I do not understand.**" (From his blackboard at the time of his death.) With an intuition behind how the models work, you'll be able to understand and predict their behavior much more easily.
 
 # Class details
 
@@ -117,7 +117,7 @@ This topic more or less finishes off the linear regression course you just finis
 
 ## Training linear models with gradient descent
 
-This topic is required so we can train regularized linear models, and is critical to understanding neural networks that you'll study in a future class.
+<img src="https://explained.ai/gradient-boosting/images/directions.png" width="100" align="right">This topic is required so we can train regularized linear models, and is critical to understanding neural networks that you'll study in a future class.
 
 * [Gradient Descent optimization](https://github.com/parrt/msds621/raw/master/lectures/gradient-descent.pdf) (slides) (Day 3)
 	* [Lab: Gradient descent in action](https://github.com/parrt/msds621/blob/master/labs/linear-models/gradient-descent.ipynb) (Day 3)
