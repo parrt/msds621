@@ -241,7 +241,7 @@ test_dtree.py::test_breast_cancer PASSED                                       [
 ============================= 7 passed in 28.53 seconds ==============================
 ```
 
-*My test script completes in less than 30 seconds and I will take off 10% if your test takes longer than one minute. Please pay attention to efficiency.*
+*My test script completes in less than 40 seconds and I will take off 10% if your test takes longer than one minute. Please pay attention to efficiency.*
 
 ### Automatic testing using github actions
 
