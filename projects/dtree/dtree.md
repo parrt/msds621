@@ -63,8 +63,9 @@ class LeafNode:
         ...
 ```
 
-You can define your own objects, but make sure that your tree nodes respond to function `t.predict(x)` for some tree node `t` and 1D feature vector `x`.  In other words, calling `t.predict()` will invoke `DecisionNode.predict()` or `LeafNode.predict()`, depending on the type of `t`. Those classes define the interior and leaf nodes of your decision trees. Now, we need objects to represent the regressors and classifiers. 
+Those classes define the interior and leaf nodes of your decision trees. You can define your own objects, but make sure that your tree nodes respond to function `t.predict(x)` for some tree node `t` and 1D feature vector `x`.  In other words, performing method call `t.predict(x)` will invoke function `DecisionNode.predict(t,x)` or `LeafNode.predict(t,x)`, depending on the type of `t`.  That is what we call *dynamic dispatch* or *method invocation* (versus function call).
 
+Now, we need objects to represent the regressors and classifiers. 
 As we talked about, regressor and classifier implementation is virtually identical. The only difference is the loss function, MSE or gini impurity, and the prediction stored in leaves (mean or mode). We can squirrel away all of that common functionality in a generic `DecisionTree621` class:
 
 ```
@@ -125,7 +126,7 @@ class RegressionTree621(DecisionTree621):
         ...
 ```
 
-In essence, we are designing a new class as it differs from the parent class. We are inheriting `fit` and `predict` methods and defining `score` and `create_leaf`.
+In essence, we are designing a new class as it differs from the parent class. We are inheriting `fit` and `predict` methods and defining `score` and `create_leaf`. You can think of inheriting as including or copying the functions from the *superclass*.
 
 `ClassifierTree621` also inherits from methods from `DecisionTree621`:
 
