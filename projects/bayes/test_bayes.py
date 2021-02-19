@@ -203,8 +203,8 @@ def test_simple_docs_error():
     model.fit(X, y)
     y_pred = model.predict(X_test)
     accuracy = np.sum(y_test==y_pred) / 2
-    # print(f"train accuracy {accuracy}")
-    assert accuracy == 1.0, f"Correct = {np.sum(y==y_pred)} / {len(y)} = {100*accuracy:.1f}%"
+    # print(f"test accuracy {accuracy}")
+    assert accuracy == 1.0, f"Correct = {np.sum(y_test==y_pred)} / {len(y_pred)} = {100 * accuracy:.1f}%"
 
 
 def test_unknown_words_vectorize():
