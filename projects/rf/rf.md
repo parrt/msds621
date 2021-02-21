@@ -20,7 +20,7 @@ The goal of bootstrapping for random forests is to train a number of decision tr
 
 The algorithm for fitting a random forest is then:
 
-<img src="images/fit.png" width="60%">
+<img src="images/fit.png" width="50%">
 
 
 ### Changes to decision tree training
@@ -51,11 +51,11 @@ A `LeafNode` obviously just returns itself (`self`) rather than the prediction.
 
 The second change is in the training mechanism. The  decision tree for looks like:
 
-<img src="images/dtreefit.png" width="60%">
+<img src="images/dtreefit.png" width="50%">
 
 For fitting conventional decision trees, `bestsplit()` exhaustively scans all available features and the feature values looking for the optimal variable/split combination. To reduce overfitting, each split should pick from a random subset of the features; the subset size is the hyper perimeter `max_features`.  Function `np.random.choice()` is useful here to get a list of feature indexes and then `X[:, i]` gives us the ith column.  In my solution,  the change is to the outermost loop in `find_best_split()`:
 
-<img src="images/bestsplit.png" width="70%">
+<img src="images/bestsplit.png" width="60%">
 
 ### RF Prediction
 
