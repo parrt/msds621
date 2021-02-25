@@ -121,7 +121,7 @@ def run_regression_test(X, y, ntrials=2, min_training_score = .85, min_samples_l
     X = X[:500]
     y = y[:500]
 
-    scores = []
+    test_scores = []
     train_scores = []
     oob_scores = []
 
@@ -135,18 +135,14 @@ def run_regression_test(X, y, ntrials=2, min_training_score = .85, min_samples_l
 
         rf = RandomForestRegressor621(n_estimators=n_estimators, min_samples_leaf=min_samples_leaf, max_features=max_features, oob_score=oob)
         rf.fit(X_train, y_train)
-        score = rf.score(X_train, y_train)
-        train_scores.append(score)
-        score = rf.score(X_test, y_test)
-        scores.append(score)
+        train_scores.append(rf.score(X_train, y_train))
+        test_scores.append(rf.score(X_test, y_test))
         oob_scores.append(rf.oob_score_)
 
         sklearn_rf = RandomForestRegressor(n_estimators=n_estimators, min_samples_leaf=min_samples_leaf, max_features=max_features, oob_score=oob)
         sklearn_rf.fit(X_train, y_train)
-        sklearn_score = sklearn_rf.score(X_train, y_train)
-        sklearn_train_scores.append(sklearn_score)
-        sklearn_score = sklearn_rf.score(X_test, y_test)
-        sklearn_scores.append(sklearn_score)
+        sklearn_train_scores.append(sklearn_rf.score(X_train, y_train))
+        sklearn_scores.append(sklearn_rf.score(X_test, y_test))
         if oob:
             sklearn_oob_scores.append(sklearn_rf.oob_score_)
         else:
@@ -157,13 +153,13 @@ def run_regression_test(X, y, ntrials=2, min_training_score = .85, min_samples_l
         print(f"{caller_name}: 621 OOB score {np.mean(oob_scores):.2f} vs sklearn OOB {np.mean(sklearn_oob_scores):.2f}")
     print(f"{caller_name}: 621     Train R^2 score mean {np.mean(train_scores):.2f}, stddev {np.std(train_scores):3f}")
     print(f"{caller_name}: Sklearn Train R^2 score mean {np.mean(sklearn_train_scores):.2f}, stddev {np.std(sklearn_train_scores):3f}")
-    print(f"{caller_name}: 621     Test  R^2 score mean {np.mean(scores):.2f}, stddev {np.std(scores):3f}")
+    print(f"{caller_name}: 621     Test  R^2 score mean {np.mean(test_scores):.2f}, stddev {np.std(test_scores):3f}")
     print(f"{caller_name}: Sklearn Test  R^2 score mean {np.mean(sklearn_scores):.2f}, stddev {np.std(sklearn_scores):3f}")
 
     assert np.mean(train_scores) >= min_training_score, \
            f"Training R^2: {np.mean(train_scores):.2f} must be >= {min_training_score}"
-    assert np.mean(scores)+grace >= np.mean(sklearn_scores), \
-           f"Testing R^2: {np.mean(scores):.2f} must be within {grace:.2f} of sklearn score: {np.mean(sklearn_scores):.2f}"
+    assert np.mean(test_scores)+grace >= np.mean(sklearn_scores), \
+           f"Testing R^2: {np.mean(test_scores):.2f} must be within {grace:.2f} of sklearn score: {np.mean(sklearn_scores):.2f}"
     if oob:
         assert np.abs(np.mean(oob_scores) - np.mean(sklearn_oob_scores)) < grace, \
             f"OOB R^2: {np.mean(oob_scores):.2f} must be within {grace:2f} of sklearn score: {np.mean(sklearn_oob_scores):.2f}"
@@ -175,11 +171,11 @@ def run_classification_test(X, y, ntrials=1, min_samples_leaf=3, max_features=0.
     X = X[:500]
     y = y[:500]
 
-    scores = []
+    test_scores = []
     train_scores = []
     oob_scores = []
 
-    sklearn_scores = []
+    sklearn_test_scores = []
     sklearn_train_scores = []
     sklearn_oob_scores = []
 
@@ -189,33 +185,29 @@ def run_classification_test(X, y, ntrials=1, min_samples_leaf=3, max_features=0.
 
         rf = RandomForestClassifier621(n_estimators=n_estimators, min_samples_leaf=min_samples_leaf, max_features=max_features, oob_score=oob)
         rf.fit(X_train, y_train)
-        score = rf.score(X_train, y_train)
-        train_scores.append(score)
-        score = rf.score(X_test, y_test)
-        scores.append(score)
+        train_scores.append(rf.score(X_train, y_train))
+        test_scores.append(rf.score(X_test, y_test))
         oob_scores.append(rf.oob_score_)
 
         sklearn_rf = RandomForestClassifier(n_estimators=n_estimators, min_samples_leaf=min_samples_leaf, max_features=max_features, oob_score=oob)
         sklearn_rf.fit(X_train, y_train)
-        sklearn_score = sklearn_rf.score(X_train, y_train)
-        sklearn_train_scores.append(sklearn_score)
-        sklearn_score = sklearn_rf.score(X_test, y_test)
-        sklearn_scores.append(sklearn_score)
+        sklearn_train_scores.append(sklearn_rf.score(X_train, y_train))
+        sklearn_test_scores.append(sklearn_rf.score(X_test, y_test))
         if oob:
             sklearn_oob_scores.append(sklearn_rf.oob_score_)
         else:
             sklearn_oob_scores.append(0.0)
 
     if oob:
-        assert np.abs(np.mean(scores)- np.mean(sklearn_scores)) < grace, \
+        assert np.abs(np.mean(oob_scores)- np.mean(sklearn_test_scores)) < grace, \
                f"OOB accuracy: {np.mean(oob_scores):.2f} must be within {grace:.2f} of sklearn score: {np.mean(sklearn_oob_scores):.2f}"
     assert np.mean(train_scores) >= min_training_score, \
            f"Training accuracy: {np.mean(train_scores):.2f} must {min_training_score:.2f}"
-    assert np.mean(scores)+grace >= np.mean(sklearn_scores), \
-           f"Testing accuracy: {np.mean(scores):.2f} must be within {grace:.2f} of sklearn score: {np.mean(sklearn_scores):.2f}"
+    assert np.mean(test_scores)+grace >= np.mean(sklearn_test_scores), \
+           f"Testing accuracy: {np.mean(test_scores):.2f} must be within {grace:.2f} of sklearn score: {np.mean(sklearn_test_scores):.2f}"
 
     print()
     if oob:
         print(f"{caller_name}: 621 OOB score {np.mean(oob_scores):.2f} vs sklearn OOB {np.mean(sklearn_oob_scores):.2f}")
-    print(f"{caller_name}: 621 accuracy score {np.mean(train_scores):.2f}, {np.mean(scores):.2f}")
-    print(f"{caller_name}: Sklearn accuracy score {np.mean(sklearn_train_scores):.2f}, {np.mean(sklearn_scores):.2f}")
+    print(f"{caller_name}: 621 accuracy score {np.mean(train_scores):.2f}, {np.mean(test_scores):.2f}")
+    print(f"{caller_name}: Sklearn accuracy score {np.mean(sklearn_train_scores):.2f}, {np.mean(sklearn_test_scores):.2f}")
