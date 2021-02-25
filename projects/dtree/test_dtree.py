@@ -22,7 +22,7 @@ def test_boston():
 
 def test_boston_min_samples_leaf():
     X, y = load_boston(return_X_y=True)
-    run_regression_test(X, y, ntrials=10, min_samples_leaf=5, grace=0.08, training_accuracy=.87)
+    run_regression_test(X, y, ntrials=10, min_samples_leaf=3, grace=0.09, training_accuracy=.94)
 
 def test_california_housing():
     X, y = fetch_california_housing(return_X_y=True)
