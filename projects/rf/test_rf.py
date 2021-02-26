@@ -199,7 +199,7 @@ def run_classification_test(X, y, ntrials=1, min_samples_leaf=3, max_features=0.
             sklearn_oob_scores.append(0.0)
 
     if oob:
-        assert np.abs(np.mean(oob_scores)- np.mean(sklearn_test_scores)) < grace, \
+        assert np.abs(np.mean(oob_scores) - np.mean(sklearn_oob_scores)) < grace, \
                f"OOB accuracy: {np.mean(oob_scores):.2f} must be within {grace:.2f} of sklearn score: {np.mean(sklearn_oob_scores):.2f}"
     assert np.mean(train_scores) >= min_training_score, \
            f"Training accuracy: {np.mean(train_scores):.2f} must {min_training_score:.2f}"
