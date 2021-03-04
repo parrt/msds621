@@ -158,13 +158,13 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 <img src="images/split-str.png" width="150" align="right">
 
 * [Preparing data for modeling](https://github.com/parrt/msds621/raw/master/lectures/data-prep.pdf) (slides) (Day 11)
-* [Basic feature engineering](https://github.com/parrt/msds621/raw/master/lectures/feature-engineering.pdf) (slides) (Day 12, 13 (didn't get to log(y) discussion))
+* [Basic feature engineering](https://github.com/parrt/msds621/raw/master/lectures/feature-engineering.pdf) (slides) (Day 11)
 
 ## Model interpretation
 
 <img src="images/heatmap.png" width="150" align="right">
 
-* [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides) (Day 14)
+* [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides) (Day 12)
 * Partial dependence
 
 <br>
@@ -176,7 +176,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 Clustering isn't used nearly as much as supervised learning, but it's an important part of your education  and is extremely useful in in certain circumstances, such as image color quantization. (Image credit [Wikipedia](https://en.wikipedia.org/wiki/Color_quantization).)
 
-* [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)  (Day 14)
+* [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)  (Day 13)
   * k-means clustering
   * Hierarchical clustering
   * Breiman's trick for clustering with RFs
