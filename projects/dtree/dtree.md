@@ -2,7 +2,7 @@
 
 ## Goal
 
-Your goal is to implement decision trees for classification and regression as objects similar to sklearn's `DecisionTreeClassifier` and `DecisionTreeRegressor`.  This project can be challenging because you must recursively construct trees, but my solution is only 100 lines of Python with comments.
+<img align="right" src="images/stumps.png" width="350">Your goal is to implement decision trees for classification and regression as objects similar to sklearn's `DecisionTreeClassifier` and `DecisionTreeRegressor`.  This project can be challenging because you must recursively construct trees, but my solution is only 100 lines of Python with comments.
 
 You will work in git repo `dtree`-*userid* and must create Python file `dtree.py`.
 
