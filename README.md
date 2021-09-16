@@ -13,7 +13,7 @@
 * Mode interpretation
 * Vanilla neural networks using pytorch
 
-We study a few key models deeply, rather than providing a broad but superficial survey of models. 
+We study a few key models deeply, rather than providing a broad but superficial survey of models.  As part of the lab you will learn about data cleaning, feature engineering, and model assessment.
 
 <img src="images/feynman.png" width="150" align="right" style="padding-top:10px">As part of this course, students implement linear and logistic regression with regularization through gradient descent, a Naive Bayes model for text sentiment analysis, decision trees, and random forest models. Implementing these models yourself is critical to truly understanding them. As Richard Feynman wrote, "**What I cannot create, I do not understand.**" (From his blackboard at the time of his death.) With an intuition behind how the models work, you'll be able to understand and predict their behavior much more easily.
 
@@ -21,21 +21,19 @@ We study a few key models deeply, rather than providing a broad but superficial 
 
 **INSTRUCTOR.** [Terence Parr](http://parrt.cs.usfca.edu). I’m a professor in the computer science and [data science program](https://www.usfca.edu/arts-sciences/graduate-programs/data-science) departments and was founding director of the MS in Analytics program at USF (which became the MS data science program).  Please call me Terence or Professor (“Terry” is not ok).
 
-**SPATIAL COORDINATES:**<br>
+**SPATIAL COORDINATES**<br>
 
-All lectures will be online via zoom thanks to COVID.
-
-<!--
 * Class is held at 101 Howard in 1st floor classroom 155-156.
-* Exams are held in 154-156. Both sections meet together.
-* My office is room 607 @ 101 Howard up on mezzanine above the open area on 5th floor
--->
+* Exams will be via HonorLock online/remote.
+* My office is room 525 @ 101 Howard on 5th floor.
 
-**TEMPORAL COORDINATES.** Tue Jan 26 to Thu Mar 11.
+**TEMPORAL COORDINATES**<br>
 
-* Lectures: 10AM - noon
-* Exam 1: Tue Feb 23, 2021 3PM-4:30PM
-* Exam 2: Thu Mar 11, 2021 10AM-11:30AM (last day of class)
+Classes run Tue Oct 21 through Tue Dec 7. I believe we will have 12 class lectures, due to exams and Thanksgiving break.
+
+* Lectures: 10AM-11:50AM (section 1) and 1-3PM (section 2)
+* Exam 1: Thur Nov 11, 2021
+* Exam 2: Tue Dec 7, 2021 (last day of class)
 
 <!--
 * Exams: Fri 5-6PM Nov 8; Fri 10-11:30AM Dec 6; Room 154-156
@@ -51,23 +49,12 @@ All lectures will be online via zoom thanks to COVID.
 
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
-|[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| Tue Feb 9, 10:00AM |
-|[Naive Bayes](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb) | 8% | Fri Feb 19, 11:59PM |
-|[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Thur Mar 4, 11:59PM |
-|[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | Fri Mar 12, 11:59PM |
-|Exam 1| 27%| Tue Feb 23, 3PM-4:30PM |
-|Exam 2| 28%| Thu, Mar 11 10AM-11:30AM |
-
-<!--
-| Artifact | Grade Weight | Due date |
-|--------|--------|--------|
 |[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| Thu Oct 31, 11:59PM |
 |[Naive Bayes](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb) | 8% | Monday Nov 11, 11:59PM |
 |[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Mon Nov 25, 11:59PM |
 |[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | Sun Dec 8, 11:59PM |
-|Exam 1| 27%| Fri Nov 8, 5PM-6PM |
-|Exam 2| 28%| Fri, Dec 6 10AM-11:30AM |
--->
+|Exam 1| 27%| Thu Nov 11|
+|Exam 2| 28%| Tue, Dec 7|
 
 All projects will be graded with the specific input or tests given in the project description, so you understand precisely what is expected of your program. Consequently, projects will be graded in binary fashion: They either work or they do not. Each failed unit test gets a fixed amount off, no partial credit. The only exception is when your program does not run on the grader's or my machine because of some cross-platform issue or some obviously trivial problem. (Attention to detail is critical.  For example, if you return an integer from a function and my code expects a string, your code makes my code fail.) This is typically because a student has hardcoded some file name or directory into their program. In that case, we will take off *a minimum* of 10% instead of giving you a 0, depending on the severity of the mistake.  Please go to github and verify that the website has the proper files for your solution. That is what I will download for testing.
 
