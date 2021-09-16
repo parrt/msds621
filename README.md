@@ -49,10 +49,10 @@ Classes run Tue Oct 21 through Tue Dec 7. I believe we will have 12 class lectur
 
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
-|[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| Thu Oct 31, 11:59PM |
-|[Naive Bayes](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb) | 8% | Monday Nov 11, 11:59PM |
-|[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Mon Nov 25, 11:59PM |
-|[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | Sun Dec 8, 11:59PM |
+|[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| Sun Oct 31, 11:59PM |
+|[Naive Bayes](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb) | 8% | Tue Nov 9, 11:59PM (start of pm class) |
+|[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Tue Nov 23, 1pm (start of pm class) |
+|[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | Sun Dec 5, 11:59PM |
 |Exam 1| 27%| Thu Nov 11|
 |Exam 2| 28%| Tue, Dec 7|
 
