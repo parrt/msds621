@@ -123,6 +123,10 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 <img src="images/heatmap.png" width="150" align="right">
 
 * [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides) (Day 12,13)
+	* Gini-drop importance for random forests
+	* Drop-column importance
+	* Permutation importance
+	* Null-distribution importance
 * Partial dependence
 
 <br>
