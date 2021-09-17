@@ -114,15 +114,15 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
   * [Training decision trees](https://github.com/parrt/msds621/raw/master/lectures/training-decision-trees.pdf) (slides) (Day 7)
   * (*[Decision trees project](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md)*) 
 * [Random Forests](https://github.com/parrt/msds621/raw/master/lectures/random-forests.pdf) (slides) (Day 7, Day 8)
-  * [Lab: Exploring Random Forests](https://github.com/parrt/msds621/blob/master/labs/trees/random-forests.ipynb) (Day 9)
-  * [Out-of-bag (OOB) validation sets](https://github.com/parrt/msds621/raw/master/lectures/rf-oob.pdf) (slides) (Day 9)
+  * [Lab: Exploring Random Forests](https://github.com/parrt/msds621/blob/master/labs/trees/random-forests.ipynb) (Day 8)
+  * [Out-of-bag (OOB) validation sets](https://github.com/parrt/msds621/raw/master/lectures/rf-oob.pdf) (slides) (Day 8)
   * (*[Random Forest project](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md)*)
 
 ## Model interpretation
 
 <img src="images/heatmap.png" width="150" align="right">
 
-* [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides) (Day 10)
+* [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides) (Day 9)
 	* Gini-drop importance for random forests
 	* Drop-column importance
 	* Permutation importance
@@ -135,12 +135,12 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 Clustering isn't used nearly as much as supervised learning, but it's an important part of your education  and is extremely useful in in certain circumstances, such as image color quantization. (Image credit [Wikipedia](https://en.wikipedia.org/wiki/Color_quantization).)
 
-* [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)  (Day 10)
+* [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)  (Day 9, Day 10)
   * k-means clustering
   * Hierarchical clustering
   * Breiman's trick for clustering with RFs
 
-## Vanilla deep learning networks (Day 11-12)
+## Vanilla deep learning networks (Day 10-12)
 
 * [Fundamentals of deep learning regressors and classifiers](https://github.com/parrt/msds621/raw/master/lectures/deep-learning.pdf) (slides)
 * [intro-regression-training-cars.ipynb](notebooks/deep-learning/1.intro-regression-training-cars.ipynb)<br>Load toy cars data set and train regression models to predict miles per gallon (MPG) through a variety of techniques. We start out doing a brute force grid search of many different slope and intercept (m, b) model parameters, looking for the best fit. Then we manually compute partial derivatives of the loss function and perform gradient descent using plain numpy. We look at the effect on the loss function of normalizing numeric variables to have zero mean and standard deviation one. Finally, this notebook shows you how to use the autograd (auto differentiation) functionality of pytorch as a way to transition from numpy to pytorch training loops.
