@@ -129,9 +129,6 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 	* Null-distribution importance
 * Partial dependence
 
-<br>
-<br>
-
 ## Unsupervised learning
 
 <img src="images/clustering.png" width="150" align="right">
