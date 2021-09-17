@@ -51,7 +51,7 @@ Classes run Tue Oct 21 through Tue Dec 7. I believe we will have 12 class lectur
 |--------|--------|--------|
 |[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| Sun Oct 31, 11:59PM |
 |[Naive Bayes](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb) | 8% | Tue Nov 9, 11:59PM (start of pm class) |
-|[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Tue Nov 23, 1pm (start of pm class) |
+|[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Wed Nov 24, 11:59PM |
 |[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | Sun Dec 5, 11:59PM |
 |Exam 1| 27%| Thu Nov 11|
 |Exam 2| 28%| Tue, Dec 7|
@@ -69,19 +69,6 @@ Each project has a hard deadline and only those projects working correctly befor
 **Grading standards**. I consider an **A** grade to be above and beyond what most students have achieved. A **B** grade is an average grade for a student or what you could call "competence" in a business setting. A **C** grade means that you either did not or could not put forth the effort to achieve competence. Below **C** implies you did very little work or had great difficulty with the class compared to other students.
 
 # Syllabus
-
-## Notebooks
-
-There are a number of notebooks associated with the lecture slides.
-
-* [Linear models, regularization](https://github.com/parrt/msds621/tree/master/notebooks/linear-models/)
-* [Binary trees, decision trees, bias-variance](https://github.com/parrt/msds621/tree/master/notebooks/trees/)
-* [Model assessment](https://github.com/parrt/msds621/tree/master/notebooks/assessment/)
-* [Clustering](https://github.com/parrt/msds621/tree/master/notebooks/clustering/)
-
-The following notebook takes you through a number of important processes, which you are free to do at your leisure. Even if we haven't covered the topics in lecture, you can still get something out of the notebook.
-
-* [Getting a sense of the training and testing procedure notebook](https://github.com/parrt/msds621/blob/master/notebooks/process/basic-process.ipynb)
 
 ## Getting started
 
@@ -119,7 +106,6 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 * [Naive Bayes](https://github.com/parrt/msds621/raw/master/lectures/naive-bayes.pdf)  (slides) (Day 4)
   * [Lab: Naive bayes by hand](https://github.com/parrt/msds621/blob/master/labs/bayes/naive-bayes.ipynb) (Day 4)
   * (*[Naive Bayes project](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb)*)
-* [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf) (slides) (Day 4)
 * [Intro to non-parametric machine learning models](https://github.com/parrt/msds621/raw/master/lectures/nonparametric-models.pdf) (slides) (Day 5)
 * [Decision trees](https://github.com/parrt/msds621/raw/master/lectures/decision-trees.pdf) (slides) (Day 5)
   * [Lab: Partitioning feature space](https://github.com/parrt/msds621/blob/master/labs/trees/partitioning-feature-space.ipynb) (Day 6) (oops delay to Day 7 due to bug in lab code)
@@ -131,21 +117,6 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
   * [Lab: Exploring Random Forests](https://github.com/parrt/msds621/blob/master/labs/trees/random-forests.ipynb) (Day 9)
   * [Out-of-bag (OOB) validation sets](https://github.com/parrt/msds621/raw/master/lectures/rf-oob.pdf) (slides) (Day 9)
   * (*[Random Forest project](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md)*)
-
-## Model assessment
-
-<img src="images/log-dec.svg" width="150" align="right">
-
-* [Model assessment](https://github.com/parrt/msds621/raw/master/lectures/model-assessment.pdf) (slides) (Day 9,10)
-* [Regressor and classifier metrics](https://github.com/parrt/msds621/raw/master/lectures/metrics.pdf) (slides) (Day 10,11)
-
-
-## Mechanics
-
-<img src="images/split-str.png" width="150" align="right">
-
-* [Preparing data for modeling](https://github.com/parrt/msds621/raw/master/lectures/data-prep.pdf) (slides) (Day 11)
-* [Basic feature engineering](https://github.com/parrt/msds621/raw/master/lectures/feature-engineering.pdf) (slides) (Day 11)
 
 ## Model interpretation
 
@@ -168,7 +139,40 @@ Clustering isn't used nearly as much as supervised learning, but it's an importa
   * Hierarchical clustering
   * Breiman's trick for clustering with RFs
 
-  
+## Supporting resources
+
+### Notebooks
+
+There are a number of notebooks associated with this course that could prove useful to you:
+
+* [Linear models, regularization](https://github.com/parrt/msds621/tree/master/notebooks/linear-models/)
+* [Binary trees, decision trees, bias-variance](https://github.com/parrt/msds621/tree/master/notebooks/trees/)
+* [Model assessment](https://github.com/parrt/msds621/tree/master/notebooks/assessment/)
+* [Clustering](https://github.com/parrt/msds621/tree/master/notebooks/clustering/)
+
+The following notebook takes you through a number of important processes, which you are free to do at your leisure. Even if we haven't covered the topics in lecture, you can still get something out of the notebook.
+
+* [Getting a sense of the training and testing procedure notebook](https://github.com/parrt/msds621/blob/master/notebooks/process/basic-process.ipynb)
+
+### Slides
+
+#### Model assessment
+
+<img src="images/log-dec.svg" width="150" align="right">
+
+* [Bias-variance trade-off](https://github.com/parrt/msds621/raw/master/lectures/bias-variance.pdf) (slides)
+* [Model assessment](https://github.com/parrt/msds621/raw/master/lectures/model-assessment.pdf) (slides)
+* [Regressor and classifier metrics](https://github.com/parrt/msds621/raw/master/lectures/metrics.pdf) (slides)
+
+#### Mechanics
+
+<img src="images/split-str.png" width="150" align="right">
+
+* [Preparing data for modeling](https://github.com/parrt/msds621/raw/master/lectures/data-prep.pdf) (slides)
+* [Basic feature engineering](https://github.com/parrt/msds621/raw/master/lectures/feature-engineering.pdf)
+
+
+
 # Administrivia
 
 **ACADEMIC HONESTY.** You must abide by the copyright laws of the United States and academic honesty policies of USF. You may not copy code from other current or previous students. All suspicious activity will be investigated and, if warranted, passed to the Dean of Sciences for action.  Copying answers or code from other students or sources during a quiz, exam, or for a project is a violation of the university’s honor code and will be treated as such. Plagiarism consists of copying material from any source and passing off that material as your own original work. Plagiarism is plagiarism: it does not matter if the source being copied is on the Internet, from a book or textbook, or from quizzes or problem sets written up by other students. Giving code or showing code to another student is also considered a violation.
