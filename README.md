@@ -151,10 +151,6 @@ Clustering isn't used nearly as much as supervised learning, but it's an importa
 * [gpu-mnist.ipynb](notebooks/deep-learning/6.gpu-mnist.ipynb)<br>This notebook redoes the examples from the previous MNIST notebook but using the GPU to perform matrix algebra in parallel. We use `.to(device)` on tensors and models to shift them to the memory on the GPU. The model trains much faster using the huge number of processors on the GPU. You will need to <a href="https://colab.research.google.com/github/parrt/fundamentals-of-deep-learning/blob/main/notebooks/7.gpu-mnist.ipynb">run the notebook at colab</a> or from an AWS machine to get access to a GPU.
 * [SGD-minibatch-mnist.ipynb](notebooks/8.SGD-minibatch-mnist.ipynb)<br>We have been doing batch gradient descent, meaning that we compute the loss on the complete training set as a means to update the parameters of the model. If we process the training data in chunks rather than a single batch, we call it mini-batch gradient descent, or more commonly stochastic gradient descent (SGD). It is called stochastic because of the imprecision and, hence, randomness introduced by the computation of gradients on a subset of the training data. We tend to get better generalization with SGD; i.e., smaller validation loss.
 
-
-The videos associated with the following notebooks are available here: [Youtube playlist](https://www.youtube.com/playlist?list=PLFCc_Fc116ikeol9CZcWWKqmrJljxhE4N). (The video and audio quality is lousy due to zoom compression, my editing, and recompression.) Here are some direct links associated with the PowerPoint slides:
-
-
 ## Supporting resources
 
 ### Notebooks
