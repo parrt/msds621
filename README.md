@@ -108,7 +108,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
   * (*[Naive Bayes project](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb)*)
 * [Intro to non-parametric machine learning models](https://github.com/parrt/msds621/raw/master/lectures/nonparametric-models.pdf) (slides) (Day 5)
 * [Decision trees](https://github.com/parrt/msds621/raw/master/lectures/decision-trees.pdf) (slides) (Day 5)
-  * [Lab: Partitioning feature space](https://github.com/parrt/msds621/blob/master/labs/trees/partitioning-feature-space.ipynb) (Day 6) (oops delay to Day 7 due to bug in lab code)
+  * [Lab: Partitioning feature space](https://github.com/parrt/msds621/blob/master/labs/trees/partitioning-feature-space.ipynb) (Day 6)
   * [Binary tree crash course](https://github.com/parrt/msds621/raw/master/lectures/binary-trees.pdf) (slides) (Day 6)
   * [Lab: Binary trees](https://github.com/parrt/msds621/blob/master/labs/trees/binary-trees.ipynb) (Day 6)
   * [Training decision trees](https://github.com/parrt/msds621/raw/master/lectures/training-decision-trees.pdf) (slides) (Day 7)
@@ -122,7 +122,7 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 <img src="images/heatmap.png" width="150" align="right">
 
-* [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides) (Day 12,13)
+* [Feature importance](https://github.com/parrt/msds621/raw/master/lectures/feature-importance.pdf) (slides) (Day 10)
 	* Gini-drop importance for random forests
 	* Drop-column importance
 	* Permutation importance
@@ -138,12 +138,12 @@ We will learn 3 models in depth for this course: naive bayes, decision trees, an
 
 Clustering isn't used nearly as much as supervised learning, but it's an important part of your education  and is extremely useful in in certain circumstances, such as image color quantization. (Image credit [Wikipedia](https://en.wikipedia.org/wiki/Color_quantization).)
 
-* [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)  (Day 13)
+* [Clustering](https://github.com/parrt/msds621/raw/master/lectures/clustering.pdf) (slides)  (Day 10)
   * k-means clustering
   * Hierarchical clustering
   * Breiman's trick for clustering with RFs
 
-## Vanilla deep learning networks
+## Vanilla deep learning networks (Day 11-12)
 
 * [Fundamentals of deep learning regressors and classifiers](https://github.com/parrt/msds621/raw/master/lectures/deep-learning.pdf) (slides)
 * [intro-regression-training-cars.ipynb](notebooks/deep-learning/1.intro-regression-training-cars.ipynb)<br>Load toy cars data set and train regression models to predict miles per gallon (MPG) through a variety of techniques. We start out doing a brute force grid search of many different slope and intercept (m, b) model parameters, looking for the best fit. Then we manually compute partial derivatives of the loss function and perform gradient descent using plain numpy. We look at the effect on the loss function of normalizing numeric variables to have zero mean and standard deviation one. Finally, this notebook shows you how to use the autograd (auto differentiation) functionality of pytorch as a way to transition from numpy to pytorch training loops.
