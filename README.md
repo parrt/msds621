@@ -141,7 +141,7 @@ Clustering isn't used nearly as much as supervised learning, but it's an importa
 
 ## Vanilla deep learning networks
 
-* [Fundamentals of deep learning regressors and classifiers](https://github.com/parrt/msds621/raw/master/lectures/deep-learning.pdf)
+* [Fundamentals of deep learning regressors and classifiers](https://github.com/parrt/msds621/raw/master/lectures/deep-learning.pdf) (slides)
 
 Related notebooks
 
