@@ -153,6 +153,8 @@ Clustering isn't used nearly as much as supervised learning, but it's an importa
 
 ## Supporting resources
 
+A lot of the mechanics of machine learning will be covered in the machine learning lab, but here are some notebooks and slides that could be of use to you.
+
 ### Notebooks
 
 There are a number of notebooks associated with this course that could prove useful to you:
