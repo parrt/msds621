@@ -1,0 +1,421 @@
+\documentclass[11pt]{article}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{epstopdf}
+\usepackage{mathrsfs}
+\usepackage{mdframed}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage{alltt}
+\usepackage{listings}
+\usepackage{array}
+\usepackage[noline,  linesnumbered]{algorithm2e}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}{Definition}
+
+\title{Brief Article}
+\author{The Author}
+\begin{document}
+\maketitle
+
+% --------------------- betas for L1 logistic ---------------------------
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em L1NegLogLikelihood(${\bf X}', {\bf y},\beta'$)}}
+$err = {\bf y} - \sigma({\bf X}' \cdot \beta')$~~~~~~~~~~~~~~~~({\em error vector} is  $n \times 1$ {\em column vector})\;
+$\frac{\partial}{\partial \beta_0} =  mean(err)$~~~~~~~~~~~~~~~~~~~~({\em usual log-likelihood gradient; use current $\beta'$})\;
+$r = \lambda \, \text{sign}(\beta')$~~~~~~~~~~~~~~~~~~~~\,~~~~({\em regularization term $p+1 \times 1$ column vector})\;
+$r[0] = 0$ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~({\em kill $\beta_0$ position but keep as $p+1 \times 1$ vector})\;
+$\nabla =  \frac{1}{n} \left \{ {\bf X}'^T err - r \right \}$\\
+\Return{\em $- \begin{bmatrix}
+    \frac{\partial}{\partial \beta_0} \\
+    \nabla_1\\
+    \vdots \\
+    \nabla_p \\
+\end{bmatrix}$}\;
+\end{algorithm}
+
+% ------------------ k means -------------------
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em kmeans(X,k)}}
+Select $k$ unique points from $X$ as initial centroids $m_{1..k}^{(t=0)}$ for clusters $C_{1..k}^{(t=0)}$\;
+\Repeat{$C_{1..k}^{(t)} = C_{1..k}^{(t-1)}$~~~~~~~~~~~~~~~~~~~~~~~{\em (}until clusters don't change{\em)}}{
+\ForEach{$x \in X$}{
+	$j^* = \argmin_{j} distance(x,m_j^{(t)})$~~~\,~({\em find closest centroid to $x$})\;
+	Add $x$ to cluster $C_{j^*}^{(t+1)}$~~~~~~~~~~~~~~({\em assign $x$ to cluster})\;
+}
+\For{$j=1..k$}{
+	$m_j^{(t+1)} = \frac{1}{|C^{(t+1)}_j|} \sum_{x \in C_j^{(t+1)}} x$~~\,~~~~~({\em recompute centroids})\;
+}
+$t = t + 1$\;
+}
+\end{algorithm}
+
+% ----------------- fit ------------------------
+
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em dtreefit(X, y, loss, {\it min\_samples\_leaf})}}
+\Indp \lIf{$|X| \le {\it min\_samples\_leaf}$}{return Leaf($y$)}\;
+$col, split$ = {\it bestsplit}($X, y, {\it loss}$)\;
+\lIf{col = -1}{return Leaf($y$)}~~~~({\it No better split?})\;
+$lchild = dtreefit(X[X_{col} \le split], y[X_{col} \le split], loss, {\it min\_samples\_leaf})$\;
+$rchild = dtreefit(X[X_{col} > split], y[X_{col} > split], loss, {\it min\_samples\_leaf})$\;
+\Return{$DecisionNode(col, split, lchild, rchild)$}\;
+\end{algorithm}
+
+% ----------------- find split ------------------------
+
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em bestsplit(X, y, loss)}}
+\Indp$best = (col=-1, split=-1, loss=loss(y))$\;
+\For{col = 1..p}{
+	\ForEach{$split \in X_{col}$}{
+		$yl = y[X_{col} \le split]$\;
+		$yr = y[X_{col} > split]$\;
+		\lIf{$|yl| < {\it min\_samples\_leaf} \text{ or } |yr| < {\it min\_samples\_leaf}$}{\bf continue}\;
+		$l = \frac{|yl| \times loss(yl) + |yr| \times loss(yr)}{|y|}$~~~~~~~~({\it weighted average of subregion losses})\;
+		\lIf{$l = 0$}{\Return{col, split}}\;
+		\lIf{$l < best[loss]$}{$best = (col, split, l)$}\;
+	}
+}
+\Return{best[col], best[split]}\;
+\end{algorithm}
+
+% ----------------- find split subset ------------------------
+
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em bestsplit(X, y, loss)}}
+\Indp$best = (col=-1, split=-1, loss=loss(y))$\;
+\For{col = 1..p}{
+	{\it candidates} = randomly pick $k\ll n$ values from $X_{col}$\;
+	\ForEach{$split \in {\it candidates}$}{
+		$yl = y[X \le split]$\;
+		$yr = y[X > split]$\;
+		\lIf{$|yl| < {\it min\_samples\_leaf} \text{ or } |yr| < {\it min\_samples\_leaf}$}{\bf continue}\;
+		$l = \frac{|yl| \times loss(yl) + |yr| \times loss(yr)}{|y|}$~~~~~~~~({\it weighted average of subregion losses})\;
+		\lIf{$l = 0$}{\Return{col, split}}\;
+		\lIf{$l < best[loss]$}{$best = (col, split, l)$}\;
+	}
+}
+\Return{best[col], best[split]}\;
+\end{algorithm}
+
+% ----------------- predict ------------------------
+
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em predict(node,x)}}
+\Indp
+\If{node is leaf}{
+	\lIf{classifier}{\Return{$mode(node.y)$}}\;
+	\Return{$mean(node.y)$}\;
+}
+\lIf{$x[node.col] \le node.split$}{\Return predict($node.lchild, x$)}\;
+\Return predict($node.rchild, x$)\;
+\end{algorithm}
+
+
+% ----------------- RF fit --------------------------
+
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em RFfit(X, y, loss, ntrees, {\it max\_features}, {\it min\_samples\_leaf})}}
+\Indp \For{$i = 1..ntrees$}{
+	$X', y' = bootstrap(X, y, size=|X|)$\;
+	$T_i = {\it RFdtreefit}(X', y', loss, {\it max\_features}, {\it min\_samples\_leaf})$\;
+}
+\end{algorithm}
+
+% ----------------- RF predict regr --------------------------
+
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em $RFpredict_{regr}$($\{T_1 .. T_{ntrees}\}$, x)}}
+\Indp {\bf Let} ${\it leaves}$ = \{{\it leaf}($T_t, x$) $\forall \, t=1..ntrees$\}~~~~({\em set of leaves reached by $x$})\;
+$nobs = \sum_{t=1}^{ntrees} |{\it leaves_t}|$\;
+$ysum = \sum_{t=1}^{ntrees} \sum_{y \in leaves_t} y$\;
+\Return{$\frac{1}{nobs} ysum$}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\,~~~~~~~~~({\em weighted avg})\;
+\end{algorithm}
+
+% ----------------- RF predict class --------------------------
+
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em $RFpredict_{class}$($\{T_1 .. T_{ntrees}\}$, x)}}
+\Indp 
+$counts[k] = 0 ~ \forall \text{ classes } k$\;
+\ForEach{$t = 1..ntrees$}{
+	${\it leaf}$ = {\it leaf}($T_t, x$)~~~~~~~~~~({\em leaf reached by $x$})\;
+	\ForEach{$y \in {\it leaf}$}{
+	     $counts[y]$ += 1~~~~~~~~~({\em track count of leaf modes})\;
+	}
+}
+\Return{$\mathrm{argmax}(counts)$}\;
+\end{algorithm}
+
+
+
+% ----------------- RF dtree fit ------------------------
+
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em RFdtreefit(X, y, loss, {\it max\_features}, {\it min\_samples\_leaf})}}
+\Indp \lIf{$|X| \le {\it min\_samples\_leaf}$}{return Leaf($y$)}\;
+$col, split$ = {\it RFbestsplit}($X, y, {\it loss}$, {\it max\_features})\;
+\lIf{col = -1}{return Leaf($y$)}\;
+$lchild = \text{\em RFdtreefit}(X[X_{col} \le split], y[X_{col} \le split], ...)$\;
+$rchild = \text{\em RFdtreefit}(X[X_{col} > split], y[X_{col} > split], ...)$\;
+\Return{$DecisionNode(col, split, lchild, rchild)$}\;
+\end{algorithm}
+
+% ----------------- RF find split var subset ------------------------
+
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em RFbestsplit(X, y, loss, {\it max\_features})}}
+\Indp$best = (col=-1, split=-1, loss=loss(y))$\;
+$vars$ = pick {\it max\_features} variables from all $p$\;
+\For{$col \in vars$}{
+	{\it candidates} = randomly pick $k\ll n$ values from $X_{col}$\;
+	\ForEach{$split \in {\it candidates}$}{
+		$yl = y[X_{col} \le split]$\;
+		$yr = y[X_{col} > split]$\;
+		\lIf{$|yl| < {\it min\_samples\_leaf} \text{ or } |yr| < {\it min\_samples\_leaf}$}{\bf continue}\;
+		$l = \frac{|yl| \times loss(yl) + |yr| \times loss(yr)}{|y|}$~~~~~~~~({\it weighted average of subregion losses})\;
+		\lIf{$l = 0$}{\Return{col, split}}\;
+		\lIf{$l < best[loss]$}{$best = (col, split, l)$}\;
+	}
+}
+\Return{best[col], best[split]}\;
+\end{algorithm}
+
+% ----------------- RF OOB score regr ------------------------
+
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em $oob\_score_{regr}$(RF, X, y)}}
+\Indp {\bf Let} $oob\_counts[i] = 0 ~ \forall \text{ records } i=1..|X|$ ({\em Num obs. in all leaves reached by X[i]})\;
+{\bf Let} $oob\_preds[i] = 0 ~ \forall \text{ records } i=1..|X|$ \,~({\em Predictions for X[i] weighted by leaf size})\;
+\ForEach{$t  \in RF$}{
+    $\text{\it leafsizes} = |t.leaf(X[t.oob])|$ ~~~~~~~~~~~~~~~({\em Num samples in leaf reached by each $X$})\;
+    $oob\_preds[t.oob] \text{ += } \text{\it leafsizes} \otimes t.predict(X[t.oob])$\;
+    $oob\_counts[t.oob] \text{ += } \text{\it leafsizes}$\;
+}
+$oob\_avg\_preds =   \frac{oob\_preds[oob\_counts>0]}{oob\_counts[oob\_counts>0]}$\;
+\Return{$R^2 \text{ score for } (y[oob\_counts>0], oob\_avg\_preds)$}\;
+\end{algorithm}
+
+
+% ----------------- RF OOB score class ------------------------
+
+\setlength{\algomargin}{5pt}
+\begin{algorithm}[]
+\DontPrintSemicolon
+\LinesNumbered
+\SetAlgorithmName{Algorithm}{List of Algorithms}
+\SetAlgoSkip{}
+\SetInd{.5em}{.5em}
+\TitleOfAlgo{{\em $oob\_score_{class}$(RF, X, y)}}
+\Indp {\bf Let} $oob\_counts[i] = 0 ~ \forall \text{ records } i=1..|X|$ ({\em Num trees w/predictions for X[i]})\;
+({\em Create 2D matrix tracking vote counts per class for each X[i]}):\;
+{\bf Let} $oob\_preds[i,k] = 0 ~ \forall \text{ records } i=1..|X|, k=1..|unique(y)|$\;
+\ForEach{$t  \in RF$}{
+    $\text{\it leafsizes} = |t.leaf(X[t.oob])|$ ~\,({\em Num samples in leaf reached by each OOB $X$})\;
+    $tpred \text{ = } t.predict(X[t.oob])$\;
+    $oob\_preds[t.oob, tpred] \text{ += } \text{\it leafsizes}$~~~({\em count weighted class votes})\;
+    $oob\_counts[t.oob] \text{ += } 1$~~~~~~~~~~~~\,~~~~~~({\em track num trees used for each OOB $X$})\;
+}
+\For{$i \text{ such that } oob\_counts[i]>0$}{
+$oob\_votes[i] = \argmax_{k} oob\_preds[i,k]$\;
+}
+\Return{accuracy of $y[oob\_counts>0] = oob\_votes$}\;
+\end{algorithm}
+
+
+\[
+\hat{y} = {\bf x}'\vec{\beta}
+\]
+
+\[
+\frac{d}{dx} f(x) = \frac{\partial}{\partial x} f(x) \approx \frac{f(x + h) - f(x)}{h}
+\]
+
+\[
+\nabla f({\bf x}) =
+\begin{bmatrix}
+\frac{\partial}{x_1}{f({\bf x})}\vspace{1mm}\\
+\frac{\partial}{x_2}{f({\bf x})} \\
+\end{bmatrix}
+\approx
+\begin{bmatrix}
+\frac{f(\left[ x_1+h, \, x_2 \right]) - f({\bf x})}{h}\vspace{1mm} \\
+\frac{f(\left[ x_1,\, x_2+h \right]) - f({\bf x})}{h} \\
+\end{bmatrix}
+\]
+
+
+\[
+loss = \frac{1}{n}\sum_{i=1}^{n} \begin{cases}
+-\text{log}(p_i) & y=1\\
+-\text{log}(1- p_i) & y=0\\
+\end{cases}
+\]
+
+\[
+loss = -\frac{1}{n} \sum_{i=1}^{n} y_i \text{log}(p)+(1-y_i)\text{log}(1-p_i)
+\]
+
+\[
+R^2 = 1 - \frac{\text{Squared error}}{\text{Variation from mean}} = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \overline{y})^2}
+\]
+
+\[
+MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
+\]
+
+\[
+MSE = \frac{1}{n} \sum_{i=1}^{n} \left(y_i - \hat{y}_i\right)^2
+\]
+
+\[
+MAPE = \frac{1}{n} \sum_{i=1}^{n} \left|\frac{y_i - \hat{y}_i}{y_i}\right|
+\]
+
+
+\[
+MMAR = \frac{1}{n} \sum_{i=1}^{n} max(\left|\frac{y_i}{\hat{y}_i}\right|,\left|\frac{\hat{y}_i}{y_i}\right|)
+\]
+
+\[
+sMAPE = \frac{1}{n} \sum_{i=1}^{n} \frac{|y_i - \hat{y}_i|}{\frac{1}{2}(|y_i|+|\hat{y}_i|)}
+\]
+
+$$
+Gini(y) = \sum_{i=1}^{k} p_i \left[ \sum_{j \ne i}^k p_j \right] = \sum_{i=1}^{k} p_i (1 - p_i) = 1 - \sum_{i=1}^{k} p_i^2
+$$
+
+$$
+\rho \sigma^2  + \frac{1-\rho}{T}\sigma^2
+$$
+
+$$
+{\mathscr L}(\beta) = ({\bf y} - {\bf X} \beta) \cdot ({\bf y} - {\bf X} \beta) + \lambda \sum_{j=1}^{p}|\beta_j|
+$$
+
+$$
+\nabla_{\beta}\, {\mathscr L}(\beta) = -2{\bf X}^T ({\bf y} - {\bf X} \beta) + \lambda \,\text{sign}(\beta)
+$$
+
+
+$$
+\beta^{(t+1)} = \beta^{(t)} - \eta \frac{d}{d \beta} {\mathscr L}(\beta^{(t)})
+$$
+
+$$
+{\mathscr L}(\beta,\lambda) = - \sum_{i=1}^n \left \{ y^{(i)}{\bf x}'^{(i)}\beta - log(1+e^{{\bf x}'^{(i)}\beta}) \right \} + \lambda \sum_{j=1}^{p}  \beta_j^2
+$$
+
+
+$$
+{\mathscr L}(\beta) =  \sum_{i=1}^n \left \{ (y^{(i)} - ({\bf x}^{(i)} \cdot \beta))^2 \right \} + \lambda \sum_{j=1}^{p}  \beta_j^2
+$$
+
+$$
+{\mathscr L}(\beta, \lambda) = {\mathscr L}(\beta) + \lambda (\sum_{j=1}^{p}  \beta_j^2 - t)
+$$
+
+$$
+\frac{\partial}{\partial \beta_i} {\mathscr L}(\beta)
+$$
+
+$$
+\argmin_{\beta} {\mathscr L}(\beta)
+$$
+
+$$
+c^* = \argmax_{c}  P(d|c)
+$$
+
+$$
+\frac{\text{\it wordcount}(w|c)}{\text{\it wordcount}(c)}
+$$
+ \end{document}
