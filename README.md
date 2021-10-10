@@ -23,7 +23,7 @@ We study a few key models deeply, rather than providing a broad but superficial 
 
 **SPATIAL COORDINATES**<br>
 
-* Class is held at 101 Howard in 1st floor classroom 155-156.
+* Class is held at 101 Howard 5th floor classroom 529.
 * Exams will be via HonorLock online/remote.
 * My office is room 525 @ 101 Howard on 5th floor.
 
@@ -31,7 +31,7 @@ We study a few key models deeply, rather than providing a broad but superficial 
 
 Classes run Tue Oct 21 through Tue Dec 7. I believe we will have 12 class lectures, due to exams and Thanksgiving break.
 
-* Lectures: 10AM-11:50AM (section 1) and 1-3PM (section 2)
+* Lectures: 10AM-11:50AM (section 1) and 1-2:50PM (section 2)
 * Exam 1: Thur Nov 11, 2021
 * Exam 2: Tue Dec 7, 2021 (last day of class)
 
