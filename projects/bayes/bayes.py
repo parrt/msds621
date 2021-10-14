@@ -12,8 +12,6 @@ import time
 
 # From scikit learn that got words from:
 # http://ir.dcs.gla.ac.uk/resources/linguistic_utils/stop_words
-# From scikit learn that got words from:
-# http://ir.dcs.gla.ac.uk/resources/linguistic_utils/stop_words
 ENGLISH_STOP_WORDS = frozenset([
     "a", "about", "above", "across", "after", "afterwards", "again", "against",
     "all", "almost", "alone", "along", "already", "also", "although", "always",
