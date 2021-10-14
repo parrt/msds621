@@ -41,7 +41,7 @@ Classes run Tue Oct 21 through Tue Dec 7. I believe we will have 12 class lectur
 
 **INSTRUCTION FORMAT**. Class runs for 1:50 hours, 2 days/week. Instructor-student interaction during lecture is encouraged and we'll mix in mini-exercises / labs during class. All programming will be done in the Python 3 programming language, unless otherwise specified.
 
-**COURSE BOOK**. [The Mechanics of Machine Learning](https://mlbook.explained.ai/) (in progress)
+**COURSE BOOK**.  There is no textbook for the course, but you might find [The elements of statistical learning](https://web.stanford.edu/~hastie/ElemStatLearn/) and [The Mechanics of Machine Learning](https://mlbook.explained.ai/) (in progress) useful.
 
 **TARDINESS.** Please be on time for class. It is a big distraction if you come in late.
 
