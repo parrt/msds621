@@ -50,11 +50,11 @@ Classes run Tue Oct 21 through Tue Dec 7. I believe we will have 12 class lectur
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
 |[Linear models](https://github.com/parrt/msds621/raw/master/projects/linreg/linreg.pdf)| 10%| Sun Oct 31, 11:59PM |
-|[Naive Bayes](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb) | 8% | Tue Nov 9, 11:59PM (start of pm class) |
-|[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Wed Nov 24, 11:59PM |
+|[Naive Bayes](https://github.com/parrt/msds621/blob/master/projects/bayes/bayes.ipynb) | 8% | Tue Nov 9, 1:00PM (start of pm class) |
+|[Decision trees](https://github.com/parrt/msds621/blob/master/projects/dtree/dtree.md) | 15% | Wed Nov 24, 1:00PM |
 |[Random Forest](https://github.com/parrt/msds621/blob/master/projects/rf/rf.md) | 12% | Sun Dec 5, 11:59PM |
 |Exam 1| 27%| Thu Nov 11|
-|Exam 2| 28%| Tue, Dec 7|
+|Exam 2| 28%| Likely in finals week of Dec 13|
 
 All projects will be graded with the specific input or tests given in the project description, so you understand precisely what is expected of your program. Consequently, projects will be graded in binary fashion: They either work or they do not. Each failed unit test gets a fixed amount off, no partial credit. The only exception is when your program does not run on the grader's or my machine because of some cross-platform issue or some obviously trivial problem. (Attention to detail is critical.  For example, if you return an integer from a function and my code expects a string, your code makes my code fail.) This is typically because a student has hardcoded some file name or directory into their program. In that case, we will take off *a minimum* of 10% instead of giving you a 0, depending on the severity of the mistake.  Please go to github and verify that the website has the proper files for your solution. That is what I will download for testing.
 
