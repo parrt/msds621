@@ -15,9 +15,6 @@ def normalize(X): # creating standard variables here (u-x)/sigma
         s = np.std(X[:,j])
         X[:,j] = (X[:,j] - u) / s
 
-def MSE(X,y,B,lmbda):
-    pass
-
 def loss_gradient(X, y, B, lmbda):
     pass
 
@@ -86,11 +83,10 @@ class LinearRegression621: # REQUIRED
 
     def fit(self, X, y):
         self.B = minimize(X, y,
-                           MSE,
-                           loss_gradient,
-                           self.eta,
-                           self.lmbda,
-                           self.max_iter)
+                          loss_gradient,
+                          self.eta,
+                          self.lmbda,
+                          self.max_iter)
 
 
 class LogisticRegression621: # REQUIRED
@@ -107,6 +103,9 @@ class LogisticRegression621: # REQUIRED
         Call self.predict_proba() to get probabilities then, for each x in X,
         return a 1 if P(y==1,x) > 0.5 else 0.
         """
+        pass
+
+    def fit(self, X, y):
         pass
 
 
