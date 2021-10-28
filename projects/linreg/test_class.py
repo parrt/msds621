@@ -93,10 +93,10 @@ def test_synthetic():
 def test_wine():
     X, y = wine_data()
 
-    check(X, y, 1.9,
+    check(X, y, 2.25,
           LogisticRegression621(max_iter=30_000, eta=1),
           LogisticRegression(penalty='none', solver='lbfgs'),
-          accuracy=0.92)
+          accuracy=0.88)
 
 def test_iris():
     X, y = iris_data()
