@@ -123,7 +123,7 @@ class RandomForestRegressor621(RandomForest621):
 ```
 
 ```
-class RandomForestClassifier621:
+class RandomForestClassifier621(RandomForest621):
     def __init__(self, n_estimators=10, min_samples_leaf=3, max_features=0.3, oob_score=False):
         super().__init__(n_estimators, oob_score=oob_score)
         n_estimators = n_estimators
